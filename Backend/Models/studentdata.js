@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
     studentId: { 
-        type: String, required: true, unique: true
+        type: String, required: true 
      },
     name: { 
         type: String, required: true 
@@ -25,13 +25,19 @@ const studentSchema = new mongoose.Schema({
          type: String, required: true 
         },
     yearOfStudy: {
-         type: String, required: true
+         type: Number, required: true
          },
     cgpa: {
          type: Number, required: true
          },
+         isPlaced: { 
+            type: Boolean, 
+            required: true, 
+            default: false 
+          },
 });
 
 const Student = mongoose.model('StudentData', studentSchema);
 
 module.exports = Student;
+//http://localhost:3000/api/students/upload
