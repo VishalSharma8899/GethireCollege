@@ -68,7 +68,9 @@ const Sidebar = ({children}) => {
         }
     ]
     return (
+
         <div className="font-Poppins ">
+        <div className="font-Poppins">
         <div style={{display:"flex"}}>
 
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar shadow-gray-700">
@@ -91,6 +93,8 @@ const Sidebar = ({children}) => {
            <main>{children}</main>
         </div>
         </div>
+    </div>
+    
     );
 };
 
