@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
     studentId: { 
-        type: String, required: true 
+        type: String, required: true , unique: true 
      },
     name: { 
         type: String, required: true 
@@ -15,8 +15,8 @@ const studentSchema = new mongoose.Schema({
         type: String, required: true
      },
     contactInformation: {
-        phone: { type: String, required: true },
-        email: { type: String, required: true },
+        phone: { type: String },
+        email: { type: String,   },
     },
     address: { 
         type: String, required: true
@@ -35,6 +35,22 @@ const studentSchema = new mongoose.Schema({
             required: true, 
             default: false 
           },
+          
+         PlacementDetails :{
+           intershipRequired: { 
+            type: Boolean, 
+            required: true, 
+            default:  true
+          },
+          PlacementRequired: { 
+            type: Boolean, 
+            required: true, 
+            default: true
+          }
+        },
+          portfolio: { 
+            type: String,  
+         },
 });
 
 const Student = mongoose.model('StudentData', studentSchema);

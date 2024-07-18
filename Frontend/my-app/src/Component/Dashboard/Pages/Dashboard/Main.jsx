@@ -10,8 +10,13 @@ function Main() {
   return (
     <div>
       <Search />
+      <div className='w-full h-screen rounded-lg'>
+      <div className='w-full p-3 ml-2 text-xl'>
+            <p className='font-bold'>Overview</p>
+          </div>
       <div className='container' style={{ backgroundColor: "rgba(246, 249, 254, 1)" }}>
         <Container fluid>  {/* Ensures responsiveness across viewports */}
+         
           <Row>
             <Col xs={12} md={6}>  {/* Adjust column sizes as needed */}
               <Main1 />
@@ -21,6 +26,7 @@ function Main() {
             </Col>
           </Row>
         </Container>
+      </div>
       </div>
     </div>
   );
