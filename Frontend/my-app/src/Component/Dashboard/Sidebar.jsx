@@ -69,6 +69,8 @@ const Sidebar = ({children}) => {
     ]
     return (
         <div className="container font-Poppins">
+        <div style={{display:"flex"}}>
+
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
                 {/* <img style={{display: isOpen? "block": "none"}} src={Image} alt="Vector" /> */}
@@ -87,6 +89,7 @@ const Sidebar = ({children}) => {
                }
            </div>
            <main>{children}</main>
+        </div>
         </div>
     );
 };
