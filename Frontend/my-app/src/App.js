@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Sidebar from './Component/Dashboard/Sidebar.jsx';
-import Dashboard from './Component/Dashboard/Pages/Dashboard/Search.jsx';
+import Dashboard from './Component/Dashboard/Pages/Dashboard/Main.jsx';
 import Collegepart from './Component/Dashboard/Pages/College/collgepart.jsx';
 import Jobs from './Component/Dashboard/Pages/Jobs/Jobs.jsx';
 import StudentData from './Component/Dashboard/Pages/StudentData/StudentData.jsx';

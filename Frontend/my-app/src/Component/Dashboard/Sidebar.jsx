@@ -68,10 +68,10 @@ const Sidebar = ({children}) => {
         }
     ]
     return (
-        <div className="container font-Poppins">
+        <div className="font-Poppins ">
         <div style={{display:"flex"}}>
 
-           <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
+           <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar shadow-gray-700">
                <div className="top_section">
                 {/* <img style={{display: isOpen? "block": "none"}} src={Image} alt="Vector" /> */}
                    <p style={{display: isOpen ? "block" : "none"}} className="logo font-bold text-black">Logo</p>
