@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FcServiceMark } from "react-icons/fc";
 import { MdArrowDropDown } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 
 
 function Search() {
@@ -15,8 +16,11 @@ function Search() {
           <div className='m-2'>
           <Navbar className="bg-body-tertiary flex flex-row justify-between">
       <Form inline>
-      <div className='ml-7'>
-      <Row>
+      <div className='ml-7 flex'>
+        <div>
+            <IoSearch/>
+        </div>
+        <Row>
           <Col xs="auto">
             <Form.Control
               type="text"
@@ -25,6 +29,7 @@ function Search() {
             />
           </Col>
         </Row>
+
       </div>
      
       </Form>
