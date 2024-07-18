@@ -12,8 +12,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
 connection();
+// api path for uplod data
+app.use('/students',studentRoutes);
 
-app.use('/api/students',studentRoutes);
+ 
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
