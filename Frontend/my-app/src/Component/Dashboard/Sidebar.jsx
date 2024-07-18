@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import {
-    FaTh,
-    FaBars,
-    FaUserAlt,
-    FaRegChartBar,
-    FaCommentAlt,
-    FaShoppingBag,
-    FaThList
-}from "react-icons/fa";
+import { MdOutlineDashboardCustomize , MdCorporateFare }from "react-icons/md";
+import { PiStudent } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
-import Image from "../Images/settingLogo.png"
+import { BsDatabaseLock } from "react-icons/bs";
+import { RiUserLocationFill } from "react-icons/ri";
+import { IoMdNotificationsOff } from "react-icons/io";
+import { MdOutlineModelTraining } from "react-icons/md";
+import { IoAnalytics } from "react-icons/io5";
+import { LiaIndustrySolid } from "react-icons/lia";
+import { VscFeedback } from "react-icons/vsc";
+import { MdOutlineFormatLineSpacing } from "react-icons/md";
+// import Image from "../Images/settingLogo.png"
 
 const Sidebar = ({children}) => {
     const[isOpen ,setIsOpen] = useState(false);
@@ -18,74 +19,77 @@ const Sidebar = ({children}) => {
         {
             path:"/",
             name:"Dashboard",
-            icon:<FaTh/>
+            icon:<MdOutlineDashboardCustomize/>
         },
         {
             path:"/collge",
             name:"College",
-            icon:<FaUserAlt/>
+            icon:<PiStudent/>
         },
         {
             path:"/jobs",
             name:"Jobs",
-            icon:<FaRegChartBar/>
+            icon:<MdCorporateFare />
         },
         {
             path:"/student",
             name:"Student Data",
-            icon:<FaCommentAlt/>
+            icon:<BsDatabaseLock />
         },
         {
             path:"/placement",
             name:"Placement",
-            icon:<FaShoppingBag/>
+            icon:<RiUserLocationFill />
         },
         {
             path:"/Notification",
             name:"Notification",
-            icon:<FaThList/>
+            icon:<IoMdNotificationsOff />
         },
         {
             path:"/Training",
             name:"Training",
-            icon:<FaThList/>
+            icon:<MdOutlineModelTraining />
         },
         {
             path:"/Analysis",
             name:"Analysis",
-            icon:<FaThList/>
+            icon:<IoAnalytics />
         },
         {
             path:"/industry",
             name:"Industry Talks",
-            icon:<FaThList/>
+            icon:<LiaIndustrySolid />
         },
         {
             path:"/feedback",
             name:"Feedback",
-            icon:<FaThList/>
+            icon:<VscFeedback />
         }
     ]
     return (
+        <div className="font-Poppins">
         <div style={{display:"flex"}}>
+
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
-                <img style={{display: isOpen? "block": "none"}} src={Image} alt="Vector" />
-                   <p style={{display: isOpen ? "block" : "none"}} className="logo font-bold ">Logo</p>
+                {/* <img style={{display: isOpen? "block": "none"}} src={Image} alt="Vector" /> */}
+                   <p style={{display: isOpen ? "block" : "none"}} className="logo font-bold text-black">Logo</p>
                    <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
-                       <FaBars onClick={toggle}/>
+                       <MdOutlineFormatLineSpacing  onClick={toggle}/>
                    </div>
                </div>
                {
                    menuItem.map((item, index)=>(
                        <NavLink to={item.path} key={index} className="link" activeclassName="active">
                            <div className="icon">{item.icon}</div>
-                           <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
+                           <div style={{display: isOpen ? "block" : "none", fontSize:"15px"}} className="link_text">{item.name}</div>
                        </NavLink>
                    ))
                }
            </div>
            <main>{children}</main>
+        </div>
         </div>
     );
 };
