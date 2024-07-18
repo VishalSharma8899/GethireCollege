@@ -1,176 +1,101 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import "../Dashboard/Sidebar.css"
-import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import React, { useState } from 'react';
+import { MdOutlineDashboardCustomize , MdCorporateFare }from "react-icons/md";
+import { PiStudent } from 'react-icons/pi';
+import { NavLink } from 'react-router-dom';
+import { BsDatabaseLock } from "react-icons/bs";
+import { RiUserLocationFill } from "react-icons/ri";
+import { IoMdNotificationsOff } from "react-icons/io";
+import { MdOutlineModelTraining } from "react-icons/md";
+import { IoAnalytics } from "react-icons/io5";
+import { LiaIndustrySolid } from "react-icons/lia";
+import { VscFeedback } from "react-icons/vsc";
+import { MdOutlineFormatLineSpacing } from "react-icons/md";
+// import Image from "../Images/settingLogo.png"
 
-const Sidebar = () => {
-
-    const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
-        right: false,
-    });
-
-    const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
+const Sidebar = ({children}) => {
+    const[isOpen ,setIsOpen] = useState(false);
+    const toggle = () => setIsOpen (!isOpen);
+    const menuItem=[
+        {
+            path:"/",
+            name:"Dashboard",
+            icon:<MdOutlineDashboardCustomize/>
+        },
+        {
+            path:"/collge",
+            name:"College",
+            icon:<PiStudent/>
+        },
+        {
+            path:"/jobs",
+            name:"Jobs",
+            icon:<MdCorporateFare />
+        },
+        {
+            path:"/student",
+            name:"Student Data",
+            icon:<BsDatabaseLock />
+        },
+        {
+            path:"/placement",
+            name:"Placement",
+            icon:<RiUserLocationFill />
+        },
+        {
+            path:"/Notification",
+            name:"Notification",
+            icon:<IoMdNotificationsOff />
+        },
+        {
+            path:"/Training",
+            name:"Training",
+            icon:<MdOutlineModelTraining />
+        },
+        {
+            path:"/Analysis",
+            name:"Analysis",
+            icon:<IoAnalytics />
+        },
+        {
+            path:"/industry",
+            name:"Industry Talks",
+            icon:<LiaIndustrySolid />
+        },
+        {
+            path:"/feedback",
+            name:"Feedback",
+            icon:<VscFeedback />
         }
-
-        setState({ ...state, [anchor]: open });
-    };
-
-
-    const list = (anchor) => (
-        <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-        >
-            <List>
-                <ListItem disablePadding>
-                    <ListItemButton >
-                        <ListItemIcon>
-                            
-                        </ListItemIcon>
-                        <ListItemText className='bg-black' primary={"Logo"} />
-                    </ListItemButton>
-                </ListItem>
-                </List>
-            <List>
-                <ListItem disablePadding>
-                    <ListItemButton >
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Dashboard"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"College"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <PermContactCalendarIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Jobs"} />
-                    </ListItemButton>
-                </ListItem>
-            
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Student Data"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Placement"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Notofication"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Training"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Analysis"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Industry Talks"} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Feedback"} />
-                    </ListItemButton>
-                </ListItem>
-            </List>
-        
-        </Box>
-    );
-
+    ]
     return (
-        <div className='Navbar'>
-            {/* {['left', 'right', 'top', 'bottom'].map((anchor) => (
-                <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-                    <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
-                    >
-                        {list(anchor)}
-                    </Drawer>
-                </React.Fragment>
-            ))} */}
 
+        <div className="font-Poppins ">
+        <div className="font-Poppins">
+        <div style={{display:"flex"}}>
 
-
-            <MenuIcon
-                onClick={
-                    toggleDrawer("left", true)
-                }
-            />
-
-            <Drawer
-                anchor={"left"}
-                open={state["left"]}
-                onClose={toggleDrawer("left", false)}
-            >
-                {list("left")}
-            </Drawer>
-
+           <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar shadow-gray-700">
+               <div className="top_section">
+                {/* <img style={{display: isOpen? "block": "none"}} src={Image} alt="Vector" /> */}
+                   <p style={{display: isOpen ? "block" : "none"}} className="logo font-bold text-black">Logo</p>
+                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
+                       <MdOutlineFormatLineSpacing  onClick={toggle}/>
+                   </div>
+               </div>
+               {
+                   menuItem.map((item, index)=>(
+                       <NavLink to={item.path} key={index} className="link" activeclassName="active">
+                           <div className="icon">{item.icon}</div>
+                           <div style={{display: isOpen ? "block" : "none", fontSize:"15px"}} className="link_text">{item.name}</div>
+                       </NavLink>
+                   ))
+               }
+           </div>
+           <main>{children}</main>
         </div>
-    )
-}
+        </div>
+    </div>
+    
+    );
+};
 
-export default Sidebar
+export default Sidebar;
