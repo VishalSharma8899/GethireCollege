@@ -9,8 +9,8 @@ main{
     padding: 20px;
 }
 .sidebar{
-    background: #000;
-    color: #fff;
+    background: #ffffff;
+    color: #adabab;
     height: 100vh;
     width: 200px;
     transition: all 0.5s;
@@ -30,19 +30,20 @@ main{
 }
 .link{
     display: flex;
-    color: #fff;
+    color: #bdbdbd;
     padding: 10px 15px;
     gap: 15px;
     transition: all 0.5s;
 }
 .link:hover{
-    background:lightskyblue;
-    color: #000;
+    /* background:lightskyblue; */
+    color:  rgba(145, 151, 179, 1);
+    ;
     transition: all 0.5s;
 }
 .active{
-    background: lightskyblue;
-    color: #000;
+    background: rgba(89, 86, 233, 1);
+    color: rgb(255, 255, 255);
 }
 .icon, .link_text{
     font-size: 20px;

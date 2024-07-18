@@ -9,7 +9,7 @@ import {
     FaThList
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-
+import Image from "../Images/settingLogo.png"
 
 const Sidebar = ({children}) => {
     const[isOpen ,setIsOpen] = useState(false);
@@ -21,28 +21,48 @@ const Sidebar = ({children}) => {
             icon:<FaTh/>
         },
         {
-            path:"/about",
-            name:"About",
+            path:"/collge",
+            name:"College",
             icon:<FaUserAlt/>
         },
         {
-            path:"/analytics",
-            name:"Analytics",
+            path:"/jobs",
+            name:"Jobs",
             icon:<FaRegChartBar/>
         },
         {
-            path:"/comment",
-            name:"Comment",
+            path:"/student",
+            name:"Student Data",
             icon:<FaCommentAlt/>
         },
         {
-            path:"/product",
-            name:"Product",
+            path:"/placement",
+            name:"Placement",
             icon:<FaShoppingBag/>
         },
         {
-            path:"/productList",
-            name:"Product List",
+            path:"/Notification",
+            name:"Notification",
+            icon:<FaThList/>
+        },
+        {
+            path:"/Training",
+            name:"Training",
+            icon:<FaThList/>
+        },
+        {
+            path:"/Analysis",
+            name:"Analysis",
+            icon:<FaThList/>
+        },
+        {
+            path:"/industry",
+            name:"Industry Talks",
+            icon:<FaThList/>
+        },
+        {
+            path:"/feedback",
+            name:"Feedback",
             icon:<FaThList/>
         }
     ]
@@ -50,7 +70,8 @@ const Sidebar = ({children}) => {
         <div style={{display:"flex"}}>
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Logo</h1>
+                <img style={{display: isOpen? "block": "none"}} src={Image} alt="Vector" />
+                   <p style={{display: isOpen ? "block" : "none"}} className="logo font-bold ">Logo</p>
                    <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
                        <FaBars onClick={toggle}/>
                    </div>
