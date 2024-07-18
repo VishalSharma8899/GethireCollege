@@ -7,7 +7,19 @@ function Main1() {
     <div className='bg-slate-400 w-full h-screen xs={12} md={8}'>
      <Container>
      <Col xs={2} md={4} lg={6}>
-        <Row className='w-full h-80'>1 of 2</Row>
+        <Row>
+             <div className='row'>
+             <div className='d-flex justify-center items-center'>
+             <div className='d-flex' style={{gap:"15px",width:"100%",flexWrap:"wrap"}}>
+               <div style={{width:"45%",height:"100px",background:"red"}}></div>
+                <div style={{width:"45%",height:"100px",background:"red"}}></div>
+                <div style={{width:"45%",height:"100px",background:"red"}}></div>
+                <div style={{width:"45%",height:"100px",background:"red"}}></div>
+               </div>
+             </div>
+               </div> 
+
+        </Row>
         <Row>2 of 2</Row>
       </Col>
      </Container>
