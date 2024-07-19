@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import  { useRef } from 'react';
-
 
 function Piecharts() {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
+
   useEffect(() => {
     if (chartInstance.current) {
       chartInstance.current.destroy();
     }
+
     const myChartRef = chartRef.current.getContext("2d");
 
     chartInstance.current = new Chart(myChartRef, {
@@ -27,18 +27,22 @@ function Piecharts() {
           },
         ],
       },
-    })
-    return()=>{
-      if(chartInstance.current)
-      {
-   chartInstance.current.destroy()
+    });
+
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
       }
-    }
-  },[]);
+    };
+  }, []);
 
   return (
-    <div>
-      <canvas className="ml-20" ref={chartRef} style={{ width: "300px", height: "200px" }} />
+    <div className="flex justify-center items-center w-full h-full ml-36 mb-2">
+      <canvas
+        className="mx-auto"
+        ref={chartRef}
+        style={{ width: "300px", height: "170px" }}
+      />
     </div>
   );
 }
