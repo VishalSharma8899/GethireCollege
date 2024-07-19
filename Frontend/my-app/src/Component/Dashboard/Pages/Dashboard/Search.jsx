@@ -43,7 +43,7 @@ function Search() {
         <img src={img}/>
       </div>
       <div>
-        Tisha
+        John
       </div>
       <div>
       </div>
