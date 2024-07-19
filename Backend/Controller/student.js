@@ -43,7 +43,7 @@ exports.uploadStudentData = async (req, res) => {
             );
         }
 
-        fs.unlinkSync(filePath); // Delete the file after processing
+        fs.unlinkSync(filePath);  
         res.status(200).send('Student data uploaded successfully');
     } catch (err) {
         console.error('Error uploading students data:', err);
@@ -65,21 +65,69 @@ exports.GetAllUser = async (req, res) => {
 
 // hire{placed student} student 
 exports.GetPlacedUser = async (req, res) => {
+    try {
+      // Retrieve all placed students
+      const PlacedStudent = await Student.find({ isPlaced: true }).lean();
+      // Calculate the count of placed students
+      const count = PlacedStudent.length;
+      
+      // Send response with both count and student list
+      res.status(200).json({
+        count: count,
+        students: PlacedStudent
+      });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+  
+// unplaced student
+exports.GetUnPlacedUser = async (req, res) => {
   try {
-      const PlacedStudent = await Student.find({isPlaced: true }).lean();
-      res.status(200).json(PlacedStudent);
+      const  PlacedStudent  = await Student.find({isPlaced: false }).lean();
+      const count = PlacedStudent.length;
+      res.status(200).json( { 
+        count: count,
+        students: PlacedStudent});
   } catch (err) {
       res.status(500).json({ message: err.message });
   }
 };
 // unplaced student
-exports.GetUnPlacedUser = async (req, res) => {
-  try {
-      const PlacedStudent = await Student.find({isPlaced: false }).lean();
-      res.status(200).json(PlacedStudent);
-  } catch (err) {
+exports.GetByName = async (req, res) => {
+
+    const { name  } = req.query;
+
+    try {
+      if (!name) {
+        return res.status(400).json({ message: 'Name query parameter is required' });
+      }
+  
+      let query = {};
+      
+       if(name.length ==1){
+        query.name = new RegExp(name, 'i');
+       }else {
+        const startsWithPattern = new RegExp(`^${name}`, 'i');
+        const exactPattern = new RegExp(`^${name}$`, 'i');
+       
+       query = {
+        $or: [
+          { name: startsWithPattern },
+          { name: exactPattern }
+        ]
+
+      };
+    }
+    
+
+      
+      const students = await Student.find(query).lean();
+
+      res.status(200).json(students);
+    } catch (err) {
       res.status(500).json({ message: err.message });
-  }
+    }
 };
 
 // depaatment fetch 
@@ -119,3 +167,103 @@ exports.GetByYear = async (req, res) => {
     }
 };
 
+// get by placement detaills by intership requirement
+exports.GetByIntership = async (req ,res)=>{
+    try {
+        const internshipStudents = await Student.find({'PlacementDetails.intershipRequired': true }).lean();
+        console.log('internshipStudents:', internshipStudents);
+        res.status(200).json(internshipStudents);
+      } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: err.message });
+      }
+};
+
+// get not intrested student for intership
+exports.GetByNotRequiredIntership = async (req ,res)=>{
+    try {
+        const internshipStudents = await Student.find({'PlacementDetails.intershipRequired': false }).lean();
+        console.log('internshipStudents:', internshipStudents);
+        res.status(200).json(internshipStudents);
+      } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: err.message });
+      }
+};
+
+// get by placement required
+exports.GetByPlacementRequired = async (req ,res)=>{
+    try {
+        const Students = await Student.find({'PlacementDetails.PlacementRequired': true }).lean();
+        console.log('Students:',  Students);
+        res.status(200).json(Students);
+      } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: err.message });
+      }
+};
+
+// get by not required placement
+exports.GetByNotRequiredPlacement = async (req ,res)=>{
+    try {
+        const Students = await Student.find({'PlacementDetails.PlacementRequired': false }).lean();
+        console.log('Students:',  Students);
+        res.status(200).json(Students);
+      } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: err.message });
+      }
+;}
+//update
+ 
+
+exports.updateStudent = async (req, res) => {
+    const { studentId } = req.body; // Assuming studentid is the studentId in the database
+    const studentdata = req.body;
+
+    console.log('Received studentid:',  studentId);
+    console.log('Data to update:', studentdata);
+
+    try {
+        // Find the student by studentId
+        const student = await Student.findOne({  studentId:  studentId });
+        console.log('Student from DB:', student);
+
+        if (!student) {
+            return res.status(404).json({ message: 'Student not found' });
+        }
+
+        // Update the student document
+        Object.assign(student, studentdata);
+
+        // Save the updated document
+        const updatedStudent = await student.save();
+
+        res.status(200).json(updatedStudent);
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+exports.deleteStudentData = async (req , res) => {
+    try {
+        
+        const studentId = req.body.id; 
+        const deletestudent = await Student.deleteOne({studentId});
+        if (deletestudent) {
+            console.log('deletestudent:', deletestudent);
+            res.status(200).json({ message: 'Student deleted successfully' });
+          } else {
+            res.status(404).json({ message: 'Student not found' });
+          }
+        }
+       
+       
+    catch {
+      console.error('Error:', err);
+      res.status(500).json({message: err.message});
+    }
+  };

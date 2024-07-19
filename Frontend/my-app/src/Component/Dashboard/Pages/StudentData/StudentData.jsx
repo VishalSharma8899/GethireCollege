@@ -72,8 +72,19 @@ function StudentData() {
             <option value="1">Yes</option>
             <option value="2">No</option>
          </Form.Select>
-        </div>    
+        </div>   
+        <div>
+        <Form.Select aria-label="Default select example">
+            <option>Yeart</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="2">3</option>
+            <option value="2">4</option>
+
+         </Form.Select>
+        </div> 
           </div>
+          
       </Form>
       <div className='flex align-middle items-center gap-2 pl-2'>
         <div className=''>
