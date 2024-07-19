@@ -23,12 +23,12 @@ const Sidebar = ({children}) => {
         },
         {
             path:"/collge",
-            name:"College",
+            name:"College Profile",
             icon:<PiStudent/>
         },
         {
             path:"/jobs",
-            name:"Jobs",
+            name:"Corporate",
             icon:<MdCorporateFare />
         },
         {
