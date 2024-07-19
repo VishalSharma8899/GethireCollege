@@ -1,24 +1,62 @@
+//   // src/components/StudentData.jsx
+ import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+ 
+
+
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { IoNotificationsOutline } from "react-icons/io5";
-import { FcServiceMark } from "react-icons/fc";
-import { MdArrowDropDown } from "react-icons/md";
+ 
 import { IoSearch } from "react-icons/io5";
-import img from "../../../Images/userimg.png"
+ 
 import { LuImport } from "react-icons/lu";
-import { FaPlus } from "react-icons/fa6";
+import { FaRegEdit } from 'react-icons/fa'; // Import edit icon
+import { MdDeleteOutline } from 'react-icons/md';
 import { FaArrowDownLong } from "react-icons/fa6";
 import { FaArrowUp } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
+ 
 
 
 
 
 
 function StudentData() {
+    const [students, setStudents] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+    
+      useEffect(() => {
+        const fetchStudentsData = () => {
+            axios.get('http://localhost:3000/students/alluser')
+              .then(response => {
+                setStudents(response.data);
+                setLoading(false);
+              })
+              .catch(error => {
+                console.error('Error fetching student data:', error);
+                setError('Error fetching student data');
+                setLoading(false);
+              });
+
+      }
+      
+      fetchStudentsData();
+    }, []);
+    
+      if (loading) return <div>Loading...</div>;
+      if (error) return <div>{error}</div>;
+      function handleEdit(student) {
+        
+        console.log('Edit student:', student);
+      }
+    
+      function handleDelete(student) {
+        // Add your delete logic here
+        console.log('Delete student:', student);
+      }
+    
   return (
    
           <div className='m-2'>
@@ -40,13 +78,10 @@ function StudentData() {
          </div>
         <div>
         <Form.Select aria-label="Default select example">
-  <option>Placed</option>
-  <option value="1">Unplaced</option>
-  {/* <optgroup label="Department">
-    <option value="1">CSE</option>
-    <option value="2">CSE</option>
-    <option value="3">CSE</option>
-  </optgroup> */}
+  <option>Placement </option>
+  <option value="1">Placed</option>
+  <option value="2">Unplaced</option>
+   
          </Form.Select>
         </div>
         <div>
@@ -75,7 +110,7 @@ function StudentData() {
         </div>   
         <div>
         <Form.Select aria-label="Default select example">
-            <option>Yeart</option>
+            <option>Year</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="2">3</option>
@@ -115,35 +150,34 @@ function StudentData() {
             <FaArrowUp/>
           </div>
           <div>Student Name</div>
-          <div>Status</div>
-          <div>Department/Class</div>
+          <div>Placement Status</div>
+          <div>Department</div>
+          <div>Action</div>
           <div>
             
             </div>  
         </div>
 
         {/* mapdata */}
-        <div className='w-full h-12 bg-white border-solid border-b-2 border-gray-300 rounded-md flex text-md gap-40 justify-center'>
-           <div className='flex items-center gap-1 '>
-           <div>#87878</div>
-           </div>
-          <div className='flex items-center gap-1'>
-            <div>15 Jan 2024</div>
-          </div>
-          <div className='text-sm'>
-            <div>John</div>
-            <div className='text-gray text-xs'>John@gmail.com</div>
-          </div>
-          <div className='-ml-7 bg-green-200 rounded-md w-20 flex justify-center items-center h-8'>Active</div>
-          <div>
-            <div className='text-sm'>B Tech</div>
-            <div className='text-xs text-grey'>5th sem</div>
-          </div>
-          <div className='flex gap-3 justify-center items-center'>
-            <FaRegEdit className='w-6 h-6'/>
-             <MdDeleteOutline className='w-6 h-6'/>
-            </div>  
-        </div>
+        {students.map((student, index) => (
+            <div key={index} className='w-full h-12 bg-white border-solid border-b-2 border-gray-300 rounded-md flex text-md gap-40 justify-center'>
+              <div>{student.studentId}</div>
+              <div>{new Date(student.dob).toLocaleDateString()}</div>
+              <div>{student.name}</div>
+               
+              <div className={`-ml-7 ${student.isPlaced ? 'bg-green-200' : 'bg-red-200'} rounded-md w-20 flex justify-center items-center h-8`}>
+                {student.isPlaced ? 'Active' : 'Inactive'}
+              </div>
+              <div>
+                <div className='text-sm'>{student.department}</div>
+                 
+              </div>
+              <div className='flex gap-3 justify-center items-center'>
+                <FaRegEdit className='w-6 h-6 cursor-pointer' onClick={() => handleEdit(student)} />
+                <MdDeleteOutline className='w-6 h-6 cursor-pointer' onClick={() => handleDelete(student)} />
+              </div>
+            </div>
+          ))}
        </div>
      </div>
     </div>

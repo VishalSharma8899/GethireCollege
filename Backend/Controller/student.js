@@ -218,25 +218,23 @@ exports.GetByNotRequiredPlacement = async (req ,res)=>{
  
 
 exports.updateStudent = async (req, res) => {
-    const { studentId } = req.body; // Assuming studentid is the studentId in the database
+    const { studentId } = req.body;  
     const studentdata = req.body;
 
     console.log('Received studentid:',  studentId);
     console.log('Data to update:', studentdata);
 
     try {
-        // Find the student by studentId
+         
         const student = await Student.findOne({  studentId:  studentId });
         console.log('Student from DB:', student);
 
         if (!student) {
             return res.status(404).json({ message: 'Student not found' });
         }
-
-        // Update the student document
+ 
         Object.assign(student, studentdata);
-
-        // Save the updated document
+ 
         const updatedStudent = await student.save();
 
         res.status(200).json(updatedStudent);
