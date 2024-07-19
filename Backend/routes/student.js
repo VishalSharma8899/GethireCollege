@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { uploadStudentData ,  GetAllUser ,GetPlacedUser ,GetUnPlacedUser , GetByDepartment ,GetByYear} = require('../Controller/student.js');
+const { uploadStudentData ,  GetAllUser ,GetPlacedUser ,GetUnPlacedUser ,GetByName, GetByDepartment ,GetByYear , GetByIntership ,GetByNotRequiredIntership, GetByPlacementRequired ,GetByNotRequiredPlacement ,updateStudent ,deleteStudentData} = require('../Controller/student.js');
 
 const multer = require('multer');
  const router = express.Router();
@@ -24,8 +24,26 @@ router.get('/UnPlaced' , GetUnPlacedUser);
 // all by deparment
 
 router.get('/department', GetByDepartment);
+//get by name 
+router.get('/search', GetByName);
 
 // get by year
 router.get('/year', GetByYear);
+// get by intership
+router.get('/intership',  GetByIntership);
+
+// get not intrested student for intership
+
+ router.get('/notrequiredintership',GetByNotRequiredIntership);
+
+ // get by placement required
+ router.get('/placementrequired', GetByPlacementRequired);
+
+ // get by placement not required
+ router.get('/notrequiredplacement', GetByNotRequiredPlacement);
+ // update
+ router.put('/update',   updateStudent );
+ //delete student 
+ router.delete('/delete/:id', deleteStudentData);
 
  module.exports = router;
