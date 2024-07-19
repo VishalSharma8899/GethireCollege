@@ -15,19 +15,20 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
 
-
-
-
 function StudentData() {
+
+  function ImportData(){
+    console.log("Imported")
+  }
+
   return (
-   
           <div className='m-2'>
             <div className='container w-full h-12 rounded-md mb-2 flex justify-between items-center'>
               <div>
                 <p className='font-bold text-lg'>Student List</p>
               </div>
               <div className='flex gap-5'>
-                <button className='bg-indigo-500 text-white p-1 w-24 rounded-md flex p-2'><LuImport className='mr-2 mt-1'/> Import</button>
+                <button onClick={()=>{ImportData()}} className='bg-indigo-500 text-white p-1 w-24 rounded-md flex p-2'><LuImport className='mr-2 mt-1'/> Import</button>
               </div>
             </div>
 
@@ -42,11 +43,6 @@ function StudentData() {
         <Form.Select aria-label="Default select example">
   <option>Placed</option>
   <option value="1">Unplaced</option>
-  {/* <optgroup label="Department">
-    <option value="1">CSE</option>
-    <option value="2">CSE</option>
-    <option value="3">CSE</option>
-  </optgroup> */}
          </Form.Select>
         </div>
         <div>
@@ -75,7 +71,7 @@ function StudentData() {
         </div>   
         <div>
         <Form.Select aria-label="Default select example">
-            <option>Yeart</option>
+            <option>Year</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="2">3</option>
