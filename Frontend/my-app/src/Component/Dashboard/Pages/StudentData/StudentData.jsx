@@ -86,6 +86,17 @@ function StudentData() {
     }
   };
 
+  const handleFetchAllUsers = () => {
+    setFilters({
+      department: '',
+      isPlaced: '',
+      internshipInterest: '',
+      placementInterest: '',
+      yearOfStudy: ''
+    });
+    fetchStudentData();
+  };
+
   const fetchStudentDataByFilter = async () => {
     try {
       const response = await axios.post('http://localhost:3000/students/filter', filters);
@@ -133,7 +144,7 @@ function StudentData() {
         const formData = new FormData();
         formData.append('file', new Blob([fileContent], { type: 'text/csv' }));
 
-        const response = await axios.post('http://localhost:3000/students/upload', formData, {
+        await axios.post('http://localhost:3000/students/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -164,20 +175,9 @@ function StudentData() {
     }
   };
 
-  const handleFetchAllUsers = () => {
-    setFilters({
-      department: '',
-      isPlaced: '',
-      internshipInterest: '',
-      placementInterest: '',
-      yearOfStudy: ''
-    });
-    fetchStudentData();
-  };
-
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:3000/students/delete', { id });
+      await axios.delete(`http://localhost:3000/students/delete/${id}`);
       const newData = dataSource.filter((item) => item.id !== id);
       setDataSource(newData);
       setFilteredData(newData);

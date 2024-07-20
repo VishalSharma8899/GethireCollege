@@ -95,7 +95,7 @@ exports.GetUnPlacedUser = async (req, res) => {
 };
 // unplaced student
 exports.GetByName = async (req, res) => {
-
+      
     const { name  } = req.body;
 
     try {
@@ -269,33 +269,25 @@ exports.deleteStudentData = async (req , res) => {
 
 
   exports.filter = async (req, res) => {
-    const filters = req.body || {};
-    let query = {};
+    console.log(req.body);
+    const { department, isPlaced, internshipRequired, PlacementRequired, yearOfStudy } = req.body;
+
+    console.log({department, isPlaced, internshipRequired, PlacementRequired, yearOfStudy});
+    const filters = {};
   
-    if (filters.department) {
-      query.department = filters.department;
-    }
-    if (filters.yearOfStudy) {
-      query.yearOfStudy = filters.yearOfStudy;
-    }
-    if (filters.isPlaced !== undefined) {
-      query.isPlaced = filters.isPlaced;
-    }
-    if (filters.gender) {
-      query.gender = filters.gender;
-    }
-    if (filters.PlacementInterest !== undefined) {
-      query['PlacementDetails.PlacementRequired'] = filters.PlacementInterest;
-    }
-    if (filters.intershipRequired !== undefined) {
-      query['PlacementDetails.internshipRequired'] = filters.InternshipInterest;
-    }
+    if (department) filters.department = department;
+    if (isPlaced) filters.isPlaced = isPlaced === 'true';
+    if (internshipRequired) filters['placementDetails.internshipRequired'] = internshipRequired === 'true';
+    if (PlacementRequired) filters['placementDetails.PlacementRequired'] = placementRequired === 'true';
+    if (yearOfStudy) filters.yearOfStudy = parseInt(yearOfStudy, 10);
   
     try {
-      const students = await Student.find(query);
-      res.status(200).json(students);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+        const students = await Student.find(filters);
+        res.send(students);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-  };
+};
+
   
