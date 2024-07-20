@@ -44,7 +44,7 @@ exports.uploadStudentData = async (req, res) => {
         }
 
         fs.unlinkSync(filePath);  
-        res.status(200).send('Student data uploaded successfully');
+        res.status(200).send(studentData );
     } catch (err) {
         console.error('Error uploading students data:', err);
         res.status(500).send('Error uploading students data');

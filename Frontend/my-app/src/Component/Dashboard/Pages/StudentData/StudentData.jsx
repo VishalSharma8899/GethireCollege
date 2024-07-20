@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+ import React, { useState, useEffect } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -122,24 +122,6 @@ function StudentData() {
 
   const handleOk = async () => {
     if (fileContent) {
-      const data = fileContent.split('\n').map((row, index) => {
-        const [id, date, name, dep, placement] = row.split(',');
-        return {
-          key: index,
-          id,
-          date: moment(date).format('DD/MM/YYYY'),
-          name,
-          dep,
-          placement: placement === 'true' ? 'Placed' : 'Unplaced',
-          action: (
-            <>
-              <MdDeleteOutline onClick={() => handleDelete(id)} style={{ cursor: 'pointer', marginRight: '10px' }} />
-              <FaRegEdit onClick={() => handleEdit(id)} style={{ cursor: 'pointer' }} />
-            </>
-          ),
-        };
-      });
-
       try {
         const formData = new FormData();
         formData.append('file', new Blob([fileContent], { type: 'text/csv' }));
@@ -151,8 +133,6 @@ function StudentData() {
         });
 
         alert('File uploaded successfully');
-        setDataSource(data);
-        setFilteredData(data);
       } catch (err) {
         console.error('There was an error uploading the file:', err);
         alert('There was an error uploading the file');
@@ -162,18 +142,20 @@ function StudentData() {
     setIsModalOpen(false);
   };
 
+
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-
+  
     if (file) {
       reader.onload = (e) => {
-        setFileContent(e.target.result);
+        setFileContent(e.target.result);   
       };
-
+  
       reader.readAsText(file);
     }
   };
+  
 
   const handleDelete = async (id) => {
     try {
