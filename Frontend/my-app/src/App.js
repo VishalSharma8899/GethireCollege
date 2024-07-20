@@ -12,10 +12,10 @@ import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
 import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-
-
 const App = () => {
   return (
+    <>
+   
     <BrowserRouter>
       <Sidebar>
         <Routes>
@@ -33,6 +33,7 @@ const App = () => {
         </Routes>
       </Sidebar>
     </BrowserRouter>
+    </>
   );
 };
 

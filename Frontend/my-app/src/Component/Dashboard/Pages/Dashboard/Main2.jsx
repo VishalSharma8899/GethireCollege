@@ -12,6 +12,11 @@ function Main2() {
         <Row className='w-full h-96'>
           <p className='font-bold mt-3'>Placement Status</p>
           
+          <div className='flex gap-12 ml-6'>
+            <div>Placed</div>
+            <div>Unplaced</div>
+            <div>Remaining</div>
+          </div>
           <  PieChart className="mt-1" ></PieChart>
           </Row>
         {/* <Row>

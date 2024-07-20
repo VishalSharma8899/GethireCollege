@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector, ResponsiveContainer, Cell } from 'recharts';
 
 const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
+  { name: 'Placed', value: 500 },
+  { name: 'Unplaced', value: 200 },
+  { name: 'Remaining', value: 300 },
 ];
+const COLORS = ['rgba(180, 223, 229, 1)', 'rgba(48, 60, 108, 1)', 'rgba(250, 151, 108, 1)'];
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -69,7 +69,8 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', display:"inline" }}>
+      <ResponsiveContainer width="232%" height="100%">
         <PieChart width={400} height={400}>
           <Pie
             activeIndex={this.state.activeIndex}
@@ -82,9 +83,14 @@ export default class Example extends PureComponent {
             fill="#8884d8"
             dataKey="value"
             onMouseEnter={this.onPieEnter}
-          />
+          >
+             {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
         </PieChart>
       </ResponsiveContainer>
+      </div>
     );
   }
 }
