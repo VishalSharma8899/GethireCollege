@@ -2,7 +2,7 @@ import React from 'react'
 
 function collgepart() {
   return (
-    <div>collgepart</div>
+    <div></div>
   )
 }
 
