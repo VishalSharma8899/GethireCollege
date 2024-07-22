@@ -43,7 +43,7 @@ exports.uploadStudentData = async (req, res) => {
                 { upsert: true, new: true, setDefaultsOnInsert: true }
             );
         }
-
+ 
         fs.unlinkSync(filePath);  
         res.status(200).send(studentData );
     } catch (err) {
