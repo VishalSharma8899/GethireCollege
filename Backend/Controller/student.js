@@ -44,7 +44,7 @@ exports.uploadStudentData = async (req, res) => {
         }
 
         fs.unlinkSync(filePath);  
-        res.status(200).send('Student data uploaded successfully');
+        res.status(200).send(studentData );
     } catch (err) {
         console.error('Error uploading students data:', err);
         res.status(500).send('Error uploading students data');
@@ -95,8 +95,8 @@ exports.GetUnPlacedUser = async (req, res) => {
 };
 // unplaced student
 exports.GetByName = async (req, res) => {
-
-    const { name  } = req.query;
+      
+    const { name  } = req.body;
 
     try {
       if (!name) {
@@ -218,25 +218,23 @@ exports.GetByNotRequiredPlacement = async (req ,res)=>{
  
 
 exports.updateStudent = async (req, res) => {
-    const { studentId } = req.body; // Assuming studentid is the studentId in the database
+    const { studentId } = req.body;  
     const studentdata = req.body;
 
     console.log('Received studentid:',  studentId);
     console.log('Data to update:', studentdata);
 
     try {
-        // Find the student by studentId
+         
         const student = await Student.findOne({  studentId:  studentId });
         console.log('Student from DB:', student);
 
         if (!student) {
             return res.status(404).json({ message: 'Student not found' });
         }
-
-        // Update the student document
+ 
         Object.assign(student, studentdata);
-
-        // Save the updated document
+ 
         const updatedStudent = await student.save();
 
         res.status(200).json(updatedStudent);
@@ -267,3 +265,29 @@ exports.deleteStudentData = async (req , res) => {
       res.status(500).json({message: err.message});
     }
   };
+
+
+
+  exports.filter = async (req, res) => {
+    console.log(req.body);
+    const { department, isPlaced, internshipRequired, PlacementRequired, yearOfStudy } = req.body;
+
+    console.log({department, isPlaced, internshipRequired, PlacementRequired, yearOfStudy});
+    const filters = {};
+  
+    if (department) filters.department = department;
+    if (isPlaced) filters.isPlaced = isPlaced === 'true';
+    if (internshipRequired) filters['placementDetails.internshipRequired'] = internshipRequired === 'true';
+    if (PlacementRequired) filters['placementDetails.PlacementRequired'] = placementRequired === 'true';
+    if (yearOfStudy) filters.yearOfStudy = parseInt(yearOfStudy, 10);
+  
+    try {
+        const students = await Student.find(filters);
+        res.send(students);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+  
