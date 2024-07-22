@@ -12,7 +12,7 @@ const legendData = [
 ];
 
 function Main2() {
-  const [notifications, setNotifications] = useState([]); // Replace with actual data
+  const [notifications, setNotifications] = useState([]); 
 
   const renderLegend = () => {
     return legendData.map((item, index) => (

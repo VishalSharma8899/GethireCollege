@@ -138,7 +138,7 @@ function StudentData() {
     }
   };
   
-  const handleOk = async () => {
+  const handleOk = async (file) => {
     // Ensure fileContent is set before upload
     if (fileContent) {
       try {

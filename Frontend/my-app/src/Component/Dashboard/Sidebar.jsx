@@ -22,7 +22,7 @@ const Sidebar = ({children}) => {
             icon:<MdOutlineDashboardCustomize/>
         },
         {
-            path:"/collge",
+            path:"/college",
             name:"College Profile",
             icon:<PiStudent/>
         },
