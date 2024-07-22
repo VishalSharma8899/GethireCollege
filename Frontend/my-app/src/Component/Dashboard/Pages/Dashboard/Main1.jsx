@@ -15,7 +15,7 @@ function Main1() {
           <Row className="justify-content-center">
             <Col xs={8} className="mt-2 ml-2">
               <Row className="gap-16 h-32">
-                <Col style={{background:"#b6fdb6"}} className="  p-3 rounded-lg w-24">
+                <Col style={{background:"#b6fdb6"}} className=" p-3 rounded-lg w-24">
                   <div className="flex ">
                     <div className=" flex-col">
                       <div>
@@ -36,7 +36,7 @@ function Main1() {
                       </div>
                   </div>
                 </Col>
-                <Col style={{background:"#cfcfe5"}} className="  p-3 rounded-lg w-24">
+                <Col style={{background:"#cfcfe5"}} className=" p-3 rounded-lg w-24">
                   <div className="flex ">
                     <div className=" flex-col">
                       <div>
@@ -59,7 +59,7 @@ function Main1() {
                 </Col>
               </Row>
               <Row className="gap-16 mt-10 h-32">
-                <Col style={{background:"#f5f5a4"}} className="  p-3 rounded-lg w-24">
+                <Col style={{background:"#f5f5a4"}} className=" p-3 rounded-lg w-24">
                   <div className="flex ">
                     <div className=" flex-col">
                       <div>
@@ -80,7 +80,7 @@ function Main1() {
                     </div>
                   </div>
                 </Col>
-                <Col style={{background:"#f4e4e6"}} className="  p-3 rounded-lg w-24">
+                <Col style={{background:"#f4e4e6"}} className=" p-3 rounded-lg w-24">
                   <div className="flex ">
                     <div className=" flex-col">
                       <div>
@@ -168,14 +168,14 @@ function Main1() {
                   <p>30LPA</p>
                   <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
                 </div>
-                {/* <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
+                <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
                   <p>#5</p>
                   <p>Barry</p>
                   <p>AI&DS</p>
                   <p>Flipkart</p>
                   <p>28LPA</p>
                   <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
-                </div> */}
+                </div>
               </div>
             </div>
           </Container>
@@ -185,4 +185,4 @@ function Main1() {
   );
 }
 
-export default Main1;
+export default Main1;

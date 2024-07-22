@@ -4,6 +4,59 @@ const path = require("path");
 const fs = require("fs");
 // uplod api for data
 exports.uploadStudentData = async (req, res) => {
+
+    try {
+        const filePath = req.file.path;
+        const workbook = xlsx.readFile(filePath);
+        const sheet_name_list = workbook.SheetNames;
+        const studentData = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+
+ 
+        for (const student of studentData) {
+            student.isPlaced = student.isPlaced.toString().toLowerCase() === 'true';
+
+            // Structure contactInformation field properly
+            const contactInformation = {
+                phone: student.phone,
+                email: student.email
+            };
+
+            const updatedStudent = {
+                studentId: student.studentId,
+                name: student.name,
+                dob: student.dob,
+                gender: student.gender,
+                contactInformation: contactInformation,
+                address: student.address,
+                department: student.department,
+                yearOfStudy: student.yearOfStudy,
+                cgpa: student.cgpa,
+                isPlaced: student.isPlaced,
+                PlacementRequired : student.PlacementRequired,
+                intershipRequired : student.intershipRequired
+            };
+
+            // Upsert student data
+            await Student.findOneAndUpdate(
+                { studentId: student.studentId },
+                updatedStudent,
+                { upsert: true, new: true, setDefaultsOnInsert: true }
+            );
+        }
+
+        fs.unlinkSync(filePath);  
+        res.status(200).send(studentData );
+    } catch (err) {
+        console.error('Error uploading students data:', err);
+        res.status(500).send('Error uploading students data');
+    }
+};
+
+
+// fatch api all data 
+
+exports.GetAllUser = async (req, res) => {
+
   try {
     res.status(200).send(req.body);
     const filePath = req.file;
@@ -96,6 +149,7 @@ exports.GetUnPlacedUser = async (req, res) => {
 };
 // unplaced student
 exports.GetByName = async (req, res) => {
+
   const { name } = req.query;
 
   try {
@@ -104,6 +158,10 @@ exports.GetByName = async (req, res) => {
         .status(400)
         .json({ message: "Name query parameter is required" });
     }
+
+      
+    const { name  } = req.body;
+
 
     let query = {};
 
@@ -258,8 +316,37 @@ exports.deleteStudentData = async (req, res) => {
     } else {
       res.status(404).json({ message: "Student not found" });
     }
+
   } catch {
     console.error("Error:", err);
     res.status(500).json({ message: err.message });
   }
 };
+
+
+
+
+
+  exports.filter = async (req, res) => {
+    console.log(req.body);
+    const { department, isPlaced, internshipRequired, PlacementRequired, yearOfStudy } = req.body;
+
+    console.log({department, isPlaced, internshipRequired, PlacementRequired, yearOfStudy});
+    const filters = {};
+  
+    if (department) filters.department = department;
+    if (isPlaced) filters.isPlaced = isPlaced === 'true';
+    if (internshipRequired) filters['placementDetails.internshipRequired'] = internshipRequired === 'true';
+    if (PlacementRequired) filters['placementDetails.PlacementRequired'] = placementRequired === 'true';
+    if (yearOfStudy) filters.yearOfStudy = parseInt(yearOfStudy, 10);
+  
+    try {
+        const students = await Student.find(filters);
+        res.send(students);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+  
