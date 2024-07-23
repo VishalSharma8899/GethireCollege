@@ -79,7 +79,7 @@ function CardActive() {
     //     </div>
     // </div>
 
-<div className="flex gap-11">
+<div className="flex gap-4">
 {cardData.map((card, index) => (
   <Card key={index} {...card} />
 ))}

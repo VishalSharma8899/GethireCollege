@@ -12,7 +12,7 @@ function Jobs() {
     <Post/>
     <Toprecruiters/>
     <div className='flex w-full h-full gap-3'>
-      <div className='w-2/5  bg-black h-96'>
+      <div className='w-2/5  h-96'>
       <TopPerformers/>
       </div>
       <div className=' w-full'>
