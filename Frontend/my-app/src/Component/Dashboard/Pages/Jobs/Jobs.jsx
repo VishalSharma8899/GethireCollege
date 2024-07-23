@@ -1,8 +1,26 @@
 import React from 'react'
+import Search from '../Jobs/Search'
+import Toprecruiters from './ActiveProcess'
+import Post from './Post'
+import TopPerformers from './TopPerformers'
+import Tranding from './Tranding'
 
 function Jobs() {
   return (
-    <div>Jobs</div>
+    <>
+    <div className='flex-col '>
+    <Post/>
+    <Toprecruiters/>
+    <div className='flex w-full h-full gap-3'>
+      <div className='w-2/5  bg-black h-96'>
+      <TopPerformers/>
+      </div>
+      <div className=' w-full'>
+        <Tranding/>
+      </div>
+    </div>
+    </div>
+    </>
   )
 }
 

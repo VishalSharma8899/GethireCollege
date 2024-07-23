@@ -2,56 +2,69 @@ const Student = require("../Models/studentdata");
 const xlsx = require("xlsx");
 const path = require("path");
 const fs = require("fs");
+const mongoose = require('mongoose');
 // uplod api for data
+ 
 exports.uploadStudentData = async (req, res) => {
+  try {
+    const filePath = req.file.path;
+    const userId = req.user ? req.user.id : req.cookies.userId; 
+    console.log('UserId from request:', userId);
+ // Use 'new' keyword here
 
-    try {
-        const filePath = req.file.path;
-        const workbook = xlsx.readFile(filePath);
-        const sheet_name_list = workbook.SheetNames;
-        const studentData = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+    // Read the workbook from the file
+    const workbook = xlsx.readFile(filePath);
+    const sheet_name_list = workbook.SheetNames;
 
- 
-        for (const student of studentData) {
-            student.isPlaced = student.isPlaced.toString().toLowerCase() === 'true';
+    // Convert the first sheet's data to JSON
+    const studentData = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
-            // Structure contactInformation field properly
-            const contactInformation = {
-                phone: student.phone,
-                email: student.email
-            };
+    // Iterate through each student record
+    for (const student of studentData) {
+      // Convert isPlaced, PlacementRequired, and intershipRequired fields to boolean
+      student.isPlaced = Boolean(student.isPlaced && student.isPlaced.toString().toLowerCase() === 'true');
+      student.PlacementRequired = Boolean(student.PlacementRequired && student.PlacementRequired.toString().toLowerCase() === 'true');
+      student.intershipRequired = Boolean(student.intershipRequired && student.intershipRequired.toString().toLowerCase() === 'true');
 
-            const updatedStudent = {
-                studentId: student.studentId,
-                name: student.name,
-                dob: student.dob,
-                gender: student.gender,
-                contactInformation: contactInformation,
-                address: student.address,
-                department: student.department,
-                yearOfStudy: student.yearOfStudy,
-                cgpa: student.cgpa,
-                isPlaced: student.isPlaced,
-                PlacementRequired : student.PlacementRequired,
-                intershipRequired : student.intershipRequired
-            };
+      // Structure contactInformation field properly
+      const contactInformation = {
+        phone: student.phone,
+        email: student.email
+      };
 
-            // Upsert student data
-            await Student.findOneAndUpdate(
-                { studentId: student.studentId },
-                updatedStudent,
-                { upsert: true, new: true, setDefaultsOnInsert: true }
-            );
-        }
- 
-        fs.unlinkSync(filePath);  
-        res.status(200).send(studentData );
-    } catch (err) {
-        console.error('Error uploading students data:', err);
-        res.status(500).send('Error uploading students data');
+      // Create the updated student object, including the userId from the request
+      const updatedStudent = {
+        userId: userId, // Use the userId from the request body
+        studentId: student.studentId,
+        name: student.name,
+        dob: student.dob,
+        gender: student.gender,
+        contactInformation: contactInformation,
+        address: student.address,
+        department: student.department,
+        yearOfStudy: student.yearOfStudy,
+        cgpa: student.cgpa,
+        isPlaced: student.isPlaced,
+        PlacementRequired: student.PlacementRequired,
+        intershipRequired: student.intershipRequired
+      };
+
+      // Save or update the student record in the database
+      await Student.findOneAndUpdate({ studentId: student.studentId }, updatedStudent, { upsert: true });
+      console.log('Updating student record:',  updatedStudent);
     }
+   
+    res.status(200).json({ msg: 'Student data uploaded successfully' });
+  } catch (error) {
+    console.error('Error uploading student data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
+      // Upsert student data (insert if not exists, update if exists)
+      
+// Add route to handle file upload
+ 
 
 // fatch api all data 
 

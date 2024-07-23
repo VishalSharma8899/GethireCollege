@@ -1,14 +1,25 @@
 const express = require('express');
 
-const { uploadStudentData ,  GetAllUser ,GetPlacedUser ,GetUnPlacedUser , GetByDepartment , filter ,GetByYear , GetByIntership ,GetByNotRequiredIntership, GetByName, GetByPlacementRequired ,GetByNotRequiredPlacement ,updateStudent ,deleteStudentData} = require('../Controller/student.js');
+const { uploadStudentData  ,  GetAllUser ,GetPlacedUser ,GetUnPlacedUser , GetByDepartment , filter ,GetByYear , GetByIntership ,GetByNotRequiredIntership, GetByName, GetByPlacementRequired ,GetByNotRequiredPlacement ,updateStudent ,deleteStudentData} = require('../Controller/student.js');
+const path = require('path');
 
 const multer = require('multer');
  const router = express.Router();
-
- const upload = multer({ dest: 'uploads/' });
+ const auth = require('../Middleware/Auth');
+ 
 
  // all user push
- router.post('/upload', upload.single('file'), uploadStudentData);
+ const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Directory where files will be uploaded
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+  
+  const upload = multer({ storage: storage });
+ router.post('/upload',auth, upload.single('file'), uploadStudentData);
 
 
  //all user get
