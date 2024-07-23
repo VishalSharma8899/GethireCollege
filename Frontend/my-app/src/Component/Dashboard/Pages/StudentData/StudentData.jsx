@@ -123,19 +123,44 @@ function StudentData() {
   };
 
   
-
-
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-  
-    if (file) {
-      reader.onload = (e) => {
-        setFileContent(e.target.result);
-      };
-  
-      reader.readAsText(file);
+     const file = event.target.files[0];
+     const reader = new FileReader();
+    
+     if (file) {
+     reader.onload = (e) => {
+    setFileContent(e.target.result); 
+     };
+    
+   reader.readAsText(file);
     }
+ 
+     };
+
+  const handleOk = async () => {
+  if (fileContent) {
+     try {
+    const formData = new FormData();
+    formData.append('file', new Blob([fileContent], { type: 'text/csv' }));
+    
+   await axios.post('http://localhost:3000/students/upload', formData, {
+     headers: {
+     'Content-Type': 'multipart/form-data',
+     },
+     });
+    
+     alert('File uploaded successfully');
+   } catch (err) {
+  console.error('There was an error uploading the file:', err);
+         alert('There was an error uploading the file');
+     }
+     }
+    
+     setIsModalOpen(false);
+     }; 
+    
+     
+ 
   };
   
   const handleOk = async (file) => {
@@ -175,6 +200,7 @@ function StudentData() {
   };
   
   
+ 
 
   const handleDelete = async (id) => {
     try {
@@ -345,6 +371,6 @@ function StudentData() {
       </div>
     </div>
   );
-}
+
 
 export default StudentData;
