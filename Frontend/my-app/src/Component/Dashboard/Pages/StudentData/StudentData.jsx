@@ -121,58 +121,42 @@ function StudentData() {
   };
 
   
-
-
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-  
-    if (file) {
-      reader.onload = (e) => {
-        setFileContent(e.target.result);
-      };
-  
-      reader.readAsText(file);
+     const file = event.target.files[0];
+     const reader = new FileReader();
+    
+     if (file) {
+     reader.onload = (e) => {
+    setFileContent(e.target.result); 
+     };
+    
+   reader.readAsText(file);
     }
-  };
-  
+     };
+
   const handleOk = async () => {
-    // Ensure fileContent is set before upload
-    if (fileContent) {
-      try {
-        const formData = new FormData();
-  
-        const fileType = file.name.split('.').pop().toLowerCase();
-        let fileContentType;
-        if (fileType === 'xlsx') {
-          fileContentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-        } else {
-          fileContentType = 'text/csv';
-        }
-  
-        const blob = new Blob([fileContent], { type: fileContentType });
-        formData.append('file', blob, file.name);
-  
-        await axios.post('http://localhost:3000/students/upload', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-  
-        alert('File uploaded successfully');
-      } catch (err) {
-        console.error('There was an error uploading the file:', err);
-        alert('There was an error uploading the file');
-      }
-    } else {
-      console.warn('No file selected for upload');
-      // Handle the case where no file is selected (e.g., disable upload button)
-    }
-  
-    setIsModalOpen(false);
-  };
-  
-  
+  if (fileContent) {
+     try {
+    const formData = new FormData();
+    formData.append('file', new Blob([fileContent], { type: 'text/csv' }));
+    
+   await axios.post('http://localhost:3000/students/upload', formData, {
+     headers: {
+     'Content-Type': 'multipart/form-data',
+     },
+     });
+    
+     alert('File uploaded successfully');
+   } catch (err) {
+  console.error('There was an error uploading the file:', err);
+         alert('There was an error uploading the file');
+     }
+     }
+    
+     setIsModalOpen(false);
+     }; 
+    
+     
 
   const handleDelete = async (id) => {
     try {

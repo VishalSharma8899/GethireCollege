@@ -3,7 +3,7 @@ const multer = require('multer');
  
 const mongoose = require('mongoose');
 const studentRoutes = require('./routes/student');
-
+const UserRoutes = require('./routes/User');
 const  connection = require('./Models/dbConnection');
 
 const cors = require('cors');
@@ -19,7 +19,7 @@ connection();
 // api path for uplod data
 app.use('/students',studentRoutes);
 
- 
+app.use('/college',UserRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
