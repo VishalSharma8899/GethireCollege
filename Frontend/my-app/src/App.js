@@ -12,8 +12,6 @@ import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
 import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-import Login from './Component/Login/Login.jsx';
-import Signup from './Component/Login/Signup.jsx';
  
 const App = () => {
   return (
@@ -27,14 +25,14 @@ const App = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/college" element={<Collegepart/>} />
-          <Route path="/comment" element={<Jobs />} />
+          <Route path="/jobs" element={<Jobs />} />
           <Route path="/student" element={<StudentData />} />
-          <Route path="/product" element={<Placement/>} />
-          <Route path="/productList" element={<Notification/>} />
-          <Route path="/productList" element={<Training/>} />
-          <Route path="/productList" element={<Analysis/>} />
-          <Route path="/productList" element={<IndustryTalks/>} />
-          <Route path="/productList" element={<Feedback/>} />
+          <Route path="/placement" element={<Placement/>} />
+          <Route path="/Notification" element={<Notification/>} />
+          <Route path="/Training" element={<Training/>} />
+          <Route path="/Analysis" element={<Analysis/>} />
+          <Route path="/industry" element={<IndustryTalks/>} />
+          <Route path="/feedback" element={<Feedback/>} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
