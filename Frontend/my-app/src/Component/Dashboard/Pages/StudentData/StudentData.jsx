@@ -54,6 +54,14 @@ function StudentData() {
     placementInterest: "",
     yearOfStudy: "",
   });
+  function getCookie(userId) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${userId}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  
+  const userId = getCookie('userId');
+  
 
   useEffect(() => {
     fetchStudentData();
@@ -152,27 +160,29 @@ function StudentData() {
   };
 
   const handleOk = async () => {
+    const userId = getCookie('userId');
     if (fileContent) {
       try {
         const formData = new FormData();
         formData.append("file", new Blob([fileContent], { type: "text/csv" }));
-
+        formData.append("userId", userId); // Add userId to FormData
+  
         await axios.post("http://localhost:3000/students/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+          }
         });
-
+  
         alert("File uploaded successfully");
       } catch (err) {
         console.error("There was an error uploading the file:", err);
         alert("There was an error uploading the file");
       }
     }
-
+  
     setIsModalOpen(false);
   };
-
+  
 
  
 

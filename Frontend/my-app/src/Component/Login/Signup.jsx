@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './style.css'; // Import CSS
-
+import { useCookies } from 'react-cookie';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const [cookies, setCookie] = useCookies(['token', 'userId']);
   const navigate = useNavigate(); 
 
   const handleSubmitLogin = async (e) => {
@@ -23,6 +24,8 @@ const Signup = () => {
         email,
         password,
       });
+      setCookie('token', response.data.token, { path: '/' });
+      setCookie('userId', response.data.userId, { path: '/' });
       console.log('Login successful:', response.data);
  
       setErrorMessage(null); // Clear any previous error messages
