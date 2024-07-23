@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { validationResult } = require('express-validator');
-
+const express = require('express');
 const User = require('../Models/User');
 
 exports.signup = async (req, res) => {
@@ -45,6 +45,8 @@ exports.signup = async (req, res) => {
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
+        res.cookie('token', token, { httpOnly: true, secure: true });
+        res.cookie('userId', user.id, { httpOnly: true, secure: true });
         res.json({ token });
       }
     );
@@ -87,6 +89,8 @@ exports.login = async (req, res) => {
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
+        res.cookie('token', token, { httpOnly: true, secure: true });
+        res.cookie('userId', user.id, { httpOnly: true, secure: true });
         res.json({ token });
       }
     );

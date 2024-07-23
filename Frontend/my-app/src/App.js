@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Sidebar from './Component/Dashboard/Sidebar.jsx';
 import Dashboard from './Component/Dashboard/Pages/Dashboard/Main.jsx';
-import Collegepart from './Component/Dashboard/Pages/College/collgepart.jsx';
+import Collgepart from './Component/Dashboard/Pages/College/collgepart.jsx';
 import Jobs from './Component/Dashboard/Pages/Jobs/Jobs.jsx';
 import StudentData from './Component/Dashboard/Pages/StudentData/StudentData.jsx';
 import Placement from './Component/Dashboard/Pages/Placement/Placement.jsx';
@@ -28,7 +28,7 @@ const App = () => {
 
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/college" element={<Collegepart/>} />
+          <Route path="/college" element={<Collgepart/>} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/student" element={<StudentData />} />
           <Route path="/placement" element={<Placement/>} />

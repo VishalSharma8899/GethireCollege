@@ -1,0 +1,21 @@
+_id,studentId,PlacementDetails.PlacementRequired,PlacementDetails.intershipRequired,__v,address,cgpa,contactInformation.phone,contactInformation.email,department,dob,gender,isPlaced,name,yearOfStudy
+669b53e5597beb435475c4d0,S001,true,true,0,123 Main St,3.5,1234567890,john@example.com,Computer Science,2000-01-01T00:00:00.000Z,Male,true,John Doe,2
+669b53e6597beb435475c4d2,S002,true,true,0,456 Elm St,3.8,0987654321,jane@example.com,Mathematics,2001-02-02T00:00:00.000Z,Female,false,Jane Smith,4
+669b53e6597beb435475c4d4,S003,true,true,0,789 Oak St,3.6,1122334455,emily@example.com,Physics,2002-03-03T00:00:00.000Z,Female,true,Emily Davis,3
+669b53e6597beb435475c4d6,S004,true,true,0,123 Pine St,3.7,5566778899,michael@example.com,Biology,2000-04-04T00:00:00.000Z,Male,false,Michael Brown,1
+669b53e6597beb435475c4d8,S005,true,true,0,456 Maple St,3.9,6677889900,sarah@example.com,Chemistry,1999-05-05T00:00:00.000Z,Female,true,Sarah Wilson,2
+669b53e6597beb435475c4da,S006,true,true,0,789 Cedar St,3.4,7788990011,david@example.com,Computer Science,2001-06-06T00:00:00.000Z,Male,true,David Taylor,3
+669b53e6597beb435475c4dc,S007,true,true,0,123 Birch St,3.2,8899001122,emma@example.com,Mathematics,2002-07-07T00:00:00.000Z,Female,false,Emma Thomas,4
+669b53e6597beb435475c4de,S008,true,true,0,456 Spruce St,3.5,9900112233,james@example.com,Physics,2000-08-08T00:00:00.000Z,Male,true,James Lee,1
+669b53e6597beb435475c4e0,S009,true,true,0,789 Willow St,3.8,0011223344,olivia@example.com,Biology,2001-09-09T00:00:00.000Z,Female,false,Olivia Harris,2
+669b53e6597beb435475c4e2,S010,true,true,0,123 Aspen St,3.6,1122334455,alexander@example.com,Chemistry,2002-10-10T00:00:00.000Z,Male,true,Alexander Young,3
+669b53e6597beb435475c4e4,S011,true,true,0,456 Cypress St,3.7,2233445566,mia@example.com,Computer Science,1999-11-11T00:00:00.000Z,Female,false,Mia King,4
+669b53e6597beb435475c4e6,S012,true,true,0,789 Redwood St,3.9,3344556677,ethan@example.com,Mathematics,2000-12-12T00:00:00.000Z,Male,true,Ethan Wright,1
+669b53e6597beb435475c4e8,S013,true,true,0,123 Dogwood St,3.4,4455667788,ava@example.com,Physics,2001-01-13T00:00:00.000Z,Female,true,Ava Walker,2
+669b53e6597beb435475c4ea,S014,true,true,0,456 Fir St,3.5,5566778899,benjamin@example.com,Biology,2002-02-14T00:00:00.000Z,Male,false,Benjamin Scott,3
+669b53e6597beb435475c4ec,S015,true,true,0,789 Hemlock St,3.8,6677889900,isabella@example.com,Chemistry,1999-03-15T00:00:00.000Z,Female,true,Isabella Green,4
+669b53e6597beb435475c4ee,S016,true,true,0,123 Cedar St,3.6,7788990011,lucas@example.com,Computer Science,2000-04-16T00:00:00.000Z,Male,true,Lucas Adams,1
+669b53e6597beb435475c4f0,S017,true,true,0,456 Oak St,3.7,8899001122,charlotte@example.com,Mathematics,2001-05-17T00:00:00.000Z,Female,false,Charlotte Nelson,2
+669b53e6597beb435475c4f2,S018,true,true,0,789 Pine St,3.9,9900112233,mason@example.com,Physics,2002-06-18T00:00:00.000Z,Male,true,Mason Baker,3
+669b53e6597beb435475c4f4,S019,true,true,0,123 Maple St,3.4,0011223344,amelia@example.com,Biology,1999-07-19T00:00:00.000Z,Female,true,Amelia Perez,4
+669b53e6597beb435475c4f6,S020,true,true,0,456 Birch St,3.5,1122334455,logan@example.com,Chemistry,2000-08-20T00:00:00.000Z,Male,false,Logan Murphy,1

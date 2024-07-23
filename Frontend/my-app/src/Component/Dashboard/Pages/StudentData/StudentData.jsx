@@ -1,9 +1,18 @@
+<<<<<<< HEAD
+
+import React, { useState, useEffect } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+=======
 //   // src/components/StudentData.jsx
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+>>>>>>> fa964cb46b922c1ac305a9cdd8510ec3fd311627
 import { IoSearch } from "react-icons/io5";
 import { LuImport } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
@@ -54,6 +63,14 @@ function StudentData() {
     placementInterest: "",
     yearOfStudy: "",
   });
+  function getCookie(userId) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${userId}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  
+  const userId = getCookie('userId');
+  
 
   useEffect(() => {
     fetchStudentData();
@@ -152,29 +169,44 @@ function StudentData() {
   };
 
   const handleOk = async () => {
+    const userId = getCookie('userId');
     if (fileContent) {
       try {
         const formData = new FormData();
         formData.append("file", new Blob([fileContent], { type: "text/csv" }));
-
+        formData.append("userId", userId); // Add userId to FormData
+  
         await axios.post("http://localhost:3000/students/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+          }
         });
-
+  
         alert("File uploaded successfully");
       } catch (err) {
         console.error("There was an error uploading the file:", err);
         alert("There was an error uploading the file");
       }
     }
-
+  
     setIsModalOpen(false);
   };
+  
 
-
+<<<<<<< HEAD
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete('http://localhost:3000/students/delete/${id}');
+      const newData = dataSource.filter((item) => item.id !== id);
+      setDataSource(newData);
+      setFilteredData(newData);
+    } catch (error) {
+      console.error("Error deleting student data:", error);
+    }
+  };
+=======
  
+>>>>>>> fa964cb46b922c1ac305a9cdd8510ec3fd311627
 
 const handleDelete = async (id) => {
   try {
