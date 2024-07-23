@@ -12,19 +12,20 @@ import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
 import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-import Login from './Component/Login/Login.jsx';
-import Signup from './Component/Login/Signup.jsx';
+
  
 const App = () => {
   return (
     <>
+        {/* <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} /> */}
    
     <BrowserRouter>
       <Sidebar>
         <Routes>
        
-        <Route path="/Login" element={<Login/>} />
-        <Route path="/Signup" element={<Signup/>} />
+        {/* <Route element={<ProtectedRoute/>}> */}
+
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/college" element={<Collegepart/>} />
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/Analysis" element={<Analysis/>} />
           <Route path="/industry" element={<IndustryTalks/>} />
           <Route path="/feedback" element={<Feedback/>} />
+        {/* </Route> */}
         </Routes>
       </Sidebar>
     </BrowserRouter>

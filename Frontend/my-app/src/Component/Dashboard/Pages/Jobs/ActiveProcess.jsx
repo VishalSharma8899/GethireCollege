@@ -1,5 +1,7 @@
-import React from 'react';
-import Slider from './Slider';
+import React from "react";
+import Slider from "./Slider";
+
+import CardActive from "./CardActive";
 
 function ActiveProcess({ data }) {
   const settings = {
@@ -12,26 +14,12 @@ function ActiveProcess({ data }) {
   };
   // console.log(data)
   return (
-    <div className='h-56 mt-3'>
-      <p className='font-bold text-lg ml-2'>Active Process</p>
-          
-      {data && data.length > 0 ? ( 
-        <Slider {...settings}>
-          {data.map((item, index) => (
-            <div key={index} className="flex w-64 rounded-xl h-32 ml-16 mt-3 gap-3">
-              <div className="mb-3">
-                <img className="w-28" src={item.image} alt="img" />
-              </div>
-              <div className="mt-3">
-                <p>{item.company}</p>
-                <p>{item.position}</p>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      ) : (
-        <p>No active processes found.</p>
-      )}
+    <div className="h-56 mt-3 ">
+      <p className="font-bold text-lg ml-2">Active Process</p>
+      <div className="flex gap-4 ">
+       <CardActive></CardActive>
+      
+      </div>
     </div>
   );
 }
