@@ -1,14 +1,10 @@
 
 
-
-
-//   // src/components/StudentData.jsx
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
 import { IoSearch } from "react-icons/io5";
 import { LuImport } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
@@ -188,10 +184,6 @@ function StudentData() {
     setIsModalOpen(false);
   };
   
-
-
- 
- 
 
 
 const handleDelete = async (id) => {
