@@ -5,6 +5,10 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import img from "../../../Images/userimg.png";
 import clgImg from "../../../Images/clgimg.jpg";
+import ClgCult from "../../../Images/ClgDance.jfif";
+import ClgHr from "../../../Images/ClgHr.avif";
+import ClgSport from "../../../Images/ClgSports.jpg";
+import ClgWork from "../../../Images/ClgWorkshop.jpg";
 import clglogo from "../../../Images/ClgLogo.webp";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaFacebook } from "react-icons/fa6";
@@ -14,7 +18,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import Events from "./Events";
 import Card from "./Card";
-
 
 function College() {
   const [ClgImg, SetClgImg] = useState(clgImg);
@@ -33,10 +36,36 @@ function College() {
     whatsapp: "https://www.whatsapp.com",
     mail: "mailto:someone@example.com",
   });
- 
+
   const [clgDetails, setClgDetails] = useState(
     "Welcome to PIEMR, Indore.PIEMR was established in 2008, under the patronage of Dr. N.N. Jain, Chairman & Founder of the Prestige Education Foundation (PEF). Approved by the All India Council for Technical Education (AICTE), New Delhi & the DTE, Govt. Of Madhya Pradesh, promising high regard to qualitative education.Our affiliation with the Rajiv Gandhi Technical University (RGTU), Bhopal, complements our existing degree of autonomy in teaching, learning, and research. Nestled in the heart of the financial capital of Madhya Pradesh, it is popularly described as one of the best engineering institutes in Central India.In the journey of 15 years, Prestige Institute of Engineering Management & Research, Indore has achieved various milestones in teaching, learning, and research. Not long ago, we collaborated with NITI Aayog in launching our venture the ‘Prestige Drone Tech’, to provide agricultural services in the Malwa and the Gird region."
   );
+  const [events] = useState([
+    {
+      id: 1,
+      image: ClgCult,
+      title: "Cultural Events",
+      description: "Conducted Various Cultural Events",
+    },
+    {
+      id: 2,
+      image: ClgWork,
+      title: "Workshop",
+      description: "Workshops Conducted by Students",
+    },
+    {
+      id: 3,
+      image: ClgSport,
+      title: "Sports Events",
+      description: "Various Games Conducted for Students",
+    },
+    {
+      id: 4,
+      image: ClgHr,
+      title: "HR Meet",
+      description: "HR Meet help to make connections",
+    },
+  ]);
   const [map, setMap] = useState(
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.1401983938745!2d75.88307947513238!3d22.76017777935854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963037e2dac9413%3A0x17126ae4be0e2398!2sPRESTIGE%20Vihar%2C%20Admin%20Block!5e0!3m2!1sen!2sin!4v1721711082421!5m2!1sen!2sin"
   );
@@ -179,16 +208,37 @@ function College() {
             </div>
 
             {/* Events */}
-            <div style={{ backgroundColor: "#FAFBFF" }} className="p-2 rounded">
-              <Events />
+            <div className="container mx-auto p-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {events.map((event) => {
+                  console.log(event);
+                  return (
+                    <div
+                      key={event.id}
+                      className="bg-white shadow-md rounded-lg overflow-hidden"
+                    >
+                      <Events img={event.image}>
+                        <h3 className="text-xl font-bold mb-2">
+                          {event.title}
+                        </h3>
+                        <p>{event.description}</p>
+                        <div className="mt-4">
+                          <button className="bg-black text-white px-4 py-2 rounded">
+                            Know More
+                          </button>
+                        </div>
+                      </Events>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Top PLacement */}
 
             <div className="w-full container">
               <div>
-                <p className="text-blue-500">Top Placements</p>
-                <hr className="w-36 mt-1" />
+                <p className="text-2xl font-bold text-black">Top Placements</p>
               </div>
               <Card />
             </div>

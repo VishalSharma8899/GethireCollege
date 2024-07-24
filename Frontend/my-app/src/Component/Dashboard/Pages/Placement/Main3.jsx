@@ -12,7 +12,7 @@ function Main3() {
         </div>
      <div className='w-60 h-60 mt-3'>
      <Circle percent={percent} strokeWidth={7} trailWidth={5} strokeColor="#86efac" trailColor='#bae6fd' /> 
-     <div className='absolute top-0 mt-40 ml-24'>
+     <div className='absolute top-0 mt- ml-24'>
      <CountUp className='font-bold text-2xl' start={0} end={percent} delay={1}/>
      </div>
      </div>
