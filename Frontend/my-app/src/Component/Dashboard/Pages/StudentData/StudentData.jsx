@@ -1,18 +1,14 @@
-<<<<<<< HEAD
 
-import React, { useState, useEffect } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-=======
+
+
+
 //   // src/components/StudentData.jsx
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
->>>>>>> fa964cb46b922c1ac305a9cdd8510ec3fd311627
+
 import { IoSearch } from "react-icons/io5";
 import { LuImport } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
@@ -193,20 +189,10 @@ function StudentData() {
   };
   
 
-<<<<<<< HEAD
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete('http://localhost:3000/students/delete/${id}');
-      const newData = dataSource.filter((item) => item.id !== id);
-      setDataSource(newData);
-      setFilteredData(newData);
-    } catch (error) {
-      console.error("Error deleting student data:", error);
-    }
-  };
-=======
+
  
->>>>>>> fa964cb46b922c1ac305a9cdd8510ec3fd311627
+ 
+
 
 const handleDelete = async (id) => {
   try {
