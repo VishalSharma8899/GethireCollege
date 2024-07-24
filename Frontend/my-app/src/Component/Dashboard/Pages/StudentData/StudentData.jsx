@@ -1,6 +1,4 @@
 
-
-//   // src/components/StudentData.jsx
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";

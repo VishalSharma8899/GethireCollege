@@ -1,49 +1,32 @@
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { FcServiceMark } from "react-icons/fc";
-import { MdArrowDropDown } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import img from "../../../Images/userimg.png";
-import { Link } from "react-router-dom";
 
 function Search() {
   return (
-    <div className="m-2">
-      <Navbar className="bg-body-tertiary flex flex-row justify-between">
-        <Form inline>
-          <div className="flex align-middle items-center gap-2 pl-2">
-            <div className="">
-              <IoSearch />
-            </div>
-            <Row>
-              <Col xs="auto">
-                <Form.Control
-                  type="text"
-                  placeholder="Search"
-                  className=" mr-sm-2"
-                />
-              </Col>
-            </Row>
-          </div>
+    <div className="container mx-auto px-4 py-2">
+      <Navbar className="bg-body-tertiary flex flex-row justify-between items-center">
+        <Form className="flex items-center">
+          <IoSearch className="text-lg mr-2" />
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            className="w-48 rounded-xl text-sm px-2 py-1"
+          />
         </Form>
-        <Form inline>
-          <div className="flex gap-3 justify-center items-center">
-            <div>
-              <IoNotificationsOutline />
-            </div>
-            <div className="bg-black rounded-xl w-10">
-              <img src={img} />
-            </div>
-            <div>John</div>
-            <div></div>
-            <MdArrowDropDown />
+        <div className="flex items-center gap-2 mr-5">
+          <IoNotificationsOutline className="text-lg" />
+          <div className="bg-black rounded-full w-8 h-8">
+            <img
+              src={img}
+              alt="profile"
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
-        </Form>
+          <div className="bg-blue-400 text-white rounded w-10 h-5 text-xs flex items-center justify-center">John</div>
+        </div>
       </Navbar>
     </div>
   );
