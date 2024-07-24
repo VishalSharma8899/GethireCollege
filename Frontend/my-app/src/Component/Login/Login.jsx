@@ -1,61 +1,56 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './style.css'; // Import CSS
 import { useNavigate } from 'react-router-dom';
+import './style.css'; // Import CSS
+
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState(''); // Add email state
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate(); 
 
-  
-  const handleSubmitRegistration = async (e) => {
+  const handleSubmitLogin = async (e) => {
     e.preventDefault();
 
     // Validation (optional)
-    if (!username || !password || !email) {
-      setErrorMessage('Please enter username, email, and password');
+    if (!email || !password) {
+      setErrorMessage('Please enter email and password');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/college/signup', {
-        username,
+      const response = await axios.post('http://localhost:3000/college/login', {
         email,
         password,
       });
+      console.log('Login successful:', response.data);
+ 
+      setErrorMessage(null); // Clear any previous error messages
 
-      console.log( 'register', response.data);
-
-      setUsername('');
-      setEmail(''); // Clear email input
-      setPassword('');
-      setErrorMessage(null); // Clear error message
-      // Redirect to login page or display success message
+      if (response.data.token) {  
+        localStorage.setItem('token', response.data.token); 
+        navigate('/');  
+      } else {
+        // Handle any other response conditions
+        setErrorMessage('Login failed');
+      }
     } catch (error) {
-      console.error('Registration error:', error.response.data);
-      setErrorMessage(error.response.data.msg || 'Registration failed');
+      const message = error.response?.data?.msg || 'Login failed';
+      setErrorMessage(message);
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-form-wrapper">
-        <h2>Registration</h2>
-        <form onSubmit={handleSubmitRegistration}>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+        <h2>Login</h2>
+        <form onSubmit={handleSubmitLogin}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="username"
+            id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)} // Use setEmail correctly
+            onChange={(e) => setEmail(e.target.value)}
           />
           <label htmlFor="password">Password:</label>
           <input
@@ -64,12 +59,10 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </div>
-
-      
     </div>
   );
 };

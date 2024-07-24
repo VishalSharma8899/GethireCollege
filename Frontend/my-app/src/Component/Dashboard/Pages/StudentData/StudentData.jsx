@@ -56,7 +56,10 @@ function StudentData() {
   });
   function getCookie(userId) {
     const value = `; ${document.cookie}`;
+    console.log( "v" + value);
+
     const parts = value.split(`; ${userId}=`);
+    console.log( " part " +parts);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
   
@@ -161,6 +164,7 @@ function StudentData() {
 
   const handleOk = async () => {
     const userId = getCookie('userId');
+    console.log(userId);
     if (fileContent) {
       try {
         const formData = new FormData();
