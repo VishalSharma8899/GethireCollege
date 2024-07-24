@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-
+import img1 from "../../../Images/google.png"
 
 const { Column } = Table;
 
@@ -8,52 +8,62 @@ const data = [
   {
     key: '1',
     Name: "Google Drive",
+    img:{img1},
   },
   {
     key: '2',
     Name: "Amazon Placement Drive",
+    img:img1,
   },
   {
     key: '3',
     Name: "Microsoft Drive",
+    img:img1,
   },
   {
     key: '4',
     Name: "Deloite",
+    img:img1,
   },
   {
     key: '5',
     Name: "Delta-X",
+    img:img1,
   },
   {
     key: '6',
     Name: "Microsoft",
+    img:img1,
   },
   {
     key: '7',
     Name: "Black Grapes",
+    img:img1,
   },
   {
     key: '8',
     Name: "Amazon Placement Drive",
+    img:img1,
   },
   {
     key: '9',
     Name: "Microsoft Drive",
+    img:img1,
   },
 ];
 
 function Main2() {
   return (
-    <div className='w-3/4 h-3/4 m-5'>
-      <div className="shadow-lg rounded-lg overflow-hidden">
+    <div className='w-3/4 h-3/4 m-5 bg-blue-50 text-white'>
+      <div className="shadow-lg overflow-hidden">
         <Table dataSource={data} pagination={{ pageSize: 3 }} size="middle" className="table-auto w-full">
           <Column 
-            title={<span className="bg-gray-100 py-2 px-4 block text-center">Up Coming Companies</span>} 
-            dataIndex="Name" 
+            title={<span className="bg-blue-100 py-2 px-4 rounded block text-center">Up Coming Companies</span>} 
+            dataIndex="Name"
             key="Name" 
             className="p-4 text-center"
           />
+           {/* <Column dataIndex="img"/> */}
         </Table>
       </div>
     </div>

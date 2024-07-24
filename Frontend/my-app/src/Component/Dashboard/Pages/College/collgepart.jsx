@@ -238,7 +238,7 @@ function College() {
 
             <div className="w-full container">
               <div>
-                <p className="text-2xl font-bold text-black">Top Placements</p>
+                <p className="text-2xl mb-5 font-bold text-black">Top Placements</p>
               </div>
               <Card />
             </div>

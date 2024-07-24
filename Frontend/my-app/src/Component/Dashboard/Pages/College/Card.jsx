@@ -1,65 +1,108 @@
-import React,{useState} from 'react'
-import { IoLocationOutline } from "react-icons/io5";
-function Card() {
-    const [jobListings, setJobListings] = useState([
-        {
-          id: 1,
-          company: 'Amazon',
-          role: 'Fresher',
-          location: 'Chennai, Tamil Nadu'
-        },
-        {
-            id: 1,
-            company: 'Amazon',
-            role: 'Fresher',
-            location: 'Chennai, Tamil Nadu'
-          },
-          {
-            id: 1,
-            company: 'Amazon',
-            role: 'Fresher',
-            location: 'Chennai, Tamil Nadu'
-          },
-          {
-            id: 1,
-            company: 'Amazon',
-            role: 'Fresher',
-            location: 'Chennai, Tamil Nadu'
-          },
-          {
-            id: 1,
-            company: 'Amazon',
-            role: 'Fresher',
-            location: 'Chennai, Tamil Nadu'
-          },
-          {
-            id: 1,
-            company: 'Amazon',
-            role: 'Fresher',
-            location: 'Chennai, Tamil Nadu'
-          },
-      ]);
+import React from 'react';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import img1 from "../../../Images/microsoft.png";
+import img2 from "../../../Images/walmart.png";
+import img3 from "../../../Images/meesho.png";
+
+function Arrow(props) {
+  const { className, style, onClick } = props;
   return (
-    <div className='flex gap-10 mt-5'>
-      {jobListings.map((job) => (
-        <div key={job.id} className="flex gap-5 mb-5 text-sm">
-          <div className="card" style={{ width: "8rem", height: "10rem" }}>
-            <div className="card-body">
-              <h5 className="card-title">{job.company}</h5>
-              <h6 className="card-subtitle mb-2 text-body-secondary">{job.role}</h6>
-              <div className="flex gap-2">
-                <p className="card-text">
-                  <IoLocationOutline />
-                </p>
-                <p>{job.location}</p>
-              </div>
-              <button className="bg-black text-white rounded-xl p-2 mt-2">View Jobs</button>
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    />
+  );
+}
+
+function Card() {
+  const data=[{
+    id:1,
+    img:img1,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:2,
+    img:img2,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:3,
+    img:img3,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:4,
+    img:img1,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:5,
+    img:img2,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },{
+    id:6,
+    img:img3,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },{
+    id:7,
+    img:img1,
+    name:"Amazon",
+    CTC:"1,00,000"
+  }
+]
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 2,
+    centerPadding: "60px",
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        }
+      },
+    ]
+  };
+
+  return (
+    <div className="slider-container gap-2 mb-10">
+      <Slider {...settings}>
+       {data.map((data)=>{
+        return(
+          <div className="mx-2">
+          <div className='card' style={{ width: '200px', height: '200px' }}>
+            <img src={data.img} alt="" className='w-full h-32 object-cover object-center'/>
+            <div className='card-body p-2'>
+               <h3 className='text-lg font-bold'></h3>
+               <p className='text-sm'>{data.name}</p>
+               <p className=''>{data.CTC}</p>
             </div>
           </div>
         </div>
-      ))}
+        )
+       })}
+      </Slider>
     </div>
   )
 }
 
-export default Card
+export default Card;
