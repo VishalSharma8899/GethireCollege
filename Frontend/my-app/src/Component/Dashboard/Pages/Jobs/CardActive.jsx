@@ -1,18 +1,16 @@
 import React from 'react'
 import Micro from "../../../Images/microsoft.png";
-import Google from '../../../Images/google.png'
+import deltax from '../../../Images/deltax.jpeg'
 import walmart from '../../../Images/walmart.png'
 import meesho from '../../../Images/meesho.png'
 import Card from './Card'
 function CardActive() {
     const cardData = [
         { image: Micro, company: 'Microsoft', position: 'SDE-1', progress: 60, percentage: 50 },
-        { image: Google, company: 'Google', position: 'SDE-2', progress: 40, percentage: 40 },
+        { image: deltax, company: 'Deltax', position: 'SDE-2', progress: 40, percentage: 40 },
         { image: walmart, company: 'Walmart', position: 'Developer', progress: 60, percentage: 50 },
         {image:meesho, company:'Meesho',position:'Frontend', progress: 80, percentage:80 }
       ];
-      
-      
    
   return (
     // <div>
@@ -81,7 +79,7 @@ function CardActive() {
     //     </div>
     // </div>
 
-<div className="flex gap-3">
+<div className="flex gap-4">
 {cardData.map((card, index) => (
   <Card key={index} {...card} />
 ))}
