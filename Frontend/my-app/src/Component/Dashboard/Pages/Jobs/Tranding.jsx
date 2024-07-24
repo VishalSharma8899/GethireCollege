@@ -1,5 +1,6 @@
 import React from 'react'
 import Google from '../../../Images/google.png'
+
 function Tranding() {
     
   return (
