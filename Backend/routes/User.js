@@ -9,12 +9,11 @@ const auth = require('../Middleware/Auth');
 const User = require('../Models/User');
 
 // @route    GET api/auth
-const{ signup ,login ,getProfile}  =  require('../Controller/User.js');
+const{ handleUserLogin ,  handleUserRegistration,getProfile}  =  require('../Controller/User.js');
 
 const router = express.Router();
 
-router.post('/login' , login);
-
-router.post('/signup' ,    signup);
-router.get('/profile', auth, getProfile);
+router.post("/login", handleUserLogin);
+router.post("/register", handleUserRegistration);
+ 
 module.exports = router;

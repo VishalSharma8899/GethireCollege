@@ -20,7 +20,7 @@ const studentSchema = new mongoose.Schema({
   cgpa: Number,
   isPlaced: Boolean,
   PlacementRequired: Boolean,
-  intershipRequired: Boolean
+   internshipRequired: Boolean
 });
 
 const Student = mongoose.model('StudentDataBase', studentSchema);
