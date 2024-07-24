@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
@@ -183,6 +184,7 @@ function StudentData() {
     setIsModalOpen(false);
   };
   
+
 const handleDelete = async (id) => {
   try {
     await axios.delete(`http://localhost:3000/students/delete/${id}`);

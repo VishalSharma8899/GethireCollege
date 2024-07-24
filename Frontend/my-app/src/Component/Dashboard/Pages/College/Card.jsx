@@ -2,9 +2,9 @@ import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import img1 from "../../../Images/amazon.png";
-import img2 from "../../../Images/flipkart.png";
-import img3 from "../../../Images/google.png";
+import img1 from "../../../Images/microsoft.png";
+import img2 from "../../../Images/walmart.png";
+import img3 from "../../../Images/meesho.png";
 
 function Arrow(props) {
   const { className, style, onClick } = props;
@@ -18,6 +18,47 @@ function Arrow(props) {
 }
 
 function Card() {
+  const data=[{
+    id:1,
+    img:img1,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:2,
+    img:img2,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:3,
+    img:img3,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:4,
+    img:img1,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },
+  {
+    id:5,
+    img:img2,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },{
+    id:6,
+    img:img3,
+    name:"Amazon",
+    CTC:"1,00,000"
+  },{
+    id:7,
+    img:img1,
+    name:"Amazon",
+    CTC:"1,00,000"
+  }
+]
   var settings = {
     dots: true,
     infinite: true,
@@ -45,66 +86,20 @@ function Card() {
   return (
     <div className="slider-container gap-2 mb-10">
       <Slider {...settings}>
-        <div className="mx-2">
+       {data.map((data)=>{
+        return(
+          <div className="mx-2">
           <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={img1} alt="" className='w-full h-full object-cover object-center'/>
+            <img src={data.img} alt="" className='w-full h-32 object-cover object-center'/>
             <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'>Slick</h3>
-               <p className='text-sm'>Amazon</p>
+               <h3 className='text-lg font-bold'></h3>
+               <p className='text-sm'>{data.name}</p>
+               <p className=''>{data.CTC}</p>
             </div>
           </div>
         </div>
-        
-        <div className="mx-2">
-          <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={img2} alt="" className='w-full h-full object-cover object-center'/>
-            <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'>Slick</h3>
-               <p className='text-sm'>Flipkart</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mx-2">
-          <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={img3} alt="" className='w-full h-full object-cover object-center'/>
-            <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'>Slick</h3>
-               <p className='text-sm'>Google</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mx-2">
-          <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={img1} alt="" className='w-full h-full object-cover object-center'/>
-            <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'>Slick</h3>
-               <p className='text-sm'>Amazon</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mx-2">
-          <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={img2} alt="" className='w-full h-full object-cover object-center'/>
-            <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'>Slick</h3>
-               <p className='text-sm'>Flipkart</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mx-2">
-          <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={img3} alt="" className='w-full h-full object-cover object-center'/>
-            <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'>Slick</h3>
-               <p className='text-sm'>Google</p>
-            </div>
-          </div>
-        </div>
-
+        )
+       })}
       </Slider>
     </div>
   )

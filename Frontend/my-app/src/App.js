@@ -12,20 +12,24 @@ import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
 import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-
+import Login from './Component/Login/Login.jsx';
+import Signup from './Component/Login/Signup.jsx'
  
+import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} /> */}
-   
     <BrowserRouter>
+    <Routes>
+        <Route path="/" element={<Login/>} />
+        <Route path="/signup" element={< Signup/>} />
+
+    </Routes>
+   
       <Sidebar>
         <Routes>
        
-        {/* <Route element={<ProtectedRoute/>}> */}
-
+        <Route element={<ProtectedRoute/>}/>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/college" element={<Collgepart/>} />
@@ -34,8 +38,6 @@ const App = () => {
           <Route path="/placement" element={<Placement/>} />
           <Route path="/Notification" element={<Notification/>} />
           <Route path="/Training" element={<Training/>} />
-          <Route path="/Analysis" element={<Analysis/>} />
-          <Route path="/industry" element={<IndustryTalks/>} />
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
         </Routes>
