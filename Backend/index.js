@@ -7,7 +7,7 @@ const UserRoutes = require('./routes/User');
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-
+ 
 const cors = require('cors');
  
 
@@ -15,7 +15,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(cookieParser());
-
+ 
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
@@ -24,7 +24,7 @@ connection();
 app.use('/students',studentRoutes);
 
 app.use('/college',UserRoutes);
-
+ 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
