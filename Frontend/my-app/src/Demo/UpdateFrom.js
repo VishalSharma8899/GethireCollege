@@ -18,7 +18,7 @@ const UpdateForm = () => {
     // Ensure at least one field is provided
     if (formData.has('college_img') || formData.has('college_info')) {
       try {
-        const response = await axios.post(`http://localhost:3000/college_data_update/${id}`, formData, {
+        const response = await axios.post(`http://localhost:3000/college_data_update`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

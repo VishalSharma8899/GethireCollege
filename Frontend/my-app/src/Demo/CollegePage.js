@@ -5,10 +5,10 @@ const CollegePage = () => {
   const [collegeData, setCollegeData] = useState(null);
 
   useEffect(() => {
-    const id = 1; // You might want to make this dynamic or configurable
+    // const id = 1; // You might want to make this dynamic or configurable
     const fetchCollegeData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/college_data_get/${id}`);
+        const response = await axios.get(`http://localhost:3000/college_data_get`);
         setCollegeData(response.data);
       } catch (error) {
         console.error('Error fetching college data:', error);

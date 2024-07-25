@@ -1,5 +1,5 @@
 const College = require('../Models/CollegeData');
-
+const jwt = require('jsonwebtoken');
 // for uploading images
 // const multer = require('multer');
 // const storage = multer.memoryStorage();
@@ -14,7 +14,32 @@ const College = require('../Models/CollegeData');
         const college_logo = req.files['college_logo'] ? req.files['college_logo'][0] : null;
     
         try {
+            const token = req.headers.authorization.split(' ')[1];
+
+    console.log('Token received:', token);
+
+    let objId;
+    const secretKey = process.env.JWT_SECRET_KEY;
+    console.log('Secret Key:', secretKey);
+
+    if (token) {
+      try {
+        console.log('Verifying token...');
+        const decoded = jwt.verify(token, secretKey);
+        objId = decoded.objId;
+        console.log('Decoded Token:', decoded);
+      } catch (err) {
+        console.error('Token verification failed:', err.message);
+        return res.status(401).json({ msg: 'Token is not valid' });
+      }
+    } else {
+      console.error('No token provided');
+      return res.status(401).json({ msg: 'No token, authorization denied' });
+    }
+
+    console.log('UserId from token:', objId);
             const college = new College({
+                userId: objId,
                 id,
                 college_img: college_img ? college_img.buffer.toString('base64') : undefined,
                 college_logo: college_logo ? college_logo.buffer.toString('base64') : undefined,
@@ -27,8 +52,6 @@ const College = require('../Models/CollegeData');
                 college_whatsapp_num,
                 college_gmail_id,
                 college_info,
-                // college_cultural_events: JSON.parse(college_cultural_events),
-                // college_top_placements: JSON.parse(college_top_placements),
                 college_location
             });
     
@@ -54,14 +77,39 @@ const College = require('../Models/CollegeData');
 
 // for get that college data
   exports.CollegeDataGet = async (req, res) => {
-    const collegeId = parseInt(req.params.id, 10); // Convert to Number
-      console.log("Searching for college with id:", collegeId); // Log the id
-    
+  
       try {
-          const collegeData = await College.findOne({ id: collegeId });
-          if (!collegeData) {
-              return res.status(404).send({ Status: "College not found" });
+        const token = req.headers.authorization.split(' ')[1];
+
+        console.log('Token received:', token);
+    
+        let objId;
+        const secretKey = process.env.JWT_SECRET_KEY;
+        console.log('Secret Key:', secretKey);
+    
+        if (token) {
+          try {
+            console.log('Verifying token...');
+            const decoded = jwt.verify(token, secretKey);
+            objId = decoded.objId;
+            console.log('Decoded Token:', decoded);
+          } catch (err) {
+            console.error('Token verification failed:', err.message);
+            return res.status(401).json({ msg: 'Token is not valid' });
           }
+        } else {
+          console.error('No token provided');
+          return res.status(401).json({ msg: 'No token, authorization denied' });
+        }
+        console.log('UserId from token:', objId);
+
+    
+        const collegeData = await College.find({userId : objId});
+        
+        if (!collegeData) {
+            return res.status(404).send({ Status: "College not found" });
+        }
+        console.log('UserId from token:', collegeData);
           res.status(200).send(collegeData);
       } catch (error) {
           console.error("Error while retrieving data: " + error);
@@ -70,7 +118,7 @@ const College = require('../Models/CollegeData');
    }
 
    exports.CollegeDataUpdate = async (req, res) => {
-    const collegeId = parseInt(req.params.id, 10); // Convert to Number
+    // const collegeId = parseInt(req.params.id, 10); // Convert to Number
     const updateData = req.body;
 
     // Handle file uploads
@@ -102,9 +150,41 @@ const College = require('../Models/CollegeData');
                 }
             }
         }
+        
+        // -------------------
+        const token = req.headers.authorization.split(' ')[1];
 
+        console.log('Token received:', token);
+    
+        let objId;
+        const secretKey = process.env.JWT_SECRET_KEY;
+        console.log('Secret Key:', secretKey);
+    
+        if (token) {
+          try {
+            console.log('Verifying token...');
+            const decoded = jwt.verify(token, secretKey);
+            objId = decoded.objId;
+            console.log('Decoded Token:', decoded);
+          } catch (err) {
+            console.error('Token verification failed:', err.message);
+            return res.status(401).json({ msg: 'Token is not valid' });
+          }
+        } else {
+          console.error('No token provided');
+          return res.status(401).json({ msg: 'No token, authorization denied' });
+        }
+        // console.log('UserId from token:', objId);
+
+    
+        // const collegeData = await College.find({userId : objId});
+        const existingCollege = await College.find({userId : objId});
+         
+        // console.log("Colleg data is "+collegeData);
+        
         // Find the existing college document
-        const existingCollege = await College.findOne({ id: collegeId });
+        // const existingCollege = await College.findOne({ id: collegeData });
+        // console.log("Existind data is Colleg data is "+ existingCollege);
         
         if (!existingCollege) {
             return res.status(404).send({ Status: "College not found" });
@@ -125,7 +205,7 @@ const College = require('../Models/CollegeData');
 
         // Find the college by id and update only the fields provided in req.body
         const updatedCollege = await College.findOneAndUpdate(
-            { id: collegeId },          // Search criteria
+            { userId:objId },          // Search criteria
             { $set: updateData },       // Fields to update
             { new: true,                // Return the updated document
               runValidators: true       // Validate the updated data
@@ -141,7 +221,7 @@ const College = require('../Models/CollegeData');
 
 //    for add on the placement data
   exports.CollegeDataPlacementAdd = async (req, res) => {
-        const collegeId = parseInt(req.params.id, 10); // Convert to Number
+        // const collegeId = parseInt(req.params.id, 10); // Convert to Number
           const { placements } = req.body; // Extract placements array from request body
 
           if (!Array.isArray(placements) || placements.length === 0) {
@@ -156,9 +236,35 @@ const College = require('../Models/CollegeData');
           }
 
           try {
+            const token = req.headers.authorization.split(' ')[1];
+
+            console.log('Token received:', token);
+        
+            let objId;
+            const secretKey = process.env.JWT_SECRET_KEY;
+            console.log('Secret Key:', secretKey);
+        
+            if (token) {
+              try {
+                console.log('Verifying token...');
+                const decoded = jwt.verify(token, secretKey);
+                objId = decoded.objId;
+                console.log('Decoded Token:', decoded);
+              } catch (err) {
+                console.error('Token verification failed:', err.message);
+                return res.status(401).json({ msg: 'Token is not valid' });
+              }
+            } else {
+              console.error('No token provided');
+              return res.status(401).json({ msg: 'No token, authorization denied' });
+            }
+            // console.log('UserId from token:', objId);
+    
+        
+            // const collegeData = await College.find({userId : objId});
               // Find the college by id and add new placements to the college_top_placements array
               const updatedCollege = await College.findOneAndUpdate(
-                  { id: collegeId },                            // Search criteria
+                  { userId: objId },                            // Search criteria
                   { $push: { college_top_placements: { $each: placements } } }, // Add new placements
                   { new: true,                                 // Return the updated document
                     runValidators: true                        // Validate the updated data
@@ -332,7 +438,7 @@ const storage = multer.memoryStorage(); // Use memory storage to handle files as
 const upload = multer({ storage: storage });
 
 exports.CollegeDataEventAdd = async (req, res) => {
-    const collegeId = parseInt(req.params.id, 10); // Convert to Number
+    // const collegeId = parseInt(req.params.id, 10); // Convert to Number
 
     // Handle file uploads using multer
     upload.array('images')(req, res, async (err) => {
@@ -369,9 +475,32 @@ exports.CollegeDataEventAdd = async (req, res) => {
         }
 
         try {
+            const token = req.headers.authorization.split(' ')[1];
+
+            console.log('Token received:', token);
+        
+            let objId;
+            const secretKey = process.env.JWT_SECRET_KEY;
+            console.log('Secret Key:', secretKey);
+        
+            if (token) {
+              try {
+                console.log('Verifying token...');
+                const decoded = jwt.verify(token, secretKey);
+                objId = decoded.objId;
+                console.log('Decoded Token:', decoded);
+              } catch (err) {
+                console.error('Token verification failed:', err.message);
+                return res.status(401).json({ msg: 'Token is not valid' });
+              }
+            } else {
+              console.error('No token provided');
+              return res.status(401).json({ msg: 'No token, authorization denied' });
+            }
+            // console.log('UserId from token:', objId);
             // Find the college by id and add new events to the college_cultural_events array
             const updatedCollege = await College.findOneAndUpdate(
-                { id: collegeId },                            // Search criteria
+                { userId: objId },                          // Search criteria
                 { $push: { college_cultural_events: { $each: events } } }, // Add new events
                 { new: true,                                 // Return the updated document
                   runValidators: true                        // Validate the updated data

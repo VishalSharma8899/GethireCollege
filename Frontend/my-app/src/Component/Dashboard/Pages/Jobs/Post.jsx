@@ -35,7 +35,7 @@ function Post() {
     }
   `;
   return (
-    <div className="w-full  h-72 mt-3 rounded-lg bg-gradient-to-r from-blue-300 to-white-100">
+    <div className="  h-72  rounded-lg  ml-3 mr-3 bg-white">
       <Container>
         <Row>
           <Col sm={8}>
@@ -45,7 +45,7 @@ function Post() {
                   style={{ color: "rgba(89, 86, 233, 1)" }}
                   className=" flex gap-2 text-3xl font-semibold "
                 >
-                  Corporate <p className="text-white">Connects</p>
+                  Corporate <p className="text-black">Connects</p>
                 </p>
               </div>
               <div className="line flex gap-3">
@@ -57,6 +57,8 @@ function Post() {
                   />
                 ))}
               </div>
+              <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus magni ex, libero corrupti quibusdam dolor quia voluptate sapiente, voluptatibus a, reiciendis voluptatem cumque!
+              </p>
               <ConfigProvider
                 button={{
                   className: linearGradientButton,
@@ -66,7 +68,7 @@ function Post() {
                   type="primary"
                   size="large"
                   icon={<AntDesignOutlined />}
-                  className="mt-10"
+                  className="mt-8"
                 >
                   Invite
                 </Button>

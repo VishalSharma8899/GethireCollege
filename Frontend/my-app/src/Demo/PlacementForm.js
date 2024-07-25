@@ -29,7 +29,7 @@ const PlacementForm = () => {
         placements: data.placements
       };
 
-      const response = await axios.post(`http://localhost:3000/college_top_placements_add/${collegeId}`, formattedData);
+      const response = await axios.post(`http://localhost:3000/college_top_placements_add`, formattedData);
 
       if (response.status === 200) {
         alert('Placement added successfully');

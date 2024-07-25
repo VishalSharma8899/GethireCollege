@@ -27,8 +27,8 @@
     
         try {
           // Replace `collegeId` with the actual college ID you want to use
-          const collegeId = 1;
-          await axios.post(`http://localhost:3000/college_cultural_events_add/${collegeId}`, formData, {
+          // const collegeId = 1;
+          await axios.post(`http://localhost:3000/college_cultural_events_add`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }

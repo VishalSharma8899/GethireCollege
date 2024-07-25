@@ -13,7 +13,8 @@ const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,Co
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
- 
+require('dotenv').config();
+
 const cors = require('cors');
  
 
@@ -21,6 +22,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(cookieParser());
+
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
@@ -40,10 +42,10 @@ app.listen(PORT, () => {
 
   // All college data apis / routes --------
   app.post('/college_data_upload', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]) ,CollegeData);
-  app.get('/college_data_get/:id', CollegeDataGet);
-  app.post('/college_data_update/:id', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]),CollegeDataUpdate);
-  app.post('/college_top_placements_add/:id', CollegeDataPlacementAdd);
-  app.post('/college_cultural_events_add/:id',CollegeDataEventAdd);
+  app.get('/college_data_get', CollegeDataGet);
+  app.post('/college_data_update', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]),CollegeDataUpdate);
+  app.post('/college_top_placements_add', CollegeDataPlacementAdd);
+  app.post('/college_cultural_events_add',CollegeDataEventAdd);
 
 
 
