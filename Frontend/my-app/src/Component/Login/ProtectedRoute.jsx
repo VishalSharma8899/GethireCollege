@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {  Navigate } from 'react-router-dom';
 
 // Dummy authentication check (replace with actual API call)
 const isAuthenticated = () => {

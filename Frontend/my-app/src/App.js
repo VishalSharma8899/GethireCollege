@@ -9,10 +9,8 @@ import StudentData from './Component/Dashboard/Pages/StudentData/StudentData.jsx
 import Placement from './Component/Dashboard/Pages/Placement/Placement.jsx';
 import Notification from './Component/Dashboard/Pages/Notifications/Notification.jsx';
 import Training from './Component/Dashboard/Pages/Training/Training.jsx';
-// import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
-// import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-
+ 
  
 import Login from './Component/Login/Login.jsx'
 
@@ -26,28 +24,40 @@ import UpdateForm from './Demo/UpdateFrom.js';
 import PlacementForm from './Demo/PlacementForm.js';
 import EventsAddForm from './Demo/EventsAddForm.js';
 
-// =====
+ 
+import Report from './Component/Dashboard/Pages/Report/Report.jsx'
+import Form from './Component/Profile/Form.jsx'
+import CollegePage from './Component/Profile/CollegePage.jsx';
+import UpdateForm from './Component/Profile/UpdateFrom.jsx';
+import PlacementForm from './Component/Profile/PlacementForm.jsx';
+import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
+import Login from './Component/Login/Login.jsx'
+ 
 import Signup from './Component/Login/Signup.jsx'
-// >>>>>>> 125f8464527de7e1fce47caeca8969234037cf04
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
-
- 
  
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<Login/>} />
         <Route path="/signup" element={< Signup/>} />
-
+          {/* dummy route */}
+          <Route path="/demo" element={<Form/>} />
+        <Route path="/collegePage" element={<CollegePage/>} />
+        <Route path="/updateForm" element={<UpdateForm/>} />
+        <Route path="/placementForm" element={<PlacementForm/>} />
+        <Route path="/eventAddForm" element={<EventsAddForm/>} />
+        
     </Routes>
    
       <Sidebar>
         <Routes>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup />} />
+        {/* <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup />} /> */}
+       
        
         <Route element={<ProtectedRoute/>}/>
           <Route path="/" element={<Dashboard />} />
@@ -58,14 +68,10 @@ const App = () => {
           <Route path="/placement" element={<Placement/>} />
           <Route path="/Notification" element={<Notification/>} />
           <Route path="/Training" element={<Training/>} />
+          <Route path="/Report" element={<Report/>}/>
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
-        {/* dummy route */}
-        <Route path="/demo" element={<Form/>} />
-        <Route path="/collegePage" element={<CollegePage/>} />
-        <Route path="/updateForm" element={<UpdateForm/>} />
-        <Route path="/placementForm" element={<PlacementForm/>} />
-        <Route path="/eventAddForm" element={<EventsAddForm/>} />
+       
 
         </Routes>
       </Sidebar>
