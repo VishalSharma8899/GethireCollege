@@ -12,21 +12,13 @@ import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
 import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-<<<<<<< HEAD
 import Login from './Component/Login/Login.jsx'
-=======
-import Login from './Component/Login/Login.jsx';
->>>>>>> 7f59713dd0e861f1ff7c66eb1d3d4c6541dd45bc
 import Signup from './Component/Login/Signup.jsx'
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
-<<<<<<< HEAD
-   
-=======
->>>>>>> 7f59713dd0e861f1ff7c66eb1d3d4c6541dd45bc
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<Login/>} />
