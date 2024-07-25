@@ -1,12 +1,20 @@
 const express = require('express');
+
 const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
  
 const mongoose = require('mongoose');
 const studentRoutes = require('./routes/student');
 const UserRoutes = require('./routes/User');
+// ----
+// const CollegeRoutes = require('./routes/college');
+const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('./Controller/CollegeDataCont')
+
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
- 
+require('dotenv').config();
+
 const cors = require('cors');
  
 
@@ -14,6 +22,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(cookieParser());
+
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
@@ -21,8 +30,163 @@ connection();
 // api path for uplod data
 app.use('/students',studentRoutes);
 
-app.use('/college',UserRoutes);
+app.use('/college',UserRoutes); 
+
+// ----
+// app.use('/college_data' , CollegeRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
+
+
+  // All college data apis / routes --------
+  app.post('/college_data_upload', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]) ,CollegeData);
+  app.get('/college_data_get', CollegeDataGet);
+  app.post('/college_data_update', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]),CollegeDataUpdate);
+  app.post('/college_top_placements_add', CollegeDataPlacementAdd);
+  app.post('/college_cultural_events_add',CollegeDataEventAdd);
+
+
+
+
+
+
+
+
+
+
+
+
+// manage this afterwords- this is for college data---------------------------------------------------------------------------------
+// college data importing ------------------------------------------------
+// const College = require('./Models/CollegeData')
+// // app.post('/college_data_upload', async (req, res) => {
+// //   const college = req.body;
+
+// //   try {
+// //       const collegeData = new College(college); // Creating new object of College
+// //       await collegeData.save(); // Saving the object in database
+// //       res.status(200).send({Status: "Data saved successfully"}); // Sending response to client
+// //   } catch (error) {
+// //       console.error("Error while saving data: " + error);
+// //       res.status(500).send({Status: "Error while saving data"}); // Sending error response to client
+// //   }
+// // });
+
+// // College data sending to frontend----------------------------
+// app.get('/college_data_get/:id', async (req, res) => {
+//   const collegeId = parseInt(req.params.id, 10); // Convert to Number
+//   console.log("Searching for college with id:", collegeId); // Log the id
+
+//   try {
+//       const collegeData = await College.findOne({ id: collegeId });
+//       if (!collegeData) {
+//           return res.status(404).send({ Status: "College not found" });
+//       }
+//       res.status(200).send(collegeData);
+//   } catch (error) {
+//       console.error("Error while retrieving data: " + error);
+//       res.status(500).send({ Status: "Error while retrieving data" });
+//   }
+// });
+
+// // for updating college data-------------
+// app.post('/college_data_update/:id', async (req, res) => {
+//   const collegeId = parseInt(req.params.id, 10); // Convert to Number
+//   const updateData = req.body;
+
+//   try {
+//       // Find the college by id and update only the fields provided in req.body
+//       const updatedCollege = await College.findOneAndUpdate(
+//           { id: collegeId },          // Search criteria
+//           updateData,                 // Fields to update
+//           { new: true,                // Return the updated document
+//             runValidators: true       // Validate the updated data
+//           }
+//       );
+
+//       if (!updatedCollege) {
+//           return res.status(404).send({ Status: "College not found" });
+//       }
+
+//       res.status(200).send(updatedCollege);
+//   } catch (error) {
+//       console.error("Error while updating data: " + error);
+//       res.status(500).send({ Status: "Error while updating data" });
+//   }
+// });
+
+// // for adding the top placements --------------
+// app.post('/college_top_placements_add/:id', async (req, res) => {
+//   const collegeId = parseInt(req.params.id, 10); // Convert to Number
+//   const { placements } = req.body; // Extract placements array from request body
+
+//   if (!Array.isArray(placements) || placements.length === 0) {
+//       return res.status(400).send({ Status: "placements array is required and should not be empty" });
+//   }
+
+//   // Validate each placement object
+//   for (const placement of placements) {
+//       if (!placement.placementCompany || !placement.exprience || !placement.location) {
+//           return res.status(400).send({ Status: "Each placement object must contain placementCompany, exprience, and location" });
+//       }
+//   }
+
+//   try {
+//       // Find the college by id and add new placements to the college_top_placements array
+//       const updatedCollege = await College.findOneAndUpdate(
+//           { id: collegeId },                            // Search criteria
+//           { $push: { college_top_placements: { $each: placements } } }, // Add new placements
+//           { new: true,                                 // Return the updated document
+//             runValidators: true                        // Validate the updated data
+//           }
+//       );
+
+//       if (!updatedCollege) {
+//           return res.status(404).send({ Status: "College not found" });
+//       }
+
+//       res.status(200).send(updatedCollege);
+//   } catch (error) {
+//       console.error("Error while adding top placements: " + error);
+//       res.status(500).send({ Status: "Error while adding top placements" });
+//   }
+// });
+
+// // for addign up the events-------
+// app.post('/college_cultural_events_add/:id', async (req, res) => {
+//   const collegeId = parseInt(req.params.id, 10); // Convert to Number
+//   const { events } = req.body; // Extract events array from request body
+
+//   if (!Array.isArray(events) || events.length === 0) {
+//       return res.status(400).send({ Status: "events array is required and should not be empty" });
+//   }
+
+//   // Validate each event object
+//   for (const event of events) {
+//       if (!event.eventName || !event.eventDate || !event.description) {
+//           return res.status(400).send({ Status: "Each event object must contain eventName, eventDate, and description" });
+//       }
+//   }
+
+//   try {
+//       // Find the college by id and add new events to the college_cultural_events array
+//       const updatedCollege = await College.findOneAndUpdate(
+//           { id: collegeId },                            // Search criteria
+//           { $push: { college_cultural_events: { $each: events } } }, // Add new events
+//           { new: true,                                 // Return the updated document
+//             runValidators: true                        // Validate the updated data
+//           }
+//       );
+
+//       if (!updatedCollege) {
+//           return res.status(404).send({ Status: "College not found" });
+//       }
+
+//       res.status(200).send(updatedCollege);
+//   } catch (error) {
+//       console.error("Error while adding cultural events: " + error);
+//       res.status(500).send({ Status: "Error while adding cultural events" });
+//   }
+// });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -23,49 +23,62 @@ function Card() {
       id: 1,
       img: img1,
       name: "Amazon",
-      CTC: "1,00,000"
+      CTC: "1,00,000",
+     
+
     },
     {
       id: 2,
       img: img2,
       name: "Amazon",
+
       CTC: "1,00,000"
+    
     },
     {
       id: 3,
       img: img3,
       name: "Amazon",
+
       CTC: "1,00,000"
+
     },
     {
       id: 4,
       img: img1,
       name: "Amazon",
+
       CTC: "1,00,000"
+
     },
     {
       id: 5,
       img: img2,
       name: "Amazon",
+
       CTC: "1,00,000"
     },
     {
       id: 6,
       img: img3,
       name: "Amazon",
+
       CTC: "1,00,000"
     },
     {
       id: 7,
       img: img1,
       name: "Amazon",
+
       CTC: "1,00,000"
     }
-  ];
+  ]
+
+  
 
   var settings = {
     dots: true,
-    infinite: true,
+    infinite: true, // Ensure this is set to true for continuous looping
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 2,
@@ -78,20 +91,21 @@ function Card() {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
-        }
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-        }
+        },
       },
-    ]
+    ],
   };
 
   return (
     <div className="slider-container gap-2 mb-10">
       <Slider {...settings}>
+
         {data.map((data) => {
           return (
             <div key={data.id} className="mx-2">
@@ -106,9 +120,25 @@ function Card() {
             </div>
           )
         })}
+
+        {data.map((item) => (
+          <div key={item.id} className="mx-2">
+            <div className="card" style={{ width: "200px", height: "200px" }}>
+              <img
+                src={item.img}
+                alt=""
+                className="w-full h-32 object-cover object-center"
+              />
+              <div className="card-body p-2">
+                <p className="text-sm">{item.name}</p>
+                <p>{item.CTC}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </Slider>
     </div>
-  )
+  );
 }
 
 export default Card;

@@ -1,59 +1,62 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './style.css'; // Import CSS
-import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(''); // Add email state
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
-  const [cookies, setCookie] = useCookies(['token', 'userId']);
-  const navigate = useNavigate(); 
 
-  const handleSubmitLogin = async (e) => {
+  const navigate = useNavigate(); 
+  const handleSubmitRegistration = async (e) => {
     e.preventDefault();
 
     // Validation (optional)
-    if (!email || !password) {
-      setErrorMessage('Please enter email and password');
+    if (!username || !password || !email) {
+      setErrorMessage('Please enter username, email, and password');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/college/login', {
+      const response = await axios.post('http://localhost:3000/college/signup', {
+        username,
         email,
         password,
       });
-      setCookie('token', response.data.token, { path: '/' });
-      setCookie('userId', response.data.userId, { path: '/' });
-      console.log('Login successful:', response.data);
- 
-      setErrorMessage(null); // Clear any previous error messages
 
-      if (response.data.token) {  
-        localStorage.setItem('token', response.data.token); 
-        navigate('/');  
-      } else {
-        // Handle any other response conditions
-        setErrorMessage('Login failed');
-      }
+      console.log( 'register', response.data);
+      // Redirect to login page
+      navigate('/login'); 
+      setUsername('');
+      setEmail(''); // Clear email input
+      setPassword('');
+      setErrorMessage(null); // Clear error message
+      // Redirect to login page or display success message
     } catch (error) {
-      const message = error.response?.data?.msg || 'Login failed';
-      setErrorMessage(message);
+      console.error('Registration error:', error.response.data);
+      setErrorMessage(error.response.data.msg || 'Registration failed');
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-form-wrapper">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmitLogin}>
+        <h2>Registration</h2>
+        <form onSubmit={handleSubmitRegistration}>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="email"
+            id="username"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)} // Use setEmail correctly
           />
           <label htmlFor="password">Password:</label>
           <input
@@ -62,10 +65,12 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </div>
+
+      
     </div>
   );
 };
