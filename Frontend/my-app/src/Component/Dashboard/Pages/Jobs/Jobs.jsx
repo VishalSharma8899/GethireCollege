@@ -8,11 +8,11 @@ import Tranding from './Tranding'
 function Jobs() {
   return (
     <>
-    <div className='flex-col '>
+    <div style={{background:" rgba(247, 249, 254, 1)"}} className='flex-col  '>
     <Post/>
     <Toprecruiters/>
     <div className='flex w-full h-full gap-3'>
-      <div className='w-2/5  bg-black h-96'>
+      <div className='w-2/5  h-96'>
       <TopPerformers/>
       </div>
       <div className=' w-full'>

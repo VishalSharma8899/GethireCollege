@@ -11,6 +11,8 @@ function CardActive() {
         { image: walmart, company: 'Walmart', position: 'Developer', progress: 60, percentage: 50 },
         {image:meesho, company:'Meesho',position:'Frontend', progress: 80, percentage:80 }
       ];
+      
+      
    
   return (
     // <div>
@@ -79,7 +81,7 @@ function CardActive() {
     //     </div>
     // </div>
 
-<div className="flex gap-11">
+<div className="flex gap-3">
 {cardData.map((card, index) => (
   <Card key={index} {...card} />
 ))}
