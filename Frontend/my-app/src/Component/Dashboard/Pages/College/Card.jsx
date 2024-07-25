@@ -18,53 +18,59 @@ function Arrow(props) {
 }
 
 function Card() {
-  const data=[{
-    id:1,
-    img:img1,
-    name:"Amazon",
-    CTC:"1,00,000"
-  },
-  {
-    id:2,
-    img:img2,
-    name:"Amazon",
-    CTC:"1,00,000"
-  },
-  {
-    id:3,
-    img:img3,
-    name:"Amazon",
-    CTC:"1,00,000"
-  },
-  {
-    id:4,
-    img:img1,
-    name:"Amazon",
-    CTC:"1,00,000"
-  },
-  {
-    id:5,
-    img:img2,
-    name:"Amazon",
-    CTC:"1,00,000"
-  },{
-    id:6,
-    img:img3,
-    name:"Amazon",
-    CTC:"1,00,000"
-  },{
-    id:7,
-    img:img1,
-    name:"Amazon",
-    CTC:"1,00,000"
-  }
-]
+  const data = [
+    {
+      id: 1,
+      img: img1,
+      name: "Amazon",
+      CTC: "1,00,000"
+    },
+    {
+      id: 2,
+      img: img2,
+      name: "Amazon",
+      CTC: "1,00,000"
+    },
+    {
+      id: 3,
+      img: img3,
+      name: "Amazon",
+      CTC: "1,00,000"
+    },
+    {
+      id: 4,
+      img: img1,
+      name: "Amazon",
+      CTC: "1,00,000"
+    },
+    {
+      id: 5,
+      img: img2,
+      name: "Amazon",
+      CTC: "1,00,000"
+    },
+    {
+      id: 6,
+      img: img3,
+      name: "Amazon",
+      CTC: "1,00,000"
+    },
+    {
+      id: 7,
+      img: img1,
+      name: "Amazon",
+      CTC: "1,00,000"
+    }
+  ];
+
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 2000, // Adjust the speed as needed
     centerPadding: "60px",
     initialSlide: 0,
     responsive: [
@@ -86,20 +92,20 @@ function Card() {
   return (
     <div className="slider-container gap-2 mb-10">
       <Slider {...settings}>
-       {data.map((data)=>{
-        return(
-          <div className="mx-2">
-          <div className='card' style={{ width: '200px', height: '200px' }}>
-            <img src={data.img} alt="" className='w-full h-32 object-cover object-center'/>
-            <div className='card-body p-2'>
-               <h3 className='text-lg font-bold'></h3>
-               <p className='text-sm'>{data.name}</p>
-               <p className=''>{data.CTC}</p>
+        {data.map((data) => {
+          return (
+            <div key={data.id} className="mx-2">
+              <div className='card' style={{ width: '200px', height: '200px' }}>
+                <img src={data.img} alt="" className='w-full h-32 object-cover object-center' />
+                <div className='card-body p-2'>
+                  <h3 className='text-lg font-bold'></h3>
+                  <p className='text-sm'>{data.name}</p>
+                  <p className=''>{data.CTC}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        )
-       })}
+          )
+        })}
       </Slider>
     </div>
   )
