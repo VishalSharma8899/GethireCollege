@@ -13,6 +13,13 @@ import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
 import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
 
+// dummy import
+import Form from './Demo/Form.js';
+import CollegePage from './Demo/CollegePage.js';
+import UpdateForm from './Demo/UpdateFrom.js';
+import PlacementForm from './Demo/PlacementForm.js';
+import EventsAddForm from './Demo/EventsAddForm.js';
+
  
 const App = () => {
   return (
@@ -38,6 +45,13 @@ const App = () => {
           <Route path="/industry" element={<IndustryTalks/>} />
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
+        {/* dummy route */}
+        <Route path="/demo" element={<Form/>} />
+        <Route path="/collegePage" element={<CollegePage/>} />
+        <Route path="/updateForm" element={<UpdateForm/>} />
+        <Route path="/placementForm" element={<PlacementForm/>} />
+        <Route path="/eventAddForm" element={<EventsAddForm/>} />
+
         </Routes>
       </Sidebar>
     </BrowserRouter>
