@@ -18,20 +18,14 @@ import Login from './Component/Login/Login.jsx'
  
 
 // dummy import
-import Form from './Demo/Form.js';
-import CollegePage from './Demo/CollegePage.js';
-import UpdateForm from './Demo/UpdateFrom.js';
-import PlacementForm from './Demo/PlacementForm.js';
-import EventsAddForm from './Demo/EventsAddForm.js';
+// import Form from './Demo/Form.js';
+// import CollegePage from './Demo/CollegePage.js';
+// import UpdateForm from './Demo/UpdateFrom.js';
+// import PlacementForm from './Demo/PlacementForm.js';
+// import EventsAddForm from './Demo/EventsAddForm.js';
 
  
 import Report from './Component/Dashboard/Pages/Report/Report.jsx'
-import Form from './Component/Profile/Form.jsx'
-import CollegePage from './Component/Profile/CollegePage.jsx';
-import UpdateForm from './Component/Profile/UpdateFrom.jsx';
-import PlacementForm from './Component/Profile/PlacementForm.jsx';
-import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
-import Login from './Component/Login/Login.jsx'
  
 import Signup from './Component/Login/Signup.jsx'
  
@@ -41,17 +35,16 @@ const App = () => {
     <>
  
     <BrowserRouter>
-    <Routes>
+    {/* <Routes>
         <Route path="/" element={<Login/>} />
         <Route path="/signup" element={< Signup/>} />
-          {/* dummy route */}
           <Route path="/demo" element={<Form/>} />
         <Route path="/collegePage" element={<CollegePage/>} />
         <Route path="/updateForm" element={<UpdateForm/>} />
         <Route path="/placementForm" element={<PlacementForm/>} />
         <Route path="/eventAddForm" element={<EventsAddForm/>} />
         
-    </Routes>
+    </Routes> */}
    
       <Sidebar>
         <Routes>
