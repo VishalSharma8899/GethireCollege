@@ -14,7 +14,7 @@ const UpdateForm = () => {
     if (data.college_info) {
       formData.append('college_info', data.college_info);
     }
-     var id= 1;
+    //  var id= 1;
     // Ensure at least one field is provided
     if (formData.has('college_img') || formData.has('college_info')) {
       try {

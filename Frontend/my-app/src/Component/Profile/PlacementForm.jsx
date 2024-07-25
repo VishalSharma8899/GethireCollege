@@ -21,7 +21,7 @@ const PlacementForm = () => {
       return;
     }
 
-    const collegeId = 1; // Replace with the actual college ID
+    // const collegeId = 1; // Replace with the actual college ID
 
     try {
       // Format data to match the required API format

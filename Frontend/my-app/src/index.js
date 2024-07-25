@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
  
-import Signup from './Component/Login/Signup';
+// import Signup from './Component/Login/Signup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
