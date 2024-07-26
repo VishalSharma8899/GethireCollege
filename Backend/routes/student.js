@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { uploadStudentData  ,   GetAllUser  , filter , GetByName ,updateStudent ,deleteStudentData} = require('../Controller/student.js');
+const { uploadStudentData  ,  GetPlacedUser, GetAllUser  , filter , GetByName ,updateStudent ,deleteStudentData} = require('../Controller/student.js');
 const path = require('path');
 
 const multer = require('multer');
@@ -34,7 +34,10 @@ router.post('/search',  GetByName);
  //delete student 
  router.delete('/delete', deleteStudentData);
 
- //
+ //fillter
  router.post('/filter',filter)
+
+ router.get('/placedStudent' , GetPlacedUser);
+
 
  module.exports = router;

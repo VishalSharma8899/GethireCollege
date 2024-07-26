@@ -51,11 +51,11 @@ const Sidebar = ({children}) => {
             name:"Training",
             icon:<MdOutlineModelTraining />
         },
-        // {
-        //     path:"/Analysis",
-        //     name:"Analysis",
-        //     icon:<IoAnalytics />
-        // },
+        {
+            path:"/Report",
+            name:"Report",
+            icon:<IoAnalytics />
+        },
         // {
         //     path:"/industry",
         //     name:"Industry Talks",

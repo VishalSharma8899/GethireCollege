@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
@@ -55,18 +53,15 @@ function StudentData() {
     placementInterest: "",
     yearOfStudy: "",
   });
+
   function getCookie(userId) {
     const value = `; ${document.cookie}`;
-    console.log( "v" + value);
-
     const parts = value.split(`; ${userId}=`);
-    console.log( " part " +parts);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
   
   const userId = getCookie('userId');
   
-
   useEffect(() => {
     fetchStudentData();
   }, []);
@@ -165,7 +160,6 @@ function StudentData() {
 
   const handleOk = async () => {
     const userId = getCookie('userId');
-    console.log(userId);
     if (fileContent) {
       try {
         const formData = new FormData();
@@ -187,201 +181,177 @@ function StudentData() {
   
     setIsModalOpen(false);
   };
-  
 
-const handleDelete = async (id) => {
-  try {
-    await axios.delete(`http://localhost:3000/students/delete/${id}`);
-    const newData = dataSource.filter((item) => item.id !== id);
-    setDataSource(newData);
-    setFilteredData(newData);
-  } catch (error) {
-    console.error("Error deleting student data:", error);
-  }
-};
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/students/delete/${id}`);
+      const newData = dataSource.filter((item) => item.id !== id);
+      setDataSource(newData);
+      setFilteredData(newData);
+    } catch (error) {
+      console.error("Error deleting student data:", error);
+    }
+  };
 
-const handleEdit = (id) => {
-  console.log("Edit item with ID:", id);
-};
+  const handleEdit = (id) => {
+    console.log("Edit item with ID:", id);
+  };
 
-const showModal = () => {
-  setIsModalOpen(true);
-};
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
-const handleCancel = () => {
-  setIsModalOpen(false);
-};
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
-const start = () => {
-  setLoading(true);
-  setTimeout(() => {
-    setSelectedRowKeys([]);
-    setLoading(false);
-  }, 1000);
-};
+  const start = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setSelectedRowKeys([]);
+      setLoading(false);
+    }, 1000);
+  };
 
-const onSelectChange = (newSelectedRowKeys) => {
-  console.log("selectedRowKeys changed: ", newSelectedRowKeys);
-  setSelectedRowKeys(newSelectedRowKeys);
-};
+  const onSelectChange = (newSelectedRowKeys) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
-const rowSelection = {
-  selectedRowKeys,
-  onChange: onSelectChange,
-};
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
 
-const hasSelected = selectedRowKeys.length > 0;
+  const hasSelected = selectedRowKeys.length > 0;
 
-const handleFilterChange = (filterKey, value) => {
-  setFilters((prevFilters) => ({
-    ...prevFilters,
-    [filterKey]: value,
-  }));
-};
+  const handleFilterChange = (filterKey, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterKey]: value,
+    }));
+  };
 
-const applyFilters = () => {
-  fetchStudentDataByFilter();
-};
+  const applyFilters = () => {
+    fetchStudentDataByFilter();
+  };
 
-return (
-  <div className="m-2">
-    <div className="container w-full h-12 rounded-md mb-2 flex justify-between items-center">
-      <div>
-        <p className="font-bold text-lg">Student List</p>
+  return (
+    <div className="p-4">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-4">
+        <p className="font-bold text-lg mb-2 lg:mb-0">Student List</p>
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-center">
+          <Button
+            type="primary"
+            className="bg-indigo-500 text-white rounded-md"
+            onClick={showModal}
+          >
+            <LuImport /> Import
+          </Button>
+          <Modal
+            title="Upload Excel File"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <input
+              type="file"
+              onChange={handleFileUpload}
+              className="mt-1 p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 w-full"
+            />
+          </Modal>
+        </div>
       </div>
-      <div className="flex gap-5">
+
+      <Navbar className="bg-body-tertiary flex flex-col lg:flex-row lg:justify-between p-4">
+        <Form inline className="flex flex-col lg:flex-row gap-4 lg:gap-6">
+          <Button
+            className="w-full lg:w-auto"
+            onClick={handleFetchAllUsers}
+          >
+            All Users
+          </Button>
+          <Form.Select
+            aria-label="Placement Status"
+            onChange={(e) => handleFilterChange("isPlaced", e.target.value)}
+            className="w-full lg:w-auto"
+          >
+            <option value="">Placement Status</option>
+            <option value="true">Placed</option>
+            <option value="false">Unplaced</option>
+          </Form.Select>
+          <Form.Select
+            aria-label="Department"
+            onChange={(e) => handleFilterChange("department", e.target.value)}
+            className="w-full lg:w-auto"
+          >
+            <option value="">Department</option>
+            <option value="Computer Science">CSE</option>
+            <option value="Biology">Bio</option>
+            <option value="AIDS">AIDS</option>
+            <option value="Civil">Civil</option>
+            <option value="Mechanical">Mechanical</option>
+          </Form.Select>
+          <Form.Select
+            aria-label="Internship Interest"
+            onChange={(e) => handleFilterChange("internshipInterest", e.target.value)}
+            className="w-full lg:w-auto"
+          >
+            <option value="">Internship Interest</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </Form.Select>
+          <Form.Select
+            aria-label="Placement Interest"
+            onChange={(e) => handleFilterChange("placementInterest", e.target.value)}
+            className="w-full lg:w-auto"
+          >
+            <option value="">Placement Interest</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </Form.Select>
+          <Form.Select
+            aria-label="Year of Study"
+            onChange={(e) => handleFilterChange("yearOfStudy", e.target.value)}
+            className="w-full lg:w-auto"
+          >
+            <option value="">Year</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </Form.Select>
+          <Button onClick={applyFilters}>Apply Filters</Button>
+        </Form>
+        <div className="flex items-center gap-2 mt-4 lg:mt-0 lg:pl-2">
+          <IoSearch />
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            className="w-full lg:w-auto"
+          />
+        </div>
+      </Navbar>
+
+      <div className="mt-4">
         <Button
           type="primary"
-          className="bg-indigo-500 text-white w-24 rounded-md"
-          onClick={showModal}
+          onClick={start}
+          disabled={!hasSelected}
+          loading={loading}
+          className="mb-4"
         >
-          <LuImport /> Import
+          Reload
         </Button>
-        <Modal
-          title="Upload Excel File"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          className=""
-        >
-          <input
-            type="file"
-            onChange={handleFileUpload}
-            className="mt-1 p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 disabled:opacity-50 w-full"
-          />
-        </Modal>
+        {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={filteredData}
+          className="w-full"
+        />
       </div>
     </div>
-
-    <Navbar className="bg-body-tertiary flex justify-between items-center">
-      <Form inline>
-        <div className="flex gap-5 ml-5 items-center justify-center">
-          <div className="flex flex-row">
-            <button
-              className="bg-white h-10 w-20 flex justify-center rounded-md items-center"
-              onClick={handleFetchAllUsers}
-            >
-              All Users
-            </button>
-          </div>
-          <div>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) => handleFilterChange("isPlaced", e.target.value)}
-            >
-              <option value="">Placement Status</option>
-              <option value="true">Placed</option>
-              <option value="false">Unplaced</option>
-            </Form.Select>
-          </div>
-          <div>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) => handleFilterChange("department", e.target.value)}
-            >
-              <option value="">Department</option>
-              <option value="Computer Science">CSE</option>
-              <option value="Biology">Bio</option>
-              <option value="AIDS">AIDS</option>
-              <option value="Civil">Civil</option>
-              <option value="Mechanical">Mechanical</option>
-            </Form.Select>
-          </div>
-          <div>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) =>
-                handleFilterChange("internshipInterest", e.target.value)
-              }
-            >
-              <option value="">Internship Interest</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </Form.Select>
-          </div>
-          <div>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) =>
-                handleFilterChange("placementInterest", e.target.value)
-              }
-            >
-              <option value="">Placement Interest</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </Form.Select>
-          </div>
-          <div>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) =>
-                handleFilterChange("yearOfStudy", e.target.value)
-              }
-            >
-              <option value="">Year</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </Form.Select>
-          </div>
-          <Button onClick={applyFilters}>Apply Filters</Button>
-        </div>
-      </Form>
-      <div className="flex align-middle items-center gap-2 pl-2">
-        <div>
-          <IoSearch />
-        </div>
-        <Row>
-          <Col xs="auto">
-            <Form.Control
-              type="text"
-              placeholder="Search"
-              className="mr-sm-2"
-            />
-          </Col>
-        </Row>
-      </div>
-    </Navbar>
-
-    <div>
-      <Button
-        type="primary"
-        onClick={start}
-        disabled={!hasSelected}
-        loading={loading}
-      >
-        Reload
-      </Button>
-      {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
-      <Table
-        rowSelection={rowSelection}
-        columns={columns}
-        dataSource={filteredData}
-      />
-    </div>
-  </div>
-);
+  );
 }
 
 export default StudentData;

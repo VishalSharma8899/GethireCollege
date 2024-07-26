@@ -43,10 +43,14 @@ exports.uploadStudentData = async (req, res) => {
       student.isPlaced = Boolean(student.isPlaced && student.isPlaced.toString().toLowerCase() === 'true');
       student.PlacementRequired = Boolean(student.PlacementRequired && student.PlacementRequired.toString().toLowerCase() === 'true');
       student.intershipRequired = Boolean(student.intershipRequired && student.intershipRequired.toString().toLowerCase() === 'true');
-
       const contactInformation = {
         phone: student.phone,
         email: student.email
+      };
+      const placedStDetails = { 
+        companyName: student.companyName,
+        jobTitle: student.jobTitle,
+        salary: student.salary
       };
 
       const updatedStudent = {
@@ -61,8 +65,9 @@ exports.uploadStudentData = async (req, res) => {
         yearOfStudy: student.yearOfStudy,
         cgpa: student.cgpa,
         isPlaced: student.isPlaced,
+        placedDetails: placedStDetails,
         PlacementRequired: student.PlacementRequired,
-        intershipRequired: student.intershipRequired
+        internshipRequired: student.internshipRequired  // Correct spelling
       };
 
       await Student.findOneAndUpdate({ studentId: student.studentId }, updatedStudent, { upsert: true });
@@ -107,7 +112,12 @@ exports.GetAllUser = async (req, res) => {
 
     console.log('UserId from token:', objId);
     const students = await Student.find({userId : objId});
-    res.status(200).json(students);
+    const count = students.length;
+ console.log('Students:', students);
+    res.status(200).json({
+      count : count,
+      students : students
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -314,23 +324,47 @@ exports.deleteStudentData = async (req, res) => {
 
 
 
-// hire{placed student} student
-// exports.GetPlacedUser = async (req, res) => {
-//   try {
-//     // Retrieve all placed students
-//     const PlacedStudent = await Student.find({ isPlaced: true }).lean();
-//     // Calculate the count of placed students
-//     const count = PlacedStudent.length;
+ 
+exports.GetPlacedUser = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      console.error('No token provided');
+      return res.status(401).json({ msg: 'No token, authorization denied' });
+    }
 
-//     // Send response with both count and student list
-//     res.status(200).json({
-//       count: count,
-//       students: PlacedStudent,
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+    const token = authHeader.split(' ')[1];
+    console.log('Token received:', token);
+
+    const secretKey = process.env.JWT_SECRET_KEY;
+    console.log('Secret Key:', secretKey);
+
+    let objId;
+    try {
+      console.log('Verifying token...');
+      const decoded = jwt.verify(token, secretKey);
+      objId = decoded.objId;
+      console.log('Decoded Token:', decoded);
+    } catch (err) {
+      console.error('Token verification failed:', err.message);
+      return res.status(401).json({ msg: 'Token is not valid' });
+    }
+
+    console.log('UserId from token:', objId);
+    // Retrieve all placed students
+    const PlacedStudent = await Student.find({ isPlaced: true }).lean();
+    // Calculate the count of placed students
+    const count = PlacedStudent.length;
+
+    // Send response with both count and student list
+    res.status(200).json({
+      count: count,
+      students: PlacedStudent,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 // // unplaced student
 // exports.GetUnPlacedUser = async (req, res) => {

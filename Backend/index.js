@@ -17,7 +17,7 @@ const {ActiveProcessData} = require('./Controller/CorporateConnects')
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-
+ 
 const cors = require('cors');
  
 
@@ -25,7 +25,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(cookieParser());
-
+ 
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
@@ -33,11 +33,15 @@ connection();
 // api path for uplod data
 app.use('/students',studentRoutes);
 
+ 
+app.use('/college',UserRoutes);
+ 
 app.use('/college',UserRoutes); 
 
 // ----
 // app.use('/college_data' , CollegeRoutes);
 
+ 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });

@@ -1,188 +1,181 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import graph from "../../../Images/Graph.png";
 import graphdown from "../../../Images/Graphdown.png";
+
 function Main1() {
   return (
-    <div className="bg-white w-full h-screen xs={12} md={8} mt-3 rounded-lg">
-      <div
-        style={{ background: "rgba(246, 249, 254, 1)" }}
-        className=" w-full h-screen xs={12} md={8} mt-3 rounded-lg"
-      >
-        <Container>
-          <Row className="justify-content-center">
-            <Col xs={8} className="mt-2 ml-2">
-              <Row className="gap-16 h-32">
-                <Col style={{background:"#b6fdb6"}} className=" p-3 rounded-lg w-24">
-                  <div className="flex ">
-                    <div className=" flex-col">
-                      <div>
-                        <p className="text-xs w-28 mb-2 font-bold ">
-                          No. of Students
-                        </p>
-                        <p
-                          style={{ color: "rgba(102, 102, 102, 1)" }}
-                          className="mb-2 font-bold"
-                        >
-                          1800+
-                        </p>
-                    <p className="text-green-500 font-bold">+2.5%</p>
-                      </div>
-                    </div>
-                    <div>
-                      <img className="w-11  mt-1" src={graph} alt="" />
-                      </div>
-                  </div>
-                </Col>
-                <Col style={{background:"#cfcfe5"}} className=" p-3 rounded-lg w-24">
-                  <div className="flex ">
-                    <div className=" flex-col">
-                      <div>
-                        <p className="text-xs w-28 mb-2 font-bold ">
-                          No. of Companies
-                        </p>
-                        <p
-                          style={{ color: "rgba(102, 102, 102, 1)" }}
-                          className="mb-2 font-bold"
-                        >
-                          150+
-                        </p>
-                      </div>
-                      <p className="text-red-500 font-bold">-5.5%</p>
-                    </div>
-                    <div>
-                      <img className="w-11  mt-1" src={graphdown} alt="" />
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-              <Row className="gap-16 mt-10 h-32">
-                <Col style={{background:"#f5f5a4"}} className=" p-3 rounded-lg w-24">
-                  <div className="flex ">
-                    <div className=" flex-col">
-                      <div>
-                        <p className="text-xs w-28 mb-2 font-bold ">
-                          No. of placement
-                        </p>
-                        <p
-                          style={{ color: "rgba(102, 102, 102, 1)" }}
-                          className="mb-2 font-bold"
-                        >
-                          500+
-                        </p>
-                      </div>
-                      <p className="text-red-500 font-bold">-4.4%</p>
-                    </div>
-                    <div>
-                      <img className="w-11  mt-1" src={graphdown} alt="" />
-                    </div>
-                  </div>
-                </Col>
-                <Col style={{background:"#f4e4e6"}} className=" p-3 rounded-lg w-24">
-                  <div className="flex ">
-                    <div className=" flex-col">
-                      <div>
-                        <p className="text-xs w-28 mb-2 font-bold ">Record</p>
-                        <p
-                          style={{ color: "rgba(102, 102, 102, 1)" }}
-                          className="mb-2 font-bold"
-                        >
-                          5 Years
-                        </p>
-                      </div>
-                      <p className="text-green-500 font-bold">+6.5%</p>
-                    </div>
-                    <div>
-                      <img className="w-11  mt-1" src={graph} alt="" />
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-        <div className="w-full bg-white rounded-lg h-96 mt-3">
-          <Container className="">
-            <div className="flex-col">
-              <div className="details flex w-full justify-between">
-                <p className="font-bold text mt-3 ">Top Placements</p>
-                <button
-                  style={{
-                    backgroundColor: "rgba(89, 86, 233, 1)",
-                    color: "white",
-                    padding: "10px 20px",
-                    border: "none",
-                    borderRadius: "15px",
-                    cursor: "pointer",
-                    margin: "10px",
-                  }}
-                  className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                >
-                  See all
-                </button>
-              </div>
-              <div className="data flex-col">
-                <div
-                  style={{ background: "rgba(237, 244, 251, 1)" }}
-                  className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md"
-                >
-                  <p>Rank</p>
-                  <p>Name</p>
-                  <p>Branch</p>
-                  <p>Company</p>
-                  <p>Package</p>
-                  <p>More</p>
+    <div className="bg-white w-full min-h-screen mt-3 rounded-lg">
+      <div className="bg-[rgba(246, 249, 254, 1)] w-full min-h-screen mt-3 rounded-lg">
+        <div className="container mx-auto p-4">
+          {/* <div className="flex flex-wrap justify-center">
+            <div className="w-full md:w-1/2 lg:w-1/4 p-2">
+              <div className="bg-[#b6fdb6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex flex-col">
+                  <p className="text-xs mb-2 font-bold">No. of Students</p>
+                  <p className="text-gray-600 mb-2 font-bold">1800+</p>
+                  <p className="text-green-500 font-bold">+2.5%</p>
                 </div>
-                <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
-                  <p>#1</p>
-                  <p>John</p>
-                  <p>CSE</p>
-                  <p>Google</p>
-                  <p>56LPA</p>
-                  <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
-
-                </div>
-                <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
-                  <p>#2</p>
-                  <p>Mark</p>
-                  <p>CSE</p>
-                  <p>Microsoft</p>
-                  <p>45LPA</p>
-                  <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
-                </div>
-                <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
-                  <p>#3</p>
-                  <p>Bark</p>
-                  <p>ITB</p>
-                  <p>Walmart</p>
-                  <p>36LPA</p>
-                  <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
-                </div>
-                <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
-                  <p>#4</p>
-                  <p>Alexa</p>
-                  <p>ECE</p>
-                  <p>Delloit</p>
-                  <p>30LPA</p>
-                  <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
-                </div>
-                <div className="heading flex justify-evenly mt-3 h-10 p-2 rounded-md">
-                  <p>#5</p>
-                  <p>Barry</p>
-                  <p>AI&DS</p>
-                  <p>Flipkart</p>
-                  <p>28LPA</p>
-                  <button type="button" className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600">Action</button>
-                </div>
+                <img className="w-11 mt-1 ml-auto" src={graph} alt="Graph" />
               </div>
             </div>
-          </Container>
+            <div className="w-full md:w-1/2 lg:w-1/4 p-2">
+              <div className="bg-[#cfcfe5] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex flex-col">
+                  <p className="text-xs mb-2 font-bold">No. of Companies</p>
+                  <p className="text-gray-600 mb-2 font-bold">150+</p>
+                  <p className="text-red-500 font-bold">-5.5%</p>
+                </div>
+                <img className="w-11 mt-1 ml-auto" src={graphdown} alt="Graph" />
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 lg:w-1/4 p-2 mt-4 md:mt-0">
+              <div className="bg-[#f5f5a4] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex flex-col">
+                  <p className="text-xs mb-2 font-bold">No. of Placements</p>
+                  <p className="text-gray-600 mb-2 font-bold">500+</p>
+                  <p className="text-red-500 font-bold">-4.4%</p>
+                </div>
+                <img className="w-11 mt-1 ml-auto" src={graphdown} alt="Graph" />
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 lg:w-1/4 p-2 mt-4 md:mt-0">
+              <div className="bg-[#f4e4e6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex flex-col">
+                  <p className="text-xs mb-2 font-bold">Record</p>
+                  <p className="text-gray-600 mb-2 font-bold">5 Years</p>
+                  <p className="text-green-500 font-bold">+6.5%</p>
+                </div>
+                <img className="w-11 mt-1 ml-auto" src={graph} alt="Graph" />
+              </div>
+            </div>
+          </div> */}
+          <div className="flex flex-wrap justify-center md:justify-between">
+  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
+    <div className="bg-[#b6fdb6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <div className="flex flex-col">
+        <p className="text-xs mb-2 font-bold">No. of Students</p>
+        <p className="text-gray-600 mb-2 font-bold">1800+</p>
+        <p className="text-green-500 font-bold">+2.5%</p>
+      </div>
+      <img className="w-11 mt-1 ml-auto" src={graph} alt="Graph" />
+    </div>
+  </div>
+  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
+    <div className="bg-[#cfcfe5] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <div className="flex flex-col">
+        <p className="text-xs mb-2 font-bold">No. of Companies</p>
+        <p className="text-gray-600 mb-2 font-bold">150+</p>
+        <p className="text-red-500 font-bold">-5.5%</p>
+      </div>
+      <img className="w-11 mt-1 ml-auto" src={graphdown} alt="Graph" />
+    </div>
+  </div>
+  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2  md:mt-0">
+    <div className="bg-[#f5f5a4] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <div className="flex flex-col">
+        <p className="text-xs mb-2 font-bold">No. of Placements</p>
+        <p className="text-gray-600 mb-2 font-bold">500+</p>
+        <p className="text-red-500 font-bold">-4.4%</p>
+      </div>
+      <img className="w-11 mt-1 ml-auto" src={graphdown} alt="Graph" />
+    </div>
+  </div>
+  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2  md:mt-0">
+    <div className="bg-[#f4e4e6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <div className="flex flex-col">
+        <p className="text-xs mb-2 font-bold">Record</p>
+        <p className="text-gray-600 mb-2 font-bold">5 Years</p>
+        <p className="text-green-500 font-bold">+6.5%</p>
+      </div>
+      <img className="w-11 mt-1 ml-auto" src={graph} alt="Graph" />
+    </div>
+  </div>
+</div>
+
+
+          <div className="bg-white rounded-lg h-auto mt-3 p-4">
+            <div className="flex justify-between items-center">
+              <p className="font-bold text-sm md:text-lg">Top Placements</p>
+              <button
+                className="inline-block rounded px-4 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out bg-violet-500 hover:bg-violet-600 focus:bg-violet-600 active:bg-violet-700"
+              >
+                See all
+              </button>
+            </div>
+
+            {/* <div className="mt-4">
+              <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-6 p-2 rounded-md mb-2 text-center">
+                <p className="w-1/6">Rank</p>
+                <p className="w-1/6">Name</p>
+                <p className="w-1/6">Branch</p>
+                <p className="w-1/6">Company</p>
+                <p className="w-1/6">Package</p>
+                <p className="w-1/6">Action</p>
+              </div>
+              {[
+                { rank: "#1", name: "John", branch: "CSE", company: "Google", package: "56LPA" },
+                { rank: "#2", name: "Mark", branch: "CSE", company: "Microsoft", package: "45LPA" },
+                { rank: "#3", name: "Bark", branch: "ITB", company: "Walmart", package: "36LPA" },
+                { rank: "#4", name: "Alexa", branch: "ECE", company: "Deloitte", package: "30LPA" },
+              ].map((placement, index) => (
+                <div key={index} className="grid grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-2">
+                  <p className="w-1/6">{placement.rank}</p>
+                  <p className="w-1/6">{placement.name}</p>
+                  <p className="w-1/6">{placement.branch}</p>
+                  <p className="w-1/6">{placement.company}</p>
+                  <p className="w-1/6">{placement.package}</p>
+                  <button
+                    type="button"
+                    className="bg-violet-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-violet-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                  >
+                    Action
+                  </button>
+                </div>
+              ))}
+            </div> */}
+            <div className="mt-4">
+  <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 text-center">
+    <p className="hidden sm:block w-1/6">Rank</p>
+    <p className="hidden sm:block w-1/6">Name</p>
+    <p className="hidden sm:block w-1/6">Branch</p>
+    <p className="hidden sm:block w-1/6">Company</p>
+    <p className="hidden sm:block w-1/6">Package</p>
+    <p className="hidden sm:block w-1/6">Action</p>
+  </div>
+  {[
+    { rank: "#1", name: "John", branch: "CSE", company: "Google", package: "56LPA" },
+    { rank: "#2", name: "Mark", branch: "CSE", company: "Microsoft", package: "45LPA" },
+    { rank: "#3", name: "Bark", branch: "ITB", company: "Walmart", package: "36LPA" },
+    { rank: "#4", name: "Alexa", branch: "ECE", company: "Deloitte", package: "30LPA" },
+  ].map((placement, index) => (
+    <div key={index} className="grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-2">
+      <div className="sm:hidden font-bold text-left">Rank:</div>
+      <p className="w-full sm:w-1/6">{placement.rank}</p>
+      <div className="sm:hidden font-bold text-left">Name:</div>
+      <p className="w-full sm:w-1/6">{placement.name}</p>
+      <div className="sm:hidden font-bold text-left">Branch:</div>
+      <p className="w-full sm:w-1/6">{placement.branch}</p>
+      <div className="sm:hidden font-bold text-left">Company:</div>
+      <p className="w-full sm:w-1/6">{placement.company}</p>
+      <div className="sm:hidden font-bold text-left">Package:</div>
+      <p className="w-full sm:w-1/6">{placement.package}</p>
+      <div className="sm:hidden font-bold text-left">Action:</div>
+      <button
+  type="button"
+  className="w-full sm:w-auto bg-violet-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-violet-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50 transition duration-150 ease-in-out flex items-center justify-center sm:justify-start"
+>
+  Action
+</button>
+
+    </div>
+  ))}
+</div>
+
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Main1;
+export default Main1;
