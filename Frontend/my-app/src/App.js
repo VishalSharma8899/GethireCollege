@@ -10,9 +10,14 @@ import Placement from './Component/Dashboard/Pages/Placement/Placement.jsx';
 import Notification from './Component/Dashboard/Pages/Notifications/Notification.jsx';
 import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
- 
- 
+
+
+// dummy import
+import {CorporateActiveProcess} from './Demo/CorporateActiveProcess.js';
+
+
 import Login from './Component/Login/Login.jsx'
+
 
 
  
@@ -26,17 +31,28 @@ import Login from './Component/Login/Login.jsx'
 
  
 import Report from './Component/Dashboard/Pages/Report/Report.jsx'
- 
+import Form from './Component/Profile/Form.jsx';
+import CollegePage from './Component/Profile/CollegePage.jsx';
+import UpdateForm from './Component/Profile/UpdateFrom.jsx';
+import PlacementForm from './Component/Profile/PlacementForm.jsx';
+import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
+// import Login from './Component/Login/Login.jsx'
+
+
 import Signup from './Component/Login/Signup.jsx'
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
- 
     <BrowserRouter>
+
     {/* <Routes>
         <Route path="/" element={<Login/>} />
+=======
+    <Routes>
+        <Route path="/login" element={<Login/>} />
+>>>>>>> 2516f9dd64a13f07b160920df6a34775ac072c64
         <Route path="/signup" element={< Signup/>} />
           <Route path="/demo" element={<Form/>} />
         <Route path="/collegePage" element={<CollegePage/>} />
@@ -64,7 +80,10 @@ const App = () => {
           <Route path="/Report" element={<Report/>}/>
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
-       
+
+        {/* dummy route */}
+        <Route path="/activeProcess" element={<CorporateActiveProcess/>} />
+
 
         </Routes>
       </Sidebar>
