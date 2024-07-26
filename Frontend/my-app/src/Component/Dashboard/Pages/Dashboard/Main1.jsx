@@ -4,8 +4,8 @@ import graphdown from "../../../Images/Graphdown.png";
 
 function Main1() {
   return (
-    <div className="bg-white w-full h-screen mt-3 rounded-lg">
-      <div className="bg-[rgba(246, 249, 254, 1)] w-full h-screen mt-3 rounded-lg">
+    <div className="bg-white w-full min-h-screen mt-3 rounded-lg">
+      <div className="bg-[rgba(246, 249, 254, 1)] w-full min-h-screen mt-3 rounded-lg">
         <div className="container mx-auto p-4">
           <div className="flex flex-wrap justify-center">
             <div className="w-full md:w-1/2 lg:w-1/4 p-2">
@@ -50,33 +50,24 @@ function Main1() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg h-96 mt-3 p-4">
+          <div className="bg-white rounded-lg h-auto mt-3 p-4">
             <div className="flex justify-between items-center">
-              <p className="font-bold">Top Placements</p>
+              <p className="font-bold text-sm md:text-lg">Top Placements</p>
               <button
-                style={{
-                  backgroundColor: "rgba(89, 86, 233, 1)",
-                  color: "white",
-                  padding: "10px 20px",
-                  border: "none",
-                  borderRadius: "15px",
-                  cursor: "pointer",
-                  margin: "10px",
-                }}
-                className="inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-lg focus:bg-primary-600 focus:shadow-lg focus:outline-none active:bg-primary-700"
+                className="inline-block rounded px-4 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out bg-violet-500 hover:bg-violet-600 focus:bg-violet-600 active:bg-violet-700"
               >
                 See all
               </button>
             </div>
 
             <div className="mt-4">
-              <div className="bg-[rgba(237, 244, 251, 1)] flex justify-between p-2 rounded-md mb-2">
-                <p>Rank</p>
-                <p>Name</p>
-                <p>Branch</p>
-                <p>Company</p>
-                <p>Package</p>
-                <p>More</p>
+              <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-6 p-2 rounded-md mb-2 text-center">
+                <p className="w-1/6">Rank</p>
+                <p className="w-1/6">Name</p>
+                <p className="w-1/6">Branch</p>
+                <p className="w-1/6">Company</p>
+                <p className="w-1/6">Package</p>
+                <p className="w-1/6">More</p>
               </div>
               {[
                 { rank: "#1", name: "John", branch: "CSE", company: "Google", package: "56LPA" },
@@ -84,15 +75,15 @@ function Main1() {
                 { rank: "#3", name: "Bark", branch: "ITB", company: "Walmart", package: "36LPA" },
                 { rank: "#4", name: "Alexa", branch: "ECE", company: "Deloitte", package: "30LPA" },
               ].map((placement, index) => (
-                <div key={index} className="flex justify-between p-2 rounded-md mb-2">
-                  <p>{placement.rank}</p>
-                  <p>{placement.name}</p>
-                  <p>{placement.branch}</p>
-                  <p>{placement.company}</p>
-                  <p>{placement.package}</p>
+                <div key={index} className="grid grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-2">
+                  <p className="w-1/6">{placement.rank}</p>
+                  <p className="w-1/6">{placement.name}</p>
+                  <p className="w-1/6">{placement.branch}</p>
+                  <p className="w-1/6">{placement.company}</p>
+                  <p className="w-1/6">{placement.package}</p>
                   <button
                     type="button"
-                    className="bg-violet-500 text-white font-bold h-10 w-16 rounded-lg shadow-md hover:bg-violet-600"
+                    className="bg-violet-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-violet-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
                   >
                     Action
                   </button>
