@@ -15,31 +15,17 @@ import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
 
 
 // dummy import
-import Form from './Demo/Form.js';
-import CollegePage from './Demo/CollegePage.js';
-import UpdateForm from './Demo/UpdateFrom.js';
-import PlacementForm from './Demo/PlacementForm.js';
-import EventsAddForm from './Demo/EventsAddForm.js';
 import {CorporateActiveProcess} from './Demo/CorporateActiveProcess.js';
 // import { CorporateActiveProcessList } from './Demo/CorporateActiveProcess.js';
 
-// =======
-// <<<<<<< HEAD
 import Login from './Component/Login/Login.jsx'
-// =======
-// import Login from './Component/Login/Login.jsx';
-// >>>>>>> 7f59713dd0e861f1ff7c66eb1d3d4c6541dd45bc
+
 import Signup from './Component/Login/Signup.jsx'
-// >>>>>>> 125f8464527de7e1fce47caeca8969234037cf04
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
-{/* <<<<<<< HEAD */}
-   
-{/* ======= */}
-{/* >>>>>>> 7f59713dd0e861f1ff7c66eb1d3d4c6541dd45bc */}
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<Login/>} />
@@ -64,13 +50,7 @@ const App = () => {
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
         {/* dummy route */}
-        <Route path="/demo" element={<Form/>} />
-        <Route path="/collegePage" element={<CollegePage/>} />
-        <Route path="/updateForm" element={<UpdateForm/>} />
-        <Route path="/placementForm" element={<PlacementForm/>} />
-        <Route path="/eventAddForm" element={<EventsAddForm/>} />
         <Route path="/activeProcess" element={<CorporateActiveProcess/>} />
-        {/* <Route path="/activeProcessList" element={<CorporateActiveProcessList/>} /> */}
 
         </Routes>
       </Sidebar>
