@@ -20,6 +20,8 @@ import CollegePage from './Demo/CollegePage.js';
 import UpdateForm from './Demo/UpdateFrom.js';
 import PlacementForm from './Demo/PlacementForm.js';
 import EventsAddForm from './Demo/EventsAddForm.js';
+import {CorporateActiveProcess} from './Demo/CorporateActiveProcess.js';
+// import { CorporateActiveProcessList } from './Demo/CorporateActiveProcess.js';
 
 // =======
 // <<<<<<< HEAD
@@ -67,6 +69,8 @@ const App = () => {
         <Route path="/updateForm" element={<UpdateForm/>} />
         <Route path="/placementForm" element={<PlacementForm/>} />
         <Route path="/eventAddForm" element={<EventsAddForm/>} />
+        <Route path="/activeProcess" element={<CorporateActiveProcess/>} />
+        {/* <Route path="/activeProcessList" element={<CorporateActiveProcessList/>} /> */}
 
         </Routes>
       </Sidebar>
