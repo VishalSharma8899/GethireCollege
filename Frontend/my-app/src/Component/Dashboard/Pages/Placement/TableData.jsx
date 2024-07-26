@@ -49,12 +49,19 @@ const data = [
 ];
 
 const TableData = () => (
-  <Table dataSource={data} pagination={{ pageSize: 4 }}  size="small"> 
-    <Column title="Name" dataIndex="Name" key="Name" />
-    <Column title="Department" dataIndex="Department" key="Department" />
-    <Column title="Company" dataIndex="Company" key="Company" />
-    <Column title="CTC" dataIndex="CTC" key="CTC" />
-  </Table>
+  <div className="table-container">
+    <Table
+      dataSource={data}
+      pagination={{ pageSize: 4 }}
+      size="small"
+      scroll={{ x: 600 }}  // Adjusted width for horizontal scrolling
+    >
+      <Column title="Name" dataIndex="Name" key="Name" width={150} />
+      <Column title="Department" dataIndex="Department" key="Department" width={150} />
+      <Column title="Company" dataIndex="Company" key="Company" width={150} />
+      <Column title="CTC" dataIndex="CTC" key="CTC" width={150} />
+    </Table>
+  </div>
 );
 
 export default TableData;
