@@ -11,30 +11,29 @@ import Notification from './Component/Dashboard/Pages/Notifications/Notification
 import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
 import Report from './Component/Dashboard/Pages/Report/Report.jsx'
-import Form from './Component/Profile/Form.jsx'
-import CollegePage from './Component/Profile/CollegePage.jsx';
-import UpdateForm from './Component/Profile/UpdateFrom.jsx';
-import PlacementForm from './Component/Profile/PlacementForm.jsx';
-import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
-import Login from './Component/Login/Login.jsx'
-import Signup from './Component/Login/Signup.jsx'
+// import Form from './Demo/Form.js';
+// import CollegePage from './Demo/CollegePage.js';
+// import UpdateForm from './Demo/UpdateFrom.js';
+// import PlacementForm from './Demo/PlacementForm.js';
+// import EventsAddForm from './Demo/EventsAddForm.js';
+// import Login from './Component/Login/Login.jsx'
+// import Signup from './Component/Login/Signup.jsx'
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
     <BrowserRouter>
-    <Routes>
+    {/* <Routes>
         <Route path="/" element={<Login/>} />
         <Route path="/signup" element={< Signup/>} />
-          {/* dummy route */}
           <Route path="/demo" element={<Form/>} />
         <Route path="/collegePage" element={<CollegePage/>} />
         <Route path="/updateForm" element={<UpdateForm/>} />
         <Route path="/placementForm" element={<PlacementForm/>} />
         <Route path="/eventAddForm" element={<EventsAddForm/>} />
         
-    </Routes>
+    </Routes> */}
    
       <Sidebar>
         <Routes>

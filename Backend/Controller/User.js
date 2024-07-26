@@ -32,7 +32,9 @@ async function handleUserLogin(req, res) {
         console.error(err.message);
         return res.status(500).send('Server error');
     }
+
 }
+ 
 
 async function handleUserRegistration(req, res) {
     const errors = validationResult(req);
