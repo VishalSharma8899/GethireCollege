@@ -10,36 +10,23 @@ import Placement from './Component/Dashboard/Pages/Placement/Placement.jsx';
 import Notification from './Component/Dashboard/Pages/Notifications/Notification.jsx';
 import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
- 
- 
-import Login from './Component/Login/Login.jsx'
-
-
- 
-
-// dummy import
-
- 
 import Report from './Component/Dashboard/Pages/Report/Report.jsx'
-import Form from './Component/Profile/Form.jsx'
+import Form from './Component/Profile/Form.jsx';
 import CollegePage from './Component/Profile/CollegePage.jsx';
 import UpdateForm from './Component/Profile/UpdateFrom.jsx';
 import PlacementForm from './Component/Profile/PlacementForm.jsx';
 import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
-
- 
+import Login from './Component/Login/Login.jsx'
 import Signup from './Component/Login/Signup.jsx'
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
- 
     <BrowserRouter>
     <Routes>
-        <Route path="/" element={<Login/>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={< Signup/>} />
-          {/* dummy route */}
           <Route path="/demo" element={<Form/>} />
         <Route path="/collegePage" element={<CollegePage/>} />
         <Route path="/updateForm" element={<UpdateForm/>} />
