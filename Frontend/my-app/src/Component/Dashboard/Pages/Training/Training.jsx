@@ -4,9 +4,9 @@ import SecondContainer from './SecondContainer'
 function Training() {
   return (
     <>
-     <div className='w-full h-dvh bg-blue-50 '>
+     <div className='w-full bg-blue-50 h-screen'>
       {/* First-Container */}
-      <div className='w-full h-2/5 rounded bg-gradient-to-r from-blue-500 via-blue-900 to-blue-900'>
+      <div className='w-full h-2/5 rounded bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500'>
          <FirstContainer/>
         </div>
 

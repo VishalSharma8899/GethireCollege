@@ -9,9 +9,12 @@ import StudentData from './Component/Dashboard/Pages/StudentData/StudentData.jsx
 import Placement from './Component/Dashboard/Pages/Placement/Placement.jsx';
 import Notification from './Component/Dashboard/Pages/Notifications/Notification.jsx';
 import Training from './Component/Dashboard/Pages/Training/Training.jsx';
-import Analysis from './Component/Dashboard/Pages/Anaysis/Analysis.jsx';
-import IndustryTalks from './Component/Dashboard/Pages/IndustryTalks/IndustryTalks.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
+import Form from './Demo/Form.js';
+import CollegePage from './Demo/CollegePage.js';
+import UpdateForm from './Demo/UpdateFrom.js';
+import PlacementForm from './Demo/PlacementForm.js';
+import EventsAddForm from './Demo/EventsAddForm.js';
 import Login from './Component/Login/Login.jsx'
 import Signup from './Component/Login/Signup.jsx'
  
@@ -42,6 +45,13 @@ const App = () => {
           <Route path="/Training" element={<Training/>} />
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
+        {/* dummy route */}
+        <Route path="/demo" element={<Form/>} />
+        <Route path="/collegePage" element={<CollegePage/>} />
+        <Route path="/updateForm" element={<UpdateForm/>} />
+        <Route path="/placementForm" element={<PlacementForm/>} />
+        <Route path="/eventAddForm" element={<EventsAddForm/>} />
+
         </Routes>
       </Sidebar>
     </BrowserRouter>

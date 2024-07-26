@@ -1,11 +1,14 @@
-import React from 'react'
+import Card from 'react-bootstrap/Card';
 
-function Courses() {
+function Courses({id,img,name}) {
   return (
-    <div>
-        
-    </div>
-  )
+    <Card style={{ width: '18rem' ,height:"15rem"}}>
+      <Card.Img variant="top" src={img} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default Courses
+export default Courses;
