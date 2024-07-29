@@ -1,13 +1,13 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
 const data = [
@@ -55,11 +55,15 @@ const data = [
   },
 ];
 
-export default function BarGraph() {
-  return (
-    <div className="w-full h-full p-4">
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart
+export default class Example extends PureComponent {
+  static demoUrl = "https://codesandbox.io/p/sandbox/dashed-line-chart-9rttw2";
+
+  render() {
+    return (
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          width={500}
+          height={300}
           data={data}
           margin={{
             top: 5,
@@ -73,10 +77,22 @@ export default function BarGraph() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
-          <Bar dataKey="uv" fill="#82ca9d" />
-        </BarChart>
+          <Line
+            type="monotone"
+            dataKey="pv"
+            stroke="#8884d8"
+            strokeDasharray="5 5"
+          />
+          <Line
+            type="monotone"
+            dataKey="uv"
+            stroke="#82ca9d"
+            strokeDasharray="3 4 5 2"
+          />
+        </LineChart>
       </ResponsiveContainer>
-    </div>
-  );
+    );
+  }
 }
+
+
