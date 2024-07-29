@@ -1,39 +1,40 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { Container, Row, Col } from "react-grid-system";
-import { Button, ConfigProvider, Space } from "antd";
-import { AntDesignOutlined } from "@ant-design/icons";
-import { css } from "@emotion/css";
+// import {  ConfigProvider} from "antd";
+
+// import { css } from "@emotion/css";
 import Invite from "../../../Images/Invite.png";
+import ActiveButton from "./ActiveButton";
 
 function Post() {
   const lineSegments = [14, 2, 1];
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const rootPrefixCls = getPrefixCls();
-  const linearGradientButton = css`
-    &.${rootPrefixCls}-btn-primary:not([disabled]):not(
-        .${rootPrefixCls}-btn-dangerous
-      ) {
-      border-width: 0;
+  // const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  // const rootPrefixCls = getPrefixCls();
+  // const linearGradientButton = css`
+  //   &.${rootPrefixCls}-btn-primary:not([disabled]):not(
+  //       .${rootPrefixCls}-btn-dangerous
+  //     ) {
+  //     border-width: 0;
 
-      > span {
-        position: relative;
-      }
+  //     > span {
+  //       position: relative;
+  //     }
 
-      &::before {
-        content: "";
-        background: linear-gradient(135deg, rgba(89, 86, 233, 1), #04befe);
-        position: absolute;
-        inset: 0;
-        opacity: 1;
-        transition: all 0.3s;
-        border-radius: inherit;
-      }
+  //     &::before {
+  //       content: "";
+  //       background: linear-gradient(135deg, rgba(89, 86, 233, 1), #04befe);
+  //       position: absolute;
+  //       inset: 0;
+  //       opacity: 1;
+  //       transition: all 0.3s;
+  //       border-radius: inherit;
+  //     }
 
-      &:hover::before {
-        opacity: 0;
-      }
-    }
-  `;
+  //     &:hover::before {
+  //       opacity: 0;
+  //     }
+  //   }
+  // `;
   return (
     <div className="  h-72  rounded-lg  ml-3 mr-3 bg-white">
       <Container>
@@ -59,7 +60,7 @@ function Post() {
               </div>
               <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus magni ex, libero corrupti quibusdam dolor quia voluptate sapiente, voluptatibus a, reiciendis voluptatem cumque!
               </p>
-              <ConfigProvider
+              {/* <ConfigProvider
                 button={{
                   className: linearGradientButton,
                 }}
@@ -72,7 +73,8 @@ function Post() {
                 >
                   Invite
                 </Button>
-              </ConfigProvider>
+              </ConfigProvider> */}
+              <  ActiveButton/ >
             </div>
           </Col>
           <Col>
