@@ -21,12 +21,6 @@ function BestSales() {
             title:"Web Developer",
             price:"$25"
         },
-        {
-            id:1,
-            img:img1,
-            title:"Web Developer",
-            price:"$25"
-        },
     ]
   return (
     <div className='w-full h-full bg-gray-50 mt-4'>
@@ -45,7 +39,7 @@ function BestSales() {
                   <p>{data.price}</p>
                   </div>
                </div>
-               <div className='flex flex-col font-thin text-gray-600 justify-center items-center'>
+               <div className='flex flex-col font-thin justify-center items-center'>
                   <div className='bg-green-100 w-24 h-10 flex items-center rounded justify-center p-2'>
                     <button>Buy Now</button>
                   </div>
