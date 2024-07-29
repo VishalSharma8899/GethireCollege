@@ -17,8 +17,9 @@ const upload = multer({
     checkFileType(file, cb);
   }
 }).fields([
-  { name: 'CourseImage', maxCount: 1 },
-  { name: 'courseDemoVideo', maxCount: 1 }
+  { name: 'courseImage', maxCount: 1 },
+  { name: 'demoVideo', maxCount: 1 },
+  { name: 'sectionVideos', maxCount: 10 }
 ]);
 
 // Check file type

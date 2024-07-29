@@ -1,38 +1,52 @@
 const mongoose = require('mongoose');
 
+const lectureSchema = new mongoose.Schema({
+  title: { type: String, },
+  duration: { type: String, },
+  preview: { type: Boolean,  },
+ 
+});
+
+const sectionSchema = new mongoose.Schema({
+  title: { type: String,  },
+   
+  lectures: [lectureSchema]
+});
+
 const courseSchema = new mongoose.Schema({
-  CourseName: {
-    type: String,
-    required: true
+  title: { type: String,  },
+  courseImage: { type: String },
+  demoVideo: { type: String },
+  Videos: { type: String },
+  instructor: { type: String,  },
+  description: { type: String,  },
+  lastUpdated: { type: String,  },
+  languages: { type: [String],  },
+  price: { type: Number,  },
+  originalPrice: { type: Number,  },
+  discount: { type: Number,  },
+  couponCode: { type: String,  },
+  ratings: {
+    stars: { type: Number,  },
   },
-  CourseCode: {
-    type: String,
-    
+  students: { type: Number,  },
+  includes: {
+    hoursOnDemandVideo: { type: Number,  },
+    Exercises: { type: Number,  },
+    articles: { type: Number,  },
+    downloadableResources: { type: Number,  },
+    accessOnMobileAndTV: { type: Boolean,  },
+    fullLifetimeAccess: { type: Boolean,  },
+    certificateOfCompletion: { type: Boolean,  }
   },
-  CourseDescription: {
-    type: String,
-    required: true
-  },
-  CourseDuration: {
-    type: String,
-    required: true
-  },
-  CourseFee: {
-    type: Number,
-    required: true
-  },
-  CourseImage: {
-    type: String,
-    required: true
-  },
-  Incharge:{
-    type: String,
-    },
-  
-  courseDemoVideo: {
-    type: String,
-    required: true
+  whatYouWillLearn: { type: [String],  },
+  content: {
+    ContentTilte: { type: String },
+     
+    Section: [sectionSchema],
   }
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+const Course = mongoose.model('Course', courseSchema);
+
+module.exports = Course;
