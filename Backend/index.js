@@ -16,6 +16,10 @@ const {ActiveProcessData} = require('./Controller/CorporateConnects')
 
 // this is for invitation
 const {Invitation} = require('../Backend/Controller/Invitation');
+// this is for UpcomingEvents data posting in training section
+const {UpcomingEventController,DeleteEvents,WantToJoinUpcomingEvents,RemoveStudentFromUpcomingEvent,TopCoursesTraining} =require('./Controller/UpcomingEvents')
+// this below is for deleting the Upcoming Events in training section
+// const {DeleteEvents} = require('./Controller/UpcomingEvents')
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
@@ -65,9 +69,18 @@ app.listen(PORT, () => {
   app.post('/invite' , Invitation);
 
 
-
+  // this is for upcoming events
+  app.post('/upcomingEvents' ,UpcomingEventController);
+ // this is for deleting upcoming events in training section
+ app.post('/deleteUpcomingEvents/:id' ,DeleteEvents);
+//  this is for students wo want to jooin the sessions
+ app.post('/wantToJoinUpcomingEvents',WantToJoinUpcomingEvents);
+ app.post('/removeStudentFromUpcomingEvent',RemoveStudentFromUpcomingEvent);
+ app.post('/topCoursesTraining',TopCoursesTraining);
 
   
+
+
 // this below si the placement schema in get hire so this is demo on ypu have to connect this your database go getHire
 // so thats why i created here
 // for logo in front end just use this one
