@@ -10,22 +10,49 @@ import Placement from './Component/Dashboard/Pages/Placement/Placement.jsx';
 import Notification from './Component/Dashboard/Pages/Notifications/Notification.jsx';
 import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
-import Report from './Component/Dashboard/Pages/Report/Report.jsx'
+
+
+// dummy import
+import {CorporateActiveProcess} from './Demo/CorporateActiveProcess.js';
+
+
+import Login from './Component/Login/Login.jsx'
+
+
+
+ 
+
+// dummy import
 // import Form from './Demo/Form.js';
 // import CollegePage from './Demo/CollegePage.js';
 // import UpdateForm from './Demo/UpdateFrom.js';
 // import PlacementForm from './Demo/PlacementForm.js';
 // import EventsAddForm from './Demo/EventsAddForm.js';
+
+ 
+import Report from './Component/Dashboard/Pages/Report/Report.jsx'
+import Form from './Component/Profile/Form.jsx';
+import CollegePage from './Component/Profile/CollegePage.jsx';
+import UpdateForm from './Component/Profile/UpdateFrom.jsx';
+import PlacementForm from './Component/Profile/PlacementForm.jsx';
+import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
 // import Login from './Component/Login/Login.jsx'
-// import Signup from './Component/Login/Signup.jsx'
+
+
+import Signup from './Component/Login/Signup.jsx'
  
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 const App = () => {
   return (
     <>
     <BrowserRouter>
+
     {/* <Routes>
         <Route path="/" element={<Login/>} />
+=======
+    <Routes>
+        <Route path="/login" element={<Login/>} />
+>>>>>>> 2516f9dd64a13f07b160920df6a34775ac072c64
         <Route path="/signup" element={< Signup/>} />
           <Route path="/demo" element={<Form/>} />
         <Route path="/collegePage" element={<CollegePage/>} />
@@ -42,7 +69,7 @@ const App = () => {
        
        
         <Route element={<ProtectedRoute/>}/>
-          {/* <Route path="/" element={<Dashboard />} /> */}
+          <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/college" element={<Collgepart/>} />
           <Route path="/jobs" element={<Jobs />} />
@@ -53,7 +80,10 @@ const App = () => {
           <Route path="/Report" element={<Report/>}/>
           <Route path="/feedback" element={<Feedback/>} />
         {/* </Route> */}
-       
+
+        {/* dummy route */}
+        <Route path="/activeProcess" element={<CorporateActiveProcess/>} />
+
 
         </Routes>
       </Sidebar>

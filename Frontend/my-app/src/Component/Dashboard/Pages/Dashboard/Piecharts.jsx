@@ -6,6 +6,7 @@ const data = [
   { name: 'Unplaced', value: 200 },
   { name: 'Remaining', value: 300 },
 ];
+
 const COLORS = ['rgba(180, 223, 229, 1)', 'rgba(48, 60, 108, 1)', 'rgba(250, 151, 108, 1)'];
 
 const renderActiveShape = (props) => {
@@ -55,8 +56,6 @@ const renderActiveShape = (props) => {
 };
 
 export default class Example extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/pie-chart-with-customized-active-shape-y93si';
-
   state = {
     activeIndex: 0,
   };
@@ -69,27 +68,27 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', display:"inline" }}>
-      <ResponsiveContainer width="232%" height="100%">
-        <PieChart width={400} height={400}>
-          <Pie
-            activeIndex={this.state.activeIndex}
-            activeShape={renderActiveShape}
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-            onMouseEnter={this.onPieEnter}
-          >
-             {data.map((entry, index) => (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
+        <ResponsiveContainer width="100%" height={400}>
+          <PieChart>
+            <Pie
+              activeIndex={this.state.activeIndex}
+              activeShape={renderActiveShape}
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius="40%"
+              outerRadius="60%"
+              fill="#8884d8"
+              dataKey="value"
+              onMouseEnter={this.onPieEnter}
+            >
+              {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     );
   }

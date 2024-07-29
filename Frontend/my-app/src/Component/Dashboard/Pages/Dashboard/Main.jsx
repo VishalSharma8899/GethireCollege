@@ -7,9 +7,9 @@ function Main() {
   return (
     <div>
       <Search />
-      <div className='w-full h-screen rounded-lg'>
+      <div className='w-full h-screen rounded-lg bg-[rgba(246, 249, 254, 1)]'>
         <div className='w-full p-3 ml-2 text-xl'>
-          <p className='font-bold'>Overview</p>
+          <p className='font-bold text-sm md:text-lg ml-8'>Overview</p>
         </div>
         <div className='container bg-[rgba(246, 249, 254, 1)]'>
           <div className='flex flex-wrap'>

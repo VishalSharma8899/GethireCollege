@@ -70,26 +70,42 @@ function CoursesContainer() {
       </div>
 
       {/* Industry Talk Section */}
-      <div className="w-full">
+      <div className="w-full mb-4">
         <h1 className="text-xl lg:text-2xl font-semibold">Industry Talk</h1>
-        <div className="w-full flex flex-wrap gap-4 lg:gap-6 mt-2">
-          {industryData.map((data) => (
-            <div
+        <div className="w-full flex flex-wrap gap-6 lg:gap-6 mt-2">
+          {
+            industryData.map((data)=>{
+              return(
+                <div
               key={data.id}
               className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
             >
-              <Industry name={data.name} img={data.img} topic={data.topic} />
+              <Card className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+                <Card.Img
+                  variant="top"
+                  src={data.img}
+                  className="object-cover w-full"
+                  style={{ height: '8rem' }} // Reduced height for the image
+                />
+                <Card.Body>
+                  <Card.Title className="text-center text-sm sm:text-base md:text-lg lg:text-xl">
+                    {data.name}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
             </div>
-          ))}
+              )
+            })
+          }
         </div>
       </div>
     </div>
 
       {/* Progress Section */}
-      {/* <div className='w-full lg:w-2/5 bg-gray-50 h-full rounded-lg p-4 lg:p-6'>
+      <div className='w-full lg:w-2/5 bg-gray-50 h-full rounded-lg p-4 lg:p-6'>
         <Progress />
         <BestSales />
-      </div> */}
+      </div>
     </div>
   );
 }

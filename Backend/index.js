@@ -9,7 +9,10 @@ const studentRoutes = require('./routes/student');
 const UserRoutes = require('./routes/User');
 // ----
 // const CollegeRoutes = require('./routes/college');
+// this is for college profile page
 const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('./Controller/CollegeDataCont')
+// this is for Corporate active process 
+const {ActiveProcessData} = require('./Controller/CorporateConnects')
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
@@ -52,6 +55,8 @@ app.listen(PORT, () => {
   app.post('/college_cultural_events_add',CollegeDataEventAdd);
 
 
+  // This all below is for corporate section page
+  app.post('/corporate/activeProcess' , ActiveProcessData)
 
 
 
