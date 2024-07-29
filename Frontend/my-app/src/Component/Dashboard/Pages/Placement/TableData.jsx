@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
+import 'tailwindcss/tailwind.css'; // Make sure Tailwind CSS is imported
 
 const { Column } = Table;
 
@@ -49,12 +50,13 @@ const data = [
 ];
 
 const TableData = () => (
-  <div className="table-container">
+  <div className="overflow-x-auto px-4 py-2">
     <Table
       dataSource={data}
       pagination={{ pageSize: 4 }}
       size="small"
-      scroll={{ x: 600 }}  // Adjusted width for horizontal scrolling
+      scroll={{ x: '100%' }} // Makes the table scroll horizontally if needed
+      className="min-w-full" // Ensures the table takes full width
     >
       <Column title="Name" dataIndex="Name" key="Name" width={150} />
       <Column title="Department" dataIndex="Department" key="Department" width={150} />

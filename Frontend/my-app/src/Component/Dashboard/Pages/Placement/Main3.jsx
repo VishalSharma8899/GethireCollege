@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { name: 'Placed Students', value: 400 },// come from api
-  { name: 'Unplaced Students', value: 300 },// in this total - placed
-  { name: 'Total Students', value: 300 },  // come from api
+  { name: 'Placed', value: 400 },// come from api
+  { name: 'Unplaced', value: 300 },// in this total - placed
+  { name: 'Total', value: 300 },  // come from api
 ];
 
 const renderActiveShape = (props) => {
@@ -66,7 +66,12 @@ export default class Main3 extends PureComponent {
 
   render() {
     return (
-      <div className="w-full h-full p-4">
+      <div className="w-full h-full p-4 bg-white rounded">
+        <div>
+          <h1 className="text-green-400 text-lg font-semibold">
+            Top Placements
+          </h1>
+        </div>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie

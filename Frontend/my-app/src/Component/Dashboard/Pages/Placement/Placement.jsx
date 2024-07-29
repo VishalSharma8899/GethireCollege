@@ -7,32 +7,33 @@ import Main4 from './Main4';
 
 function Placement() {
   return (
-    <div className='w-full min-h-screen p-4'>
+    <div className="w-full min-h-screen p-4">
       {/* Search */}
-      <div className='mb-4'>
+      <div className="mb-4">
         <Search />
       </div>
 
       {/* First-Container */}
-      <div className='container mx-auto bg-blue-50 rounded p-4'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-          <div className='md:col-span-2'>
+      <div className="container mx-auto bg-blue-50 rounded p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-2">
             <Main1 />
           </div>
-          <div className='md:col-span-1'>
+          <div className="md:col-span-1">
             <Main2 />
           </div>
         </div>
       </div>
-
-      {/* Second-Container */}
-      <div className='container mx-auto bg-blue-50 mt-5 rounded p-4'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-          <div className='md:col-span-1'>
+      <div className="container mx-auto bg-blue-50 mt-2 rounded p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="col-span-1">
             <Main3 />
           </div>
-          <div className='md:col-span-2'>
+          <div className="col-span-1 flex items-center justify-center">
             <Main4 />
+          </div>
+          <div className="col-span-1 flex items-center justify-center">
+            <Main3 />
           </div>
         </div>
       </div>
@@ -41,3 +42,5 @@ function Placement() {
 }
 
 export default Placement;
+
+
