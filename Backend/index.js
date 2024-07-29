@@ -13,6 +13,7 @@ const UserRoutes = require('./routes/User');
 const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('./Controller/CollegeDataCont')
 // this is for Corporate active process 
 const {ActiveProcessData} = require('./Controller/CorporateConnects')
+const path = require('path');
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
@@ -20,12 +21,12 @@ require('dotenv').config();
  
 const cors = require('cors');
  
-
+ 
  
 const app = express();
 app.use(cors());
 app.use(cookieParser());
- 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
@@ -56,7 +57,7 @@ app.listen(PORT, () => {
 
 
   // This all below is for corporate section page
-  app.post('/corporate/activeProcess' , ActiveProcessData)
+   
 
 
 
