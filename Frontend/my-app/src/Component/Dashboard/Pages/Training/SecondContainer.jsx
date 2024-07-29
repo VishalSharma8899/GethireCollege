@@ -41,50 +41,34 @@ function CoursesContainer() {
     <div className="w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6">
       {/* Courses/Industry */}
       <div className="flex flex-col lg:w-3/5 p-4 lg:p-6">
-      {/* Courses Section */}
-      <div className="w-full mb-6">
-  <h1 className="text-xl lg:text-2xl font-semibold mb-4">Courses</h1>
-  <div className="w-full flex flex-wrap gap-8 lg:gap-8">
-    {
-      courses.map((data) => (
-        <Courses
-          key={data.id}
-          id={data.id}
-          name={data.name}
-          img={data.img}
-          text={data.text}
-          duration={data.duration}
-        />
-      ))
-    }
-  </div>
+        {/* Courses Section */}
+        <div className="w-full mb-6">
+          <h1 className="text-xl lg:text-2xl font-semibold mb-4">Courses</h1>
+          <div className="w-full">
+            <Courses />
+          </div>
+        </div>
 
-  {/* All Courses */}
-  <div className="flex justify-center lg:justify-end mt-4 -ml-5">
-    <button onClick={handleAllCourses} className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors">
-      View All
-    </button>
-  </div>
-</div>
-
-
-      {/* Industry Talk Section */}
-      <div className="w-full mb-4">
-        <h1 className="text-xl lg:text-2xl font-semibold">Industry Talk</h1>
-        <div className="w-full flex flex-wrap gap-6 lg:gap-6 mt-2">
-          {
-            industryData.map((data)=>{
-              return(
-                 <Industry id={data.id} name={data.name} img={data.img} topic={data.topic}/>
-              )
-            })
-          }
+        {/* Industry Talk Section */}
+        <div className="w-full mb-4">
+          <h1 className="text-xl lg:text-2xl font-semibold">Industry Talk</h1>
+          <div className="w-full flex flex-wrap gap-6 lg:gap-6 mt-2">
+            {industryData.map((data) => {
+              return (
+                <Industry
+                  id={data.id}
+                  name={data.name}
+                  img={data.img}
+                  topic={data.topic}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
 
       {/* Progress Section */}
-      <div className='w-full lg:w-2/5 bg-gray-50 h-full rounded-lg p-4 lg:p-6'>
+      <div className="w-full lg:w-2/5 bg-gray-50 h-full rounded-lg p-4 lg:p-6">
         <Progress />
         <BestSales />
       </div>
@@ -93,5 +77,4 @@ function CoursesContainer() {
 }
 
 export default CoursesContainer;
-
 
