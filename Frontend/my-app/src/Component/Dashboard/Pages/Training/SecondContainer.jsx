@@ -1,25 +1,26 @@
 import React from "react";
 import Courses from "./Courses";
 import Industry from "./Industry";
-import Course1 from "../../../Images/course1.png";
-import Course2 from "../../../Images/course2.png";
-import Course3 from "../../../Images/course3.png";
-import Course4 from "../../../Images/course4.jfif";
+import Course1 from "../../../Images/course1.jfif";
+import Course2 from "../../../Images/course2.jfif";
+import Course3 from "../../../Images/course3.jpeg";
+import Course4 from "../../../Images/course4.jfif"
 import industry1 from "../../../Images/industry1.jfif";
 import industry2 from "../../../Images/industry2.jfif";
 import industry3 from "../../../Images/industry3.jfif";
 import industry4 from "../../../Images/industry4.jfif";
 import Progress from "./Progress"
 import BestSales from "./BestSales"
-import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router";
 
 function CoursesContainer() {
+  const navigate=useNavigate();
   const courses = [
-    { id: 1, name: "Course Name 1", img: Course1 },
-    { id: 2, name: "Course Name 2", img: Course2 },
-    { id: 3, name: "Course Name 3", img: Course3 },
-    { id: 4, name: "Course Name 4", img: Course4 },
+    { id: 1, name: "Web Development", img: Course1,text:"Lorem Ipsum is simply dummy text. " ,duration:"1hr" },
+    { id: 2, name: "Data Analytics", img: Course2,text:"Lorem Ipsum is simply dummy text. ",duration:"1hr"  },
+    { id: 3, name: "Machine Learning", img: Course3,text:"Lorem Ipsum is simply dummy text. ",duration:"1hr"},
+    { id: 4, name: "Python", img: Course4, text:"Lorem Ipsum is simply dummy text. ",duration:"1hr"  },
   ];
 
   const industryData = [
@@ -33,41 +34,39 @@ function CoursesContainer() {
       topic: "Software Development",
     },
   ];
-
+  const handleAllCourses=()=>{
+    navigate("/training/all-courses")
+  }
   return (
     <div className="w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6">
       {/* Courses/Industry */}
       <div className="flex flex-col lg:w-3/5 p-4 lg:p-6">
       {/* Courses Section */}
-      <div className="w-full mb-4">
-        <h1 className="text-xl lg:text-2xl font-semibold">Courses</h1>
-        <div className="w-full flex flex-wrap gap-6 lg:gap-6 mt-2">
-          {
-            courses.map((data)=>{
-              return(
-                <div
-              key={data.id}
-              className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
-            >
-              <Card className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                <Card.Img
-                  variant="top"
-                  src={data.img}
-                  className="object-cover w-full"
-                  style={{ height: '8rem' }} // Reduced height for the image
-                />
-                <Card.Body>
-                  <Card.Title className="text-center text-sm sm:text-base md:text-lg lg:text-xl">
-                    {data.name}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </div>
-              )
-            })
-          }
-        </div>
-      </div>
+      <div className="w-full mb-6">
+  <h1 className="text-xl lg:text-2xl font-semibold mb-4">Courses</h1>
+  <div className="w-full flex flex-wrap gap-8 lg:gap-8">
+    {
+      courses.map((data) => (
+        <Courses
+          key={data.id}
+          id={data.id}
+          name={data.name}
+          img={data.img}
+          text={data.text}
+          duration={data.duration}
+        />
+      ))
+    }
+  </div>
+
+  {/* All Courses */}
+  <div className="flex justify-center lg:justify-end mt-4 -ml-5">
+    <button onClick={handleAllCourses} className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors">
+      View All
+    </button>
+  </div>
+</div>
+
 
       {/* Industry Talk Section */}
       <div className="w-full mb-4">
@@ -76,24 +75,7 @@ function CoursesContainer() {
           {
             industryData.map((data)=>{
               return(
-                <div
-              key={data.id}
-              className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
-            >
-              <Card className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                <Card.Img
-                  variant="top"
-                  src={data.img}
-                  className="object-cover w-full"
-                  style={{ height: '8rem' }} // Reduced height for the image
-                />
-                <Card.Body>
-                  <Card.Title className="text-center text-sm sm:text-base md:text-lg lg:text-xl">
-                    {data.name}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </div>
+                 <Industry id={data.id} name={data.name} img={data.img} topic={data.topic}/>
               )
             })
           }
@@ -111,3 +93,5 @@ function CoursesContainer() {
 }
 
 export default CoursesContainer;
+
+

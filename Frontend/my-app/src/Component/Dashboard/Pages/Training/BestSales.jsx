@@ -1,5 +1,5 @@
 import React from 'react'
-import img1 from "../../../Images/course2.avif"
+import img1 from "../../../Images/course3.jpeg"
 
 function BestSales() {
     const bestcourse=[
@@ -47,7 +47,7 @@ function BestSales() {
                </div>
                <div className='flex flex-col font-thin text-gray-600 justify-center items-center'>
                   <div className='bg-green-100 w-24 h-10 flex items-center rounded justify-center p-2'>
-                    <button>Buy Now</button>
+                    Buy Now
                   </div>
                </div>
              </div>

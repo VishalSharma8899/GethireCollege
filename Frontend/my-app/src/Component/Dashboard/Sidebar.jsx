@@ -7,9 +7,9 @@ import { RiUserLocationFill } from "react-icons/ri";
 import { IoMdNotificationsOff } from "react-icons/io";
 import { MdOutlineModelTraining } from "react-icons/md";
 import { IoAnalytics } from "react-icons/io5";
-import { LiaIndustrySolid } from "react-icons/lia";
 import { VscFeedback } from "react-icons/vsc";
 import { MdOutlineFormatLineSpacing } from "react-icons/md";
+import './Sidebar.css'
 // import Image from "../Images/settingLogo.png"
 
 const Sidebar = ({children}) => {
