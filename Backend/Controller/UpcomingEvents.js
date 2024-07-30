@@ -4,7 +4,7 @@ const express = require('express');
 const UpcomingEvent  = require('../Models/UpcomintEvents')
 const mongoose = require('mongoose')
 const WantToJoinUpcomingEventSchema = require('../Models/UpcomintEvents')
-const Course = require('../Models/trainigCourse');
+const Course = require('../Models/training');
 // middleware/upload.js
 
 const multer = require('multer');
@@ -204,9 +204,9 @@ exports.RemoveStudentFromUpcomingEvent = async (req, res) => {
 exports.TopCoursesTraining = async (req , res) =>{
     try {
         const topCourses = await Course.find()
-          .sort({ rating: -1 })  // Sort by rating in descending order
+          .sort({ 'ratings.stars': -1 })  // Sort by stars rating in descending order
           .limit(10)  // Limit the results to top 10
-          .select('courseName price -_id');  // Select only courseName and price fields
+          .select('courseName price');  // Select only courseName and price fields
     
         res.status(200).json({ topCourses });
       } catch (error) {

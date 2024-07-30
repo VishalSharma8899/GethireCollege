@@ -70,6 +70,7 @@ app.listen(PORT, () => {
   app.post('/invite' , Invitation);
 
 
+//   this all routes are for Training page
   // this is for upcoming events
   app.post('/upcomingEvents' ,UpcomingEventController);
  // this is for deleting upcoming events in training section
