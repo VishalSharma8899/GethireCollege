@@ -13,9 +13,14 @@ const UserRoutes = require('./routes/User');
 const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('./Controller/CollegeDataCont')
 // this is for Corporate active process 
 const {ActiveProcessData} = require('./Controller/CorporateConnects')
+const path = require('path');
 
 // this is for invitation
 const {Invitation} = require('../Backend/Controller/Invitation');
+// this is for UpcomingEvents data posting in training section
+const {UpcomingEventController,DeleteEvents,WantToJoinUpcomingEvents,RemoveStudentFromUpcomingEvent,TopCoursesTraining} =require('./Controller/UpcomingEvents')
+// this below is for deleting the Upcoming Events in training section
+// const {DeleteEvents} = require('./Controller/UpcomingEvents')
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
@@ -23,12 +28,12 @@ require('dotenv').config();
   
 const cors = require('cors');
  
-
+ 
  
 const app = express();
 app.use(cors());
 app.use(cookieParser());
- 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 //database
@@ -59,15 +64,24 @@ app.listen(PORT, () => {
 
 
   // This all below is for corporate section page
-  app.post('/corporate/activeProcess' , ActiveProcessData)
+   
 
   // this is for invitation
   app.post('/invite' , Invitation);
 
 
-
+  // this is for upcoming events
+  app.post('/upcomingEvents' ,UpcomingEventController);
+ // this is for deleting upcoming events in training section
+ app.post('/deleteUpcomingEvents/:id' ,DeleteEvents);
+//  this is for students wo want to jooin the sessions
+ app.post('/wantToJoinUpcomingEvents',WantToJoinUpcomingEvents);
+ app.post('/removeStudentFromUpcomingEvent',RemoveStudentFromUpcomingEvent);
+ app.post('/topCoursesTraining',TopCoursesTraining);
 
   
+
+
 // this below si the placement schema in get hire so this is demo on ypu have to connect this your database go getHire
 // so thats why i created here
 // for logo in front end just use this one

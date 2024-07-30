@@ -20,7 +20,9 @@ import Login from './Component/Login/Login.jsx';
 import Signup from './Component/Login/Signup.jsx';
 import TopPerformers from './Component/Dashboard/Pages/Jobs/TopPerformers.jsx';
 import SeeAllCompanies from './Component/Dashboard/Pages/Jobs/SeeAllCompanies.jsx';
+import AllCourses from './Component/Dashboard/Pages/Training/AllCourses.jsx';
 import StudentDetails from './Component/Dashboard/Pages/Jobs/StudentDetails.jsx';
+import ParticularCourse from './Component/Dashboard/Pages/Training/ParticularCourse/ParticularCourse.jsx';
 // import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 
 const App = () => {
@@ -48,6 +50,9 @@ const App = () => {
         <Route path="/jobs/top-performers" element={<Sidebar><TopPerformers /></Sidebar>} />
         <Route path="/jobs/see-all-companies" element={<Sidebar><SeeAllCompanies /></Sidebar>} />
         <Route path="/jobs/student-details/:name" element={<Sidebar><StudentDetails /></Sidebar>} />
+        <Route path="/training/all-courses" element={<Sidebar><AllCourses/></Sidebar>} />
+        <Route path="/training/all-courses/course/:id" element={<Sidebar><ParticularCourse/></Sidebar>} />
+
       </Routes>
     </Router>
   );

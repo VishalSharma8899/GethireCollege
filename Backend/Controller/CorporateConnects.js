@@ -1,4 +1,5 @@
 const ActiveProcess = require('../Models/CorporateData');
+const student = require('../Models/studentdata');
 
 exports.ActiveProcessData = async (req, res) => {
   try {
@@ -41,5 +42,27 @@ exports.ActiveProcessData = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+exports.getCompanyDetails = async (req, res) => {
+  try {
+    const companies = await student.aggregate([
+      { $match: { "placedDetails.companyName": { $ne: null } } },
+      {
+        $group: {
+          _id: "$placedDetails.companyName",
+          studentCount: { $sum: 1 },
+          highestPackage: { $max: "$placedDetails.salary" }
+        }
+      }
+    ]);
+    res.json(companies);
+  } catch (error) {
+    console.error('Error fetching company details:', error);
+    res.status(500).json({ error: 'Error fetching company details' });
   }
 };

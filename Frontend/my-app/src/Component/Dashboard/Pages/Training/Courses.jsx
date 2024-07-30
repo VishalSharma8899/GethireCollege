@@ -1,13 +1,63 @@
-import Card from 'react-bootstrap/Card';
 
-function Courses({id,img,name}) {
+import React from "react";
+import { Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { IoMdTime } from "react-icons/io";
+import { useCourses } from "./Context/CoursesContext";
+import { useNavigate } from "react-router-dom";
+
+function Courses() {
+  const courses = useCourses();
+  const navigate = useNavigate();
+
+  const handleCardClick = (id) => {
+    navigate(`/training/all-courses/course/${id}`); // Navigate to ParticularCourse page with course ID
+  };
+
   return (
-    <Card style={{ width: '18rem' ,height:"15rem"}}>
-      <Card.Img variant="top" src={img} />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-      </Card.Body>
-    </Card>
+    <div className="w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        {courses.slice(0, 4).map((course) => (
+          <div
+            key={course.id}
+            className="cursor-pointer flex flex-col"
+            onClick={() => handleCardClick(course.id)}
+          >
+            <Card className="w-full h-full flex flex-col">
+              <div className="aspect-w-4 aspect-h-3">
+                <Card.Img
+                  variant="top"
+                  src={course.img}
+                  className="object-cover w-full"
+                  style={{ height: "8rem" }} 
+                />
+              </div>
+
+              <Card.Body className="bg-gray-50 flex flex-col justify-between">
+                <Card.Text className="text-sm font-semibold">
+                  {course.name}
+                </Card.Text>
+                <Card.Text className="text-xs flex-grow">
+                  {course.text}
+                </Card.Text>
+                <div className="flex items-center gap-1 text-xs">
+                  <IoMdTime className="mt-1" />
+                  <span>{course.duration}</span>
+                </div>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4">
+        <button
+          onClick={() => navigate('/training/all-courses')}
+          className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
+        >
+           All Courses
+        </button>
+      </div>
+    </div>
   );
 }
 
