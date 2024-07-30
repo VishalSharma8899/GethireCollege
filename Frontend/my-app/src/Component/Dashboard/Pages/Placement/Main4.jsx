@@ -11,17 +11,6 @@ function Main4() {
       <div className='flex justify-center items-center w-full h-64 sm:h-80 md:h-96 lg:h-[400px]'>
         <BarGraph />
         </div>
-    <div className="w-full h-full bg-white rounded-xl flex flex-col p-4 relative">
-      <div className="mb-4">
-        <h1 className="text-green-400 text-lg font-semibold">Top Companies</h1>
-      </div>
-      <div className="flex justify-center items-center w-full flex-grow">
-        <div className="w-full h-full max-w-full max-h-full">
-          <BarGraph />
-        </div>
-
-      </div>
-    </div>
     </div>
   );
 }

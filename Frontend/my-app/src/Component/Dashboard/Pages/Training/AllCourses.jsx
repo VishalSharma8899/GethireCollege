@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,7 +5,7 @@ import { IoMdTime } from "react-icons/io";
 import { useCourses } from "./Context/CoursesContext";
 import { useNavigate } from "react-router-dom";
 
-function Courses() {
+function AllCourses() {
   const courses = useCourses();
   const navigate = useNavigate();
 
@@ -16,8 +15,11 @@ function Courses() {
 
   return (
     <div className="w-full">
+      <div className="mt-3 container font-bold text-xl">
+        ALL Courses
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {courses.slice(0, 4).map((course) => (
+        {courses.map((course) => (
           <div
             key={course.id}
             className="cursor-pointer flex flex-col"
@@ -29,7 +31,7 @@ function Courses() {
                   variant="top"
                   src={course.img}
                   className="object-cover w-full"
-                  style={{ height: "8rem" }} 
+                  style={{ height: "8rem" }}
                 />
               </div>
 
@@ -49,16 +51,8 @@ function Courses() {
           </div>
         ))}
       </div>
-      <div className="mt-4">
-        <button
-          onClick={() => navigate('/training/all-courses')}
-          className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
-        >
-           All Courses
-        </button>
-      </div>
     </div>
   );
 }
 
-export default Courses;
+export default AllCourses;
