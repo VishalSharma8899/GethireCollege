@@ -14,7 +14,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"499"
     },
     {
       id: 2,
@@ -23,7 +24,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 3,
@@ -32,7 +34,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 4,
@@ -41,7 +44,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 5,
@@ -50,7 +54,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"699"
     },
     {
       id: 6,
@@ -59,7 +64,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"899"
     },
     {
       id: 7,
@@ -68,7 +74,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"399"
     },
     {
       id: 8,
@@ -77,7 +84,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"799"
     },
     {
       id: 9,
@@ -86,7 +94,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id:10,
@@ -95,7 +104,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"199"
     },
     {
       id: 11,
@@ -104,7 +114,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 12,
@@ -113,7 +124,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
   ];
 

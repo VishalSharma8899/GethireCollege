@@ -22,6 +22,8 @@ import SeeAllCompanies from './Component/Dashboard/Pages/Jobs/SeeAllCompanies.js
 import AllCourses from './Component/Dashboard/Pages/Training/AllCourses.jsx';
 import StudentDetails from './Component/Dashboard/Pages/Jobs/StudentDetails.jsx';
 import ParticularCourse from './Component/Dashboard/Pages/Training/ParticularCourse/ParticularCourse.jsx';
+import AllIndustry from './Component/Dashboard/Pages/Training/AllIndustry.jsx';
+import ParticularIndustry from './Component/Dashboard/Pages/Training/ParticularIndustry.jsx';
 // import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 
 const App = () => {
@@ -51,7 +53,8 @@ const App = () => {
         <Route path="/jobs/student-details/:name" element={<Sidebar><StudentDetails /></Sidebar>} />
         <Route path="/training/all-courses" element={<Sidebar><AllCourses/></Sidebar>} />
         <Route path="/training/all-courses/course/:id" element={<Sidebar><ParticularCourse/></Sidebar>} />
-
+        <Route path="/training/all-industry" element={<Sidebar><AllIndustry/></Sidebar>} />
+        <Route path="/training/all-industry/industry/:id" element={<Sidebar><ParticularIndustry/></Sidebar>} />
       </Routes>
     </Router>
   );

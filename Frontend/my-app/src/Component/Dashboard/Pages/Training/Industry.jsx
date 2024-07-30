@@ -1,32 +1,61 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import { Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useIndustryData } from "./Context/IndustryTalkContext";
+import { useNavigate } from "react-router-dom";
 
-function Industry({ id, name, img, topic }) {
+function Industry() {
+  const data = useIndustryData();
+  const navigate = useNavigate();
+ console.log(data);
+  const handleCardClick = (id) => {
+    navigate(`/training/all-industry/industry/${id}`); // Navigate to ParticularCourse page with course ID
+  };
   return (
-    <div
-    key={id}
-    className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
-  >
-    <Card className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-      <Card.Img
-        variant="top"
-        src={img}
-        className="object-cover w-full"
-        style={{ height: '8rem' }} // Reduced height for the image
-      />
-      <Card.Body>
-        <Card.Title className="text-center text-xs sm:text-base md:text-xm lg:text-xm">
-          {name}
-        </Card.Title>
-        <Card.Text className='text-xs'>
-           {topic}
-          </Card.Text>
-      </Card.Body>
-    </Card>
+    <div className="w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      {data.slice(0, 4).map((data) => (
+        <div
+          key={data.id}
+          className="cursor-pointer flex flex-col"
+          onClick={() => handleCardClick(data.id)}
+        >
+          <Card className="w-full h-full flex flex-col">
+            <div className="aspect-w-4 aspect-h-3">
+              <Card.Img
+                variant="top"
+                src={data.img}
+                className="object-cover w-full"
+                style={{ height: "8rem" }} 
+              />
+            </div>
+
+            <Card.Body className="bg-gray-50 flex flex-col justify-between">
+              <Card.Text className="text-sm font-semibold">
+                {data.name}
+              </Card.Text>
+              <Card.Text className="text-xs flex-grow">
+                {data.title}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      ))}
+    </div>
+    <div className="mt-4">
+      <button
+        onClick={() => navigate('/training/all-industry')}
+        className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
+      >
+         All Event
+      </button>
+    </div>
   </div>
   );
 }
 
 export default Industry;
+
+
 
 
