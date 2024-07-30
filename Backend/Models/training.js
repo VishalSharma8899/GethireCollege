@@ -42,8 +42,12 @@ const courseSchema = new mongoose.Schema({
   whatYouWillLearn: { type: [String],  },
   content: {
     ContentTilte: { type: String },
-     
+    
     Section: [sectionSchema],
+  },
+  payment:{
+  type : Boolean,
+  default : false,
   }
 });
 

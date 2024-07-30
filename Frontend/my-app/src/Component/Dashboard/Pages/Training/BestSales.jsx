@@ -29,7 +29,11 @@ function BestSales() {
         },
     ]
   return (
+
+    <div  className='w-full h-full bg-gray-50 mt-4'>
+
     <div className='w-full h-full bg-gray-50 mt-4'>
+
     <div className='w-full p-4'>
        <div className='mb-3'>
            <h1 className='text-xl font-bold'>Best Courses</h1>
@@ -55,6 +59,7 @@ function BestSales() {
            })
        }
    </div>
+  </div>
   </div>
   )
 }
