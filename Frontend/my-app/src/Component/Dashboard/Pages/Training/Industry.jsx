@@ -1,5 +1,5 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useIndustryData } from "./Context/IndustryTalkContext";
 import { useNavigate } from "react-router-dom";
@@ -7,55 +7,83 @@ import { useNavigate } from "react-router-dom";
 function Industry() {
   const data = useIndustryData();
   const navigate = useNavigate();
- console.log(data);
-  const handleCardClick = (id) => {
-    navigate(`/training/all-industry/industry/${id}`); // Navigate to ParticularCourse page with course ID
-  };
-  return (
-    <div className="w-full">
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {data.slice(0, 4).map((data) => (
-        <div
-          key={data.id}
-          className="cursor-pointer flex flex-col"
-          onClick={() => handleCardClick(data.id)}
-        >
-          <Card className="w-full h-full flex flex-col">
-            <div className="aspect-w-4 aspect-h-3">
-              <Card.Img
-                variant="top"
-                src={data.img}
-                className="object-cover w-full"
-                style={{ height: "8rem" }} 
-              />
-            </div>
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
 
-            <Card.Body className="bg-gray-50 flex flex-col justify-between">
-              <Card.Text className="text-sm font-semibold">
-                {data.name}
-              </Card.Text>
-              <Card.Text className="text-xs flex-grow">
-                {data.title}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
-      ))}
+  const showModal = (data) => {
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <div className="w-full p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {data.slice(0, 4).map((item) => (
+          <div
+            key={item.id}
+            className="cursor-pointer flex flex-col"
+            onClick={() => showModal(item)}
+          >
+            <Card className="w-full h-full flex flex-col">
+              <div className="relative w-full h-48">
+                <Card.Img
+                  variant="top"
+                  src={item.img}
+                  className="absolute inset-0 w-full h-4/5 object-cover"
+                />
+              </div>
+
+              <Card.Body className="bg-gray-50 flex flex-col justify-between">
+                <Card.Text className="text-sm font-semibold">
+                  {item.name}
+                </Card.Text>
+                <Card.Text className="text-sm -mt-3 text-gray-500">
+                  {item.specializationWith}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 flex">
+        <button
+          onClick={() => navigate("/training/all-industry")}
+          className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
+        >
+          All Event
+        </button>
+      </div>
+      <Modal show={isModalOpen} onHide={handleCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedData?.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedData?.video && (
+            <video controls autoPlay muted className="w-full h-auto">
+              <source src={selectedData.video} type="video/mp4" />
+            </video>
+          )}
+          <p>{selectedData?.specializationWith}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancel}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleOk}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
-    <div className="mt-4">
-      <button
-        onClick={() => navigate('/training/all-industry')}
-        className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
-      >
-         All Event
-      </button>
-    </div>
-  </div>
   );
 }
 
 export default Industry;
-
-
-
-

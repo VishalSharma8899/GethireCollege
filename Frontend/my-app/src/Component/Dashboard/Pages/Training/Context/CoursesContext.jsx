@@ -9,7 +9,7 @@ const CoursesProvider = ({ children }) => {
   const courses = [
     {
       id: 1,
-      name: "Web Development",
+      name: "Web Development & Designing",
       img: Course1,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -19,7 +19,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 2,
-      name: "Data Analytics",
+      name: "Data Analytics For Beginners",
       img: Course2,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -29,7 +29,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 3,
-      name: "Machine Learning",
+      name: "AI & Machine Learning",
       img: Course3,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -49,7 +49,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 5,
-      name: "Web Development",
+      name: "Web Development & Designing",
       img: Course1,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -59,7 +59,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 6,
-      name: "Data Analytics",
+      name: "Data Analytics For Beginners",
       img: Course2,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -69,7 +69,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 7,
-      name: "Machine Learning",
+      name: "AI & Machine Learning",
       img: Course3,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -89,7 +89,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 9,
-      name: "Web Development",
+      name: "Web Development & Designing",
       img: Course1,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -99,7 +99,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id:10,
-      name: "Data Analytics",
+      name: "Data Analytics For Beginners",
       img: Course2,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
@@ -109,7 +109,7 @@ const CoursesProvider = ({ children }) => {
     },
     {
       id: 11,
-      name: "Machine Learning",
+      name: "AI & Machine Learning",
       img: Course3,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
