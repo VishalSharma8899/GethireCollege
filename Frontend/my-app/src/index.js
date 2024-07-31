@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CoursesProvider from './Component/Dashboard/Pages/Training/Context/CoursesContext';
-
+import IndustryProvider from './Component/Dashboard/Pages/Training/Context/IndustryTalkContext'
 
 
 
@@ -12,7 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <CoursesProvider>
+      <IndustryProvider>
       <App />
+      </IndustryProvider>
     </CoursesProvider>
   </React.StrictMode>
 );

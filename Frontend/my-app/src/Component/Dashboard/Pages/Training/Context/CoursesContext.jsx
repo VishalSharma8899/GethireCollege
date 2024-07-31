@@ -9,30 +9,33 @@ const CoursesProvider = ({ children }) => {
   const courses = [
     {
       id: 1,
-      name: "Web Development",
+      name: "Web Development & Designing",
       img: Course1,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"499"
     },
     {
       id: 2,
-      name: "Data Analytics",
+      name: "Data Analytics For Beginners",
       img: Course2,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 3,
-      name: "Machine Learning",
+      name: "AI & Machine Learning",
       img: Course3,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 4,
@@ -41,34 +44,38 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 5,
-      name: "Web Development",
+      name: "Web Development & Designing",
       img: Course1,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"699"
     },
     {
       id: 6,
-      name: "Data Analytics",
+      name: "Data Analytics For Beginners",
       img: Course2,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"899"
     },
     {
       id: 7,
-      name: "Machine Learning",
+      name: "AI & Machine Learning",
       img: Course3,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"399"
     },
     {
       id: 8,
@@ -77,34 +84,38 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"799"
     },
     {
       id: 9,
-      name: "Web Development",
+      name: "Web Development & Designing",
       img: Course1,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id:10,
-      name: "Data Analytics",
+      name: "Data Analytics For Beginners",
       img: Course2,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"199"
     },
     {
       id: 11,
-      name: "Machine Learning",
+      name: "AI & Machine Learning",
       img: Course3,
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
     {
       id: 12,
@@ -113,7 +124,8 @@ const CoursesProvider = ({ children }) => {
       text: "Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text.",
       duration: "1hr",
       createdBy:"Colt Stealer",
-      language:"English"
+      language:"English",
+      price:"599"
     },
   ];
 
