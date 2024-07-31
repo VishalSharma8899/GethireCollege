@@ -15,7 +15,8 @@ const{ handleUserLogin  ,  handleUserRegistration   }  =  require('../Controller
 const {  uploadCourse,getCourse ,updateCourse,  deletecourse} = require('../Controller/Trainings.js');
 //coprate
  const {Invitation,ActiveProcessData  ,GetActiveProcessData , gethireplacment ,GetTopPlacedUser} = require('../Controller/Corporate');
-
+//college
+const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('../Controller/CollegeDataCont')
  const multer = require('multer');
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -61,6 +62,11 @@ router.post('/activeProcess' , ActiveProcessData);
 
  //college profile
 
- 
+ // All college data apis / routes --------
+ router.post('/college_data_upload', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]) ,CollegeData);
+ router.get('/college_data_get', CollegeDataGet);
+ router.post('/college_data_update', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]),CollegeDataUpdate);
+ router.post('/college_top_placements_add', CollegeDataPlacementAdd);
+ router.post('/college_cultural_events_add',CollegeDataEventAdd);
   
 module.exports = router;
