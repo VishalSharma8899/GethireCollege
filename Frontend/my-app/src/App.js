@@ -25,6 +25,8 @@ import StudentDetails from './Component/Dashboard/Pages/Jobs/StudentDetails.jsx'
 import ParticularCourse from './Component/Dashboard/Pages/Training/ParticularCourse/ParticularCourse.jsx';
 // import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 
+
+
 const App = () => {
   return (
     <Router>
@@ -52,7 +54,8 @@ const App = () => {
         <Route path="/jobs/student-details/:name" element={<Sidebar><StudentDetails /></Sidebar>} />
         <Route path="/training/all-courses" element={<Sidebar><AllCourses/></Sidebar>} />
         <Route path="/training/all-courses/course/:id" element={<Sidebar><ParticularCourse/></Sidebar>} />
-
+        
+         
       </Routes>
     </Router>
   );

@@ -12,7 +12,7 @@ const UserRoutes = require('./routes/User');
 // this is for college profile page
 const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('./Controller/CollegeDataCont')
 // this is for Corporate active process 
-const {ActiveProcessData} = require('./Controller/CorporateConnects')
+const {ActiveProcessData , getAllActiveProcesses} = require('./Controller/CorporateConnects')
 const path = require('path');
 
 // this is for invitation
@@ -21,6 +21,8 @@ const {Invitation} = require('../Backend/Controller/Invitation');
 const {UpcomingEventController,DeleteEvents,WantToJoinUpcomingEvents,RemoveStudentFromUpcomingEvent,TopCoursesTraining} =require('./Controller/UpcomingEvents')
 // this below is for deleting the Upcoming Events in training section
 // const {DeleteEvents} = require('./Controller/UpcomingEvents')
+// this is for industry talk 
+const {industryTalk , deleteIndustryTalk,getAllIndustryTalk} = require('./Controller/Trainings')
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
@@ -68,6 +70,9 @@ app.listen(PORT, () => {
 
   // this is for invitation
   app.post('/invite' , Invitation);
+  // this is for active prosess
+  app.post('/corporate/activeProcess' , ActiveProcessData)
+  app.get('/corporate/getAllActiveProcesses' , getAllActiveProcesses)
 
 
 //   this all routes are for Training page
@@ -79,8 +84,12 @@ app.listen(PORT, () => {
  app.post('/wantToJoinUpcomingEvents',WantToJoinUpcomingEvents);
  app.post('/removeStudentFromUpcomingEvent',RemoveStudentFromUpcomingEvent);
  app.post('/topCoursesTraining',TopCoursesTraining);
-
+// this below for Industry talk
+app.post('/industryTalk' , industryTalk)
+app.post('/deleteIndustryTalk/:id' , deleteIndustryTalk)
+app.get('/getAllIndustryTalk' , getAllIndustryTalk)
   
+
 
 
 // this below si the placement schema in get hire so this is demo on ypu have to connect this your database go getHire

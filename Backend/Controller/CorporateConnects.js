@@ -45,7 +45,23 @@ exports.ActiveProcessData = async (req, res) => {
   }
 };
 
+exports.getAllActiveProcesses = async (req , res) =>{
+  try {
+    // Use MongoDB aggregation to count distinct companyIds
+    const countResult = await ActiveProcess.aggregate([
+      { $group: { _id: "$companyId" } }, // Group by companyId to get unique values
+      { $count: "total" } // Count the number of unique companyIds
+    ]);
 
+    const totalUniqueCompanyIds = countResult.length > 0 ? countResult[0].total : 0;
+
+    // Send success response
+    res.status(200).send({ totalUniqueCompanyIds });
+  } catch (error) {
+    console.error('Error counting unique companyIds:', error);
+    res.status(500).send({ error: 'Failed to count unique companyIds' });
+  }
+}
 
 
 exports.getCompanyDetails = async (req, res) => {
