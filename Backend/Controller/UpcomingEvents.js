@@ -4,7 +4,7 @@ const express = require('express');
 const UpcomingEvent  = require('../Models/UpcomintEvents')
 const mongoose = require('mongoose')
 const WantToJoinUpcomingEventSchema = require('../Models/UpcomintEvents')
-const Course = require('../Models/trainigCourse');
+const Course = require('../Models/training');
 // middleware/upload.js
 
 const multer = require('multer');
