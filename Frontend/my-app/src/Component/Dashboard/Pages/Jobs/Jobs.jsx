@@ -1,27 +1,39 @@
-import React from 'react'
-// import Search from '../Jobs/Search'
-import Toprecruiters from './ActiveProcess'
-import Post from './Post'
-import TopPerformers from './TopPerformers'
-import Tranding from './Tranding'
+import React from 'react';
+import Toprecruiters from './ActiveProcess';
+import Post from './Post';
+import TopPerformers from './TopPerformers';
+import Tranding from './Tranding';
 
 function Jobs() {
-  return (
-    <>
-    <div style={{background:" rgba(247, 249, 254, 1)"}} className='flex-col  '>
-    <Post/>
-    <Toprecruiters/>
-    <div className='flex w-full h-full gap-3'>
-      <div className='w-2/5  h-96'>
-      <TopPerformers/>
-      </div>
-      <div className=' w-full'>
-        <Tranding/>
-      </div>
-    </div>
-    </div>
-    </>
-  )
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      {/* Main Content */}
+      <main className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
+        {/* Post Section */}
+        <div className="mb-4">
+          <Post />
+        </div>
+        
+        {/* Top Recruiters Section */}
+        <div className="mb-4">
+          <Toprecruiters />
+        </div>
+        
+        {/* Main Content Section */}
+        <div className="flex flex-col gap-4 mt-4 sm:flex-row">
+          {/* Top Performers */}
+          <div className="w-full sm:w-1/2 lg:w-2/5">
+            <TopPerformers />
+          </div>
+          
+          {/* Trending */}
+          <div className="w-full sm:w-1/2 lg:w-3/5">
+            <Tranding />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default Jobs
+export default Jobs;

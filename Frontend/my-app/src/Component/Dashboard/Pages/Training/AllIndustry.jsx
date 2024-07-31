@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useIndustryData } from "./Context/IndustryTalkContext";
-import { useNavigate } from "react-router-dom";
 
-function Industry() {
+function AllIndustry() {
   const data = useIndustryData();
-  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
@@ -24,9 +22,10 @@ function Industry() {
   };
 
   return (
-    <div className="w-full p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {data.slice(0, 4).map((item) => (
+    <div className="w-full">
+      <div className="mt-3 container font-bold text-xl">All Sessions</div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        {data.map((item) => (
           <div
             key={item.id}
             className="cursor-pointer flex flex-col"
@@ -37,7 +36,7 @@ function Industry() {
                 <Card.Img
                   variant="top"
                   src={item.img}
-                  className="absolute inset-0 w-full h-4/5 object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
 
@@ -48,30 +47,27 @@ function Industry() {
                 <Card.Text className="text-sm -mt-3 text-gray-500">
                   {item.specializationWith}
                 </Card.Text>
+                <Card.Text className="text-xs flex-grow">
+                  {item.title}
+                </Card.Text> 
               </Card.Body>
             </Card>
           </div>
         ))}
       </div>
-      <div className="mt-4 flex">
-        <button
-          onClick={() => navigate("/training/all-industry")}
-          className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
-        >
-          All Event
-        </button>
-      </div>
+
       <Modal show={isModalOpen} onHide={handleCancel}>
         <Modal.Header closeButton>
           <Modal.Title>{selectedData?.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedData?.video && (
-            <video controls autoPlay muted className="w-full h-auto">
+            <video controls autoPlay muted className="w-full h-48 mt-4">
               <source src={selectedData.video} type="video/mp4" />
             </video>
           )}
-          <p>{selectedData?.specializationWith}</p>
+          <p>{selectedData?.title}</p>
+          <p>{selectedData?.text}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCancel}>
@@ -86,4 +82,4 @@ function Industry() {
   );
 }
 
-export default Industry;
+export default AllIndustry;

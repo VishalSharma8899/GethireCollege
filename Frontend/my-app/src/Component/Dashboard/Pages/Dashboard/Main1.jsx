@@ -83,7 +83,7 @@ function Main1() {
   <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2  md:mt-0">
     <div className="bg-[#f4e4e6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
       <div className="flex flex-col">
-        <p className="text-xs mb-2 font-bold">Record</p>
+        <p className="text-xs mb-2 font-bold">No of Hiring</p>
         <p className="text-gray-600 mb-2 font-bold">5 Years</p>
         <p className="text-green-500 font-bold">+6.5%</p>
       </div>

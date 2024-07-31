@@ -1,4 +1,3 @@
-// src/components/SeeAllCompanies.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,6 +35,12 @@ function SeeAllCompanies() {
   return (
     <div className="p-4 md:p-6 bg-white rounded-lg shadow-md overflow-hidden">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="mb-4 md:mb-0 bg-gray-300 text-gray-800 rounded-md px-4 py-2 hover:bg-gray-400 transition-colors"
+        >
+          Back
+        </button>
         <h1 className="font-bold text-xl md:text-2xl">Bulk Hiring Companies</h1>
         <div className="relative mt-4 md:mt-0">
           <select

@@ -6,12 +6,15 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 const auth = require('../Middleware/Auth');
 // const upload = require('../Middleware/Upload');
-const User = require('../Models/User');
+ 
 
 // @route    GET api/auth
+//login -signup
 const{ handleUserLogin  ,  handleUserRegistration   }  =  require('../Controller/User.js');
+//traing
 const {  uploadCourse,getCourse ,updateCourse,  deletecourse} = require('../Controller/Trainings.js');
-const {ActiveProcessData , getCompanyDetails }= require('../Controller/CorporateConnects');
+//coprate
+ const {Invitation,ActiveProcessData  ,GetActiveProcessData , gethireplacment ,GetTopPlacedUser} = require('../Controller/Corporate');
 
  const multer = require('multer');
 const router = express.Router();
@@ -49,8 +52,15 @@ router.post("/register", handleUserRegistration);
 ]), updateCourse);
 
  //coprative
+router.post('/invite' , Invitation);
 router.post('/activeProcess' , ActiveProcessData);
- router.get('/company-details',getCompanyDetails )
+ router.get('/company-details', GetActiveProcessData )
+ router.get('/topplaced' , GetTopPlacedUser);
+ router.get('/hireplacement' , gethireplacment );
 
+
+ //college profile
+
+ 
   
 module.exports = router;

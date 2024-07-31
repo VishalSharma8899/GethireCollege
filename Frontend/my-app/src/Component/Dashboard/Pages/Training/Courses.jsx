@@ -41,7 +41,7 @@ function Courses() {
                   {course.text}
                 </Card.Text>
                 <div className="flex items-center gap-1 text-xs">
-                  <IoMdTime className="mt-1" />
+                  <IoMdTime/>
                   <span>{course.duration}</span>
                 </div>
               </Card.Body>
