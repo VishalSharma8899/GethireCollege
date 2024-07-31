@@ -1,29 +1,42 @@
-import React from 'react'
+import React from 'react';
 import ProgressBar from "react-bootstrap/ProgressBar";
+
 function Card({ image, company, position, progress, percentage }) {
   return (
-    <div className="bg-white w-64 h-28 rounded-xl mt-3 ml-14 flex gap-10 hover:translate-x-2 hover:shadow-2xl transition-transform duration-300">
-    <div className="mt-0">
-      <img className="w-28 h-28" src={image} alt="" />
-    </div>
-    <div className="details mt-3 text-black">
-      <p className="font-bold">{company}</p>
-      <p className="font-semibold">{position}</p>
-      <ProgressBar
-        style={{ color: "rgba(89, 86, 233, 1)" }}
-        className="w-24 mt-2 h-1 ml-0"
-        now={progress}
-      />
-      <div className='mt-2'>
-    {/* //     style={{ background: "rgba(89, 86, 233, 1)" }}
-    //     className="mt-2 w-10 rounded-xl"
-    //   >
-    //     <p className="ml-1 text-sm cursor-pointer">{percentage}%</p> */}
-    <button style={{background:"rgba(89, 86, 233, 1)"}} className=' rounded-2xl font-semibold w-20 h-6 text-center p-0'>{percentage}%</button>
+    <div className="bg-white w-56 md:w-56 h-auto rounded-xl mx-auto md:ml-4 flex flex-col gap-1 p-4 hover:shadow-lg transform transition-transform duration-300 hover:scale-105">
+      {/* Image Section */}
+      <div className="flex-shrink-0">
+        <img
+          className="w-full h-32 object-cover rounded-lg transition-transform duration-300 hover:scale-110"
+          src={image}
+          alt={company}
+        />
+      </div>
+      
+      {/* Details Section */}
+      <div className="text-black flex-grow flex flex-col justify-between">
+        <div>
+          <p className="font-bold text-base md:text-base mb-1">{company}</p>
+          <p className="font-semibold text-sm md:text-sm mb-2">{position}</p>
+          <ProgressBar
+            style={{ backgroundColor: "rgba(89, 86, 233, 0.1)", height: '6px' }}
+            className="w-full rounded-xl"
+            now={progress}
+          />
+        </div>
+        
+        {/* Percentage Button */}
+        <div className="flex items-center mt-2">
+          <button
+            style={{ background: "rgba(89, 86, 233, 1)" }}
+            className="rounded-2xl font-semibold px-3 py-1 text-center text-white text-xs"
+          >
+            {percentage}%
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default Card
+export default Card;

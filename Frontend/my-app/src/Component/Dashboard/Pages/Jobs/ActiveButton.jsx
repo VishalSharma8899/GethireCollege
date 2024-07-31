@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <>
-      <Button className='mt-6' type="primary" onClick={showModal}>
+      <Button className='mt-6 w-32' type="primary" onClick={showModal}>
         <AntDesignOutlined />
         Invite
       </Button>
