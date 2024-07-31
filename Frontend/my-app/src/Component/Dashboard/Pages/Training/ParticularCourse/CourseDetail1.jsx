@@ -4,7 +4,7 @@ import { IoMdTime } from "react-icons/io";
 
  function CourseDetail1({img,name,text,duration,creater,lang}) {
    return (
-     <div className="w-full h-full flex flex-col relative">
+     <div className="w-full h-2/5 bg-gradient-to-r from-gray-800 via-gray-900 to-black flex flex-col">
        <div className="w-full h-full container text-white flex flex-col mt-2 gap-3 p-4 lg:p-0 bg-black-500 lg:bg-transparent order-2 lg:order-2">
          <h1 className="text-xl lg:text-3xl font-semibold">
            {name}
@@ -23,10 +23,6 @@ import { IoMdTime } from "react-icons/io";
              <p className='text-xs'>last Update : 7/3/24</p>
            </div>
          </div>
-       </div>
-
-       <div>
-     
        </div>
      </div>
    );

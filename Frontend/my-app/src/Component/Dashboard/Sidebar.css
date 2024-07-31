@@ -38,7 +38,7 @@ main{
 .link{
     display: flex;
     color:  rgba(145, 151, 179, 1);
-    ;
+    list-style: none;
     padding: 10px 15px;
     gap: 15px;
     transition: all 0.5s;

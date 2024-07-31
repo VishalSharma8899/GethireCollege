@@ -10,7 +10,7 @@ const User = require('../Models/User');
 
 // @route    GET api/auth
 const{ handleUserLogin  ,  handleUserRegistration   }  =  require('../Controller/User.js');
-const {  uploadCourse,getCourse ,  deletecourse} = require('../Controller/Trainings.js');
+const {  uploadCourse,getCourse ,updateCourse,  deletecourse} = require('../Controller/Trainings.js');
 const {ActiveProcessData , getCompanyDetails }= require('../Controller/CorporateConnects');
 
  const multer = require('multer');
@@ -41,6 +41,13 @@ router.post("/register", handleUserRegistration);
  
  router.get('/getcousre' , getCourse );
  router.post('/deletecourse/:id' ,  deletecourse );
+
+ router.put('/editcourses/:id', upload.fields([
+  { name: 'courseImage', maxCount: 1 },
+  { name: 'demoVideo', maxCount: 1 },
+  { name: 'Videos', maxCount: 10 } // Adjust as needed for multiple section videos
+]), updateCourse);
+
  //coprative
 router.post('/activeProcess' , ActiveProcessData);
  router.get('/company-details',getCompanyDetails )
