@@ -12,7 +12,6 @@ const UserRoutes = require('./routes/User');
 // this is for college profile page
 const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('./Controller/CollegeDataCont')
 // this is for Corporate active process 
- 
 const path = require('path');
 
 // this is for invitation
@@ -21,6 +20,8 @@ const path = require('path');
 const {UpcomingEventController,DeleteEvents,WantToJoinUpcomingEvents,RemoveStudentFromUpcomingEvent,TopCoursesTraining} =require('./Controller/UpcomingEvents')
 // this below is for deleting the Upcoming Events in training section
 // const {DeleteEvents} = require('./Controller/UpcomingEvents')
+// this is for industry talk 
+const {industryTalk , deleteIndustryTalk,getAllIndustryTalk} = require('./Controller/Trainings')
 
 const  connection = require('./Models/dbConnection');
 const cookieParser = require('cookie-parser');
@@ -63,9 +64,10 @@ app.listen(PORT, () => {
    
 
   // this is for invitation
-   
+  app.post('/invite' , Invitation);
 
 
+//   this all routes are for Training page
   // this is for upcoming events
   app.post('/upcomingEvents' ,UpcomingEventController);
  // this is for deleting upcoming events in training section
@@ -74,8 +76,12 @@ app.listen(PORT, () => {
  app.post('/wantToJoinUpcomingEvents',WantToJoinUpcomingEvents);
  app.post('/removeStudentFromUpcomingEvent',RemoveStudentFromUpcomingEvent);
  app.post('/topCoursesTraining',TopCoursesTraining);
-
+// this below for Industry talk
+app.post('/industryTalk' , industryTalk)
+app.post('/deleteIndustryTalk/:id' , deleteIndustryTalk)
+app.get('/getAllIndustryTalk' , getAllIndustryTalk)
   
+
 
 
  

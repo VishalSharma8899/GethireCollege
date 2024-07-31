@@ -1,4 +1,5 @@
 const Course = require('../Models/training');
+const Industry = require('../Models/CollegeData');
 const mongoose = require('mongoose');
 exports.uploadCourse = async (req, res) => {
   const courseData = req.body;
@@ -121,3 +122,128 @@ exports.updateCourse = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+
+// for storing vidos and photos in industry talk -----------------------------
+const multer = require('multer');
+const path = require('path');
+// Set storage engine
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Specify the destination directory
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+// Initialize upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000000 }, // Set file size limit to 1GB (in bytes)
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).fields([
+  { name: 'photo', maxCount: 1 },
+  { name: 'video', maxCount: 1 }
+]);
+// Check file type
+function checkFileType(file, cb) {
+  const filetypes = /jpeg|jpg|png|gif|mp4/;
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    return cb(null, true);
+  } else {
+    cb(new Error('Error: Images and videos only!'));
+  }
+}
+exports.industryTalk = async (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      console.error('Multer error:', err); // Log the error for debugging
+      return res.status(400).send({ error: err.message });
+    }
+
+    try {
+      const { name,title, specializationWith } = req.body;
+
+      // Log files and body for debugging
+      console.log('Uploaded files:', req.files);
+      console.log('Request body:', req.body);
+
+      // Check if files are uploaded
+      if (!req.files || !req.files.photo || !req.files.video) {
+        return res.status(400).send({ error: 'Photo and video are required' });
+      }
+
+      // Create a new media document
+      const newMedia = new Industry({
+        photo: req.files.photo[0].path,
+        video: req.files.video[0].path,
+        name,
+        specializationWith,
+        title
+      });
+
+      // Save the document to the database
+      await newMedia.save();
+
+      // Send success response
+      res.status(201).send(newMedia);
+    } catch (error) {
+      // Handle errors
+      res.status(500).send({ error: 'Failed to create media' });
+    }
+  });
+};
+
+
+const fs = require('fs'); // Import the 'fs' module
+exports.deleteIndustryTalk = async (req, res) => {
+  const { id } = req.params; // Get the ID from URL params
+
+  try {
+    // Find the document by ID
+    const media = await Industry.findById(id);
+
+    if (!media) {
+      return res.status(404).send({ error: 'Document not found' });
+    }
+
+    // Delete files from disk
+    const photoPath = path.join(__dirname, media.photo);
+    const videoPath = path.join(__dirname, media.video);
+
+    fs.unlink(photoPath, (err) => {
+      if (err) console.error('Error deleting photo:', err);
+    });
+
+    fs.unlink(videoPath, (err) => {
+      if (err) console.error('Error deleting video:', err);
+    });
+
+    // Remove the document from the database
+    await Industry.findByIdAndDelete(id);
+
+    // Send success response
+    res.status(200).send({ message: 'Files and document deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting files:', error);
+    res.status(500).send({ error: 'Failed to delete files' });
+  }
+}
+
+exports.getAllIndustryTalk = async (req , res) =>{
+  try {
+    // Find all documents in the collection
+    const media = await Industry.find();
+
+    // Send success response
+    res.status(200).send(media);
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    res.status(500).send({ error: 'Failed to fetch documents' });
+  }
+}

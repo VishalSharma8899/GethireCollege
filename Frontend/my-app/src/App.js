@@ -27,6 +27,8 @@ import AllIndustry from './Component/Dashboard/Pages/Training/AllIndustry.jsx';
 import ParticularIndustry from './Component/Dashboard/Pages/Training/ParticularIndustry.jsx';
 // import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 
+
+
 const App = () => {
   return (
     <Router>

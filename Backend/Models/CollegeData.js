@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const CollegeSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -108,3 +109,39 @@ const CollegeSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('CollegeData', CollegeSchema);
+
+
+
+
+
+// Define the schema
+const industrySchema = new mongoose.Schema({
+    photo: {
+        type: String,
+        required: true,
+      },
+      title:{
+        type: String,
+        required: true,
+        trim :true,
+      },
+      video: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+        trim: true, 
+      },
+      specializationWith: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+});
+
+// Create the model
+const Industry = mongoose.model('Media', industrySchema);
+
+module.exports = Industry;
