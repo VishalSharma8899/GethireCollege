@@ -9,7 +9,7 @@ async function handleUserLogin(req, res) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, pass } = req.body;
+    const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
@@ -17,7 +17,7 @@ async function handleUserLogin(req, res) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
-        const isMatch = await bcrypt.compare(pass, user.pass);
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
@@ -42,7 +42,7 @@ async function handleUserRegistration(req, res) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, pass } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         let user = await User.findOne({ email });
@@ -51,9 +51,9 @@ async function handleUserRegistration(req, res) {
         }
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(pass, salt);
+        const hashedPass = await bcrypt.hash(password, salt);
 
-        user = new User({ name, email, pass: hashedPass });
+        user = new User({ name, email, password: hashedPass });
         await user.save();
 
         const { _id: objId } = user;

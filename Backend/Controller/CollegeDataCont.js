@@ -1,4 +1,4 @@
-const College = require('../Models/CollegeData');
+const {CollegeData} = require('../Models/CollegeData');
 const jwt = require('jsonwebtoken');
 // for uploading images
 // const multer = require('multer');
@@ -38,7 +38,7 @@ const jwt = require('jsonwebtoken');
     }
 
     console.log('UserId from token:', objId);
-            const college = new College({
+            const college = new CollegeData({
                 userId: objId,
                 id,
                 college_img: college_img ? college_img.buffer.toString('base64') : undefined,
@@ -56,25 +56,14 @@ const jwt = require('jsonwebtoken');
             });
     
             await college.save();
+           
             res.status(200).send({ Status: "Data saved successfully" });
         } catch (error) {
             console.error("Error while saving data: " + error);
             res.status(500).send({ Status: "Error while saving data" });
         }
   };
-
-// exports.CollegeData = async (req, res) => {
-//     const college = req.body;
-//     try {
-//         const collegeData = new College(college); // Creating new object of College
-//         await collegeData.save(); // Saving the object in database
-//         res.status(200).send({Status: "Data saved successfully"}); // Sending response to client
-//     } catch (error) {
-//         console.error("Error while saving data: " + error);
-//         res.status(500).send({Status: "Error while saving data"}); // Sending error response to client
-//     }
-//   };
-
+ 
 // for get that college data
   exports.CollegeDataGet = async (req, res) => {
   
@@ -104,10 +93,10 @@ const jwt = require('jsonwebtoken');
         console.log('UserId from token:', objId);
 
     
-        const collegeData = await College.find({userId : objId});
+        const collegeData = await CollegeData.find({userId : objId});
         
         if (!collegeData) {
-            return res.status(404).send({ Status: "College not found" });
+            return res.status(404).send({ Status: "CollegeData not found" });
         }
         console.log('UserId from token:', collegeData);
           res.status(200).send(collegeData);
@@ -177,17 +166,17 @@ const jwt = require('jsonwebtoken');
         // console.log('UserId from token:', objId);
 
     
-        // const collegeData = await College.find({userId : objId});
-        const existingCollege = await College.find({userId : objId});
+        // const collegeData = await CollegeData.find({userId : objId});
+        const existingCollege = await CollegeData.find({userId : objId});
          
         // console.log("Colleg data is "+collegeData);
         
         // Find the existing college document
-        // const existingCollege = await College.findOne({ id: collegeData });
+        // const existingCollege = await CollegeData.findOne({ id: collegeData });
         // console.log("Existind data is Colleg data is "+ existingCollege);
         
         if (!existingCollege) {
-            return res.status(404).send({ Status: "College not found" });
+            return res.status(404).send({ Status: "CollegeData not found" });
         }
 
         // Preserve existing images if not updated
@@ -204,7 +193,7 @@ const jwt = require('jsonwebtoken');
         }
 
         // Find the college by id and update only the fields provided in req.body
-        const updatedCollege = await College.findOneAndUpdate(
+        const updatedCollege = await CollegeData.findOneAndUpdate(
             { userId:objId },          // Search criteria
             { $set: updateData },       // Fields to update
             { new: true,                // Return the updated document
@@ -261,9 +250,9 @@ const jwt = require('jsonwebtoken');
             // console.log('UserId from token:', objId);
     
         
-            // const collegeData = await College.find({userId : objId});
+            // const collegeData = await CollegeData.find({userId : objId});
               // Find the college by id and add new placements to the college_top_placements array
-              const updatedCollege = await College.findOneAndUpdate(
+              const updatedCollege = await CollegeData.findOneAndUpdate(
                   { userId: objId },                            // Search criteria
                   { $push: { college_top_placements: { $each: placements } } }, // Add new placements
                   { new: true,                                 // Return the updated document
@@ -272,7 +261,7 @@ const jwt = require('jsonwebtoken');
               );
 
               if (!updatedCollege) {
-                  return res.status(404).send({ Status: "College not found" });
+                  return res.status(404).send({ Status: "CollegeData not found" });
               }
 
               res.status(200).send(updatedCollege);
@@ -289,7 +278,7 @@ const jwt = require('jsonwebtoken');
     
 //       try {
 //           // Find the college by id and update only the fields provided in req.body
-//           const updatedCollege = await College.findOneAndUpdate(
+//           const updatedCollege = await CollegeData.findOneAndUpdate(
 //               { id: collegeId },          // Search criteria
 //               updateData,                 // Fields to update
 //               { new: true,                // Return the updated document
@@ -298,7 +287,7 @@ const jwt = require('jsonwebtoken');
 //           );
     
 //           if (!updatedCollege) {
-//               return res.status(404).send({ Status: "College not found" });
+//               return res.status(404).send({ Status: "CollegeData not found" });
 //           }
     
 //           res.status(200).send(updatedCollege);
@@ -327,7 +316,7 @@ const jwt = require('jsonwebtoken');
 
 //       try {
 //           // Find the college by id and add new events to the college_cultural_events array
-//           const updatedCollege = await College.findOneAndUpdate(
+//           const updatedCollege = await CollegeData.findOneAndUpdate(
 //               { id: collegeId },                            // Search criteria
 //               { $push: { college_cultural_events: { $each: events } } }, // Add new events
 //               { new: true,                                 // Return the updated document
@@ -336,7 +325,7 @@ const jwt = require('jsonwebtoken');
 //           );
 
 //           if (!updatedCollege) {
-//               return res.status(404).send({ Status: "College not found" });
+//               return res.status(404).send({ Status: "CollegeData not found" });
 //           }
 
 //           res.status(200).send(updatedCollege);
@@ -408,7 +397,7 @@ const jwt = require('jsonwebtoken');
 
 //         try {
 //             // Find the college by id and add new events to the college_cultural_events array
-//             const updatedCollege = await College.findOneAndUpdate(
+//             const updatedCollege = await CollegeData.findOneAndUpdate(
 //                 { id: collegeId },                            // Search criteria
 //                 { $push: { college_cultural_events: { $each: events } } }, // Add new events
 //                 { new: true,                                 // Return the updated document
@@ -417,7 +406,7 @@ const jwt = require('jsonwebtoken');
 //             );
 
 //             if (!updatedCollege) {
-//                 return res.status(404).send({ Status: "College not found" });
+//                 return res.status(404).send({ Status: "CollegeData not found" });
 //             }
 
 //             res.status(200).send(updatedCollege);
@@ -499,7 +488,7 @@ exports.CollegeDataEventAdd = async (req, res) => {
             }
             // console.log('UserId from token:', objId);
             // Find the college by id and add new events to the college_cultural_events array
-            const updatedCollege = await College.findOneAndUpdate(
+            const updatedCollege = await CollegeData.findOneAndUpdate(
                 { userId: objId },                          // Search criteria
                 { $push: { college_cultural_events: { $each: events } } }, // Add new events
                 { new: true,                                 // Return the updated document
@@ -508,7 +497,7 @@ exports.CollegeDataEventAdd = async (req, res) => {
             );
 
             if (!updatedCollege) {
-                return res.status(404).send({ Status: "College not found" });
+                return res.status(404).send({ Status: "CollegeData not found" });
             }
 
             res.status(200).send(updatedCollege);
