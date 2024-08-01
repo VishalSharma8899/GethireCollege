@@ -25,7 +25,7 @@ import StudentDetails from './Component/Dashboard/Pages/Jobs/StudentDetails.jsx'
 import ParticularCourse from './Component/Dashboard/Pages/Training/ParticularCourse/ParticularCourse.jsx';
 import AllIndustry from './Component/Dashboard/Pages/Training/AllIndustry.jsx';
 import ParticularIndustry from './Component/Dashboard/Pages/Training/ParticularIndustry.jsx';
-// import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
+import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
 
 const App = () => {
   return (

@@ -1,33 +1,25 @@
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
 import img from "../../../Images/userimg.png";
 
 function Search() {
   return (
-    <div className="container mx-auto px-4 py-2 bg-white rounded ">
-      <Navbar className="bg-body-tertiary flex  justify-between ">
-        <div>
-        <Form className="flex items-center ">
-          <IoSearch className="text-lg mr-2" />
-          <Form.Control
-            type="text"
-            placeholder="Search"
-            className="w-48 rounded-xl text-sm px-2 py-1"
-          />
-        </Form>
-        </div>
-        <div className="flex items-center justify-end gap-2  mr-5  ">
-          <IoNotificationsOutline className="text-lg" />
-          <div className="bg-black rounded-full w-8 h-8">
-            <img
-              src={img}
-              alt="profile"
-              className="w-full h-full object-cover rounded-full"
-            />
+    <div className="container mx-auto px-4 py-2 bg-white rounded-lg shadow-md">
+      <Navbar className="bg-body-tertiary p-0">
+        <div className="flex justify-end items-center w-full">
+          <div className="flex items-center gap-3">
+            <IoNotificationsOutline className="text-lg text-gray-700" />
+            <div className="bg-black rounded-full w-8 h-8 overflow-hidden">
+              <img
+                src={img}
+                alt="profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="text-black text-sm font-medium">
+              John
+            </div>
           </div>
-          <div className="bg-blue-400 text-white rounded w-10 h-5 text-xs flex items-center justify-center">John</div>
         </div>
       </Navbar>
     </div>
