@@ -1,13 +1,77 @@
-import React, { useState } from "react";
+ 
 import graph from "../../../Images/Graph.png";
 import graphdown from "../../../Images/Graphdown.png";
 import { MdOutlineSettingsApplications } from "react-icons/md";
 import { BiSolidOffer } from "react-icons/bi";
 import { IoIosContact } from "react-icons/io";
+import { useEffect, useState } from 'react';
 
 function Main1() {
   const [hoveredIcon, setHoveredIcon] = useState(null);
+  // no of student
+  const [count, setCount] = useState(null);
+  //no of placed student
+  const [placedcount, setplacedCount] = useState(0);
+  const authToken = localStorage.getItem('authToken');
+  console.log(authToken);
+  async function fetchStudentCount() {
+    if (!authToken) {
+        console.error('No authToken found');
+        return;
+    }
 
+    try {
+        const response = await fetch('http://localhost:3000/students/alluser', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data.count;  
+    } catch (error) {
+        console.error('Error fetching student count:', error);
+    }
+}
+async function fetchPlacedStudentCount() {
+  if (!authToken) {
+      console.error('No authToken found');
+      return;
+  }
+
+  try {
+      const response = await fetch('http://localhost:3000/students/placedStudent', {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${authToken}`
+          }
+      });
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data);
+      return data;  
+  } catch (error) {
+      console.error('Error fetching student count:', error);
+  }
+}
+
+  useEffect(() => {
+    async function getCount() {
+        const count = await fetchStudentCount();
+        setCount(count);
+    }
+    async function getplacedCount() {
+      const placedcount= await  fetchPlacedStudentCount();
+      setplacedCount(placedcount.count);
+  }
+    getCount();
+    getplacedCount(); 
+}, []);
   const handleMouseEnter = (icon) => {
     setHoveredIcon(icon);
   };
@@ -56,7 +120,7 @@ function Main1() {
               <div className="bg-[#b6fdb6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                 <div className="flex flex-col">
                   <p className="text-xs mb-2 font-bold">No. of Students</p>
-                  <p className="text-gray-600 mb-2 font-bold">1800+</p>
+                  <p className="text-gray-600 mb-2 font-bold">{count}+</p>
                   <p className="text-green-500 font-bold">+2.5%</p>
                 </div>
                 <img className="w-11 mt-1 ml-auto" src={graph} alt="Graph" />
@@ -76,7 +140,7 @@ function Main1() {
               <div className="bg-[#f5f5a4] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                 <div className="flex flex-col">
                   <p className="text-xs mb-2 font-bold">No. of Placements</p>
-                  <p className="text-gray-600 mb-2 font-bold">500+</p>
+                  <p className="text-gray-600 mb-2 font-bold">{placedcount}+</p>
                   <p className="text-red-500 font-bold">-4.4%</p>
                 </div>
                 <img className="w-11 mt-1 ml-auto" src={graphdown} alt="Graph" />
