@@ -1,23 +1,89 @@
-const Course = require('../Models/training');
+const express = require('express');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const { Course, UpcomingEvent, WantToJoinUpcomingEvent } = require('../Models/training');
+const Industry = require('../Models/CollegeData');
+
+// // Configure multer for file uploads
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/'); // Specify the destination directory
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//   },
+// });
+
+// const upload = multer({
+//   storage: storage,
+//   limits: { fileSize: 1000000000 }, // Set file size limit to 1GB (in bytes)
+//   fileFilter: function (req, file, cb) {
+//     const filetypes = /jpeg|jpg|png|gif|mp4/;
+//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//     const mimetype = filetypes.test(file.mimetype);
+
+//     if (extname && mimetype) {
+//       return cb(null, true);
+//     } else {
+//       cb(new Error('Error: Images and videos only!'));
+//     }
+//   },
+// }).fields([
+//   { name: 'photo', maxCount: 1 },
+//   { name: 'video', maxCount: 1 },
+// ]);
+
+// { name: 'hostImage', maxCount: 1 },
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Specify the destination directory
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+// Initialize upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000000 }, // Set file size limit to 1GB (in bytes)
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).fields([
+  { name: 'photo', maxCount: 1 },
+  { name: 'video', maxCount: 1 },
+  { name: 'hostImage', maxCount: 1 },
+]);
+// Check file type
+function checkFileType(file, cb) {
+  const filetypes = /jpeg|jpg|png|gif|mp4/;
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    return cb(null, true);
+  } else {
+    cb(new Error('Error: Images and videos only!'));
+}
+}
+
+
+// Course Handlers
 exports.uploadCourse = async (req, res) => {
   const courseData = req.body;
 
-  // Ensure req.files is defined and not null
   if (req.files) {
     if (req.files.courseImage) {
       courseData.courseImage = req.files.courseImage[0].path;
     }
-
     if (req.files.demoVideo) {
       courseData.demoVideo = req.files.demoVideo[0].path;
     }
-
     if (req.files.Videos) {
       courseData.Videos = req.files.Videos[0].path;
     }
-
-       
   }
 
   const course = new Course(courseData);
@@ -30,65 +96,51 @@ exports.uploadCourse = async (req, res) => {
   }
 };
 
-exports.getCourse = async(req , res) =>{
-    try{
-        const courses = await Course.find().sort({ _id: -1 }).limit();
-    console.log(courses);
-        res.status(200).json(courses);
-    }catch{
-        res.status(500).json({error:'Internal server error'})
-    }
-
+exports.getCourse = async (req, res) => {
+  try {
+    const courses = await Course.find().sort({ _id: -1 });
+    res.status(200).json(courses);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
-exports.deletecourse = async (req, res) => {
-  const id = req.params.id; // Ensure the parameter name is `id`
+exports.deleteCourse = async (req, res) => {
+  const id = req.params.id;
 
   try {
-    // Validate the ID format
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ msg: `Invalid course ID ${id}` });
     }
 
-    // Delete the course by ID
     const deleteResult = await Course.deleteOne({ _id: id });
 
-    // Check if any document was deleted
     if (deleteResult.deletedCount > 0) {
-      console.log("Deleted course:", deleteResult);
       res.status(200).json({ message: "Course deleted successfully" });
     } else {
       res.status(404).json({ message: "Course not found" });
     }
-
   } catch (err) {
-    console.error("Error:", err);
     res.status(500).json({ message: err.message });
   }
 };
 
-
 exports.updateCourse = async (req, res) => {
-  const courseId = req.params.id; // Get course ID from URL parameters
+  const courseId = req.params.id;
   const courseData = req.body;
 
-  // Initialize content if it's not defined
   if (!courseData.content) {
     courseData.content = {};
   }
 
-  // Ensure req.files is defined and not null
   if (req.files) {
     if (req.files.courseImage) {
       courseData.courseImage = req.files.courseImage[0].path;
     }
-
     if (req.files.demoVideo) {
       courseData.demoVideo = req.files.demoVideo[0].path;
     }
-
     if (req.files.Videos) {
-      // Initialize content.Videos as an array if it doesn't exist
       if (!courseData.content.Videos) {
         courseData.content.Videos = [];
       }
@@ -97,27 +149,208 @@ exports.updateCourse = async (req, res) => {
   }
 
   try {
-    // Validate the ID format
     if (!mongoose.Types.ObjectId.isValid(courseId)) {
       return res.status(400).json({ msg: `Invalid course ID ${courseId}` });
     }
 
-    // Find the existing course by ID
     const course = await Course.findById(courseId);
 
     if (!course) {
       return res.status(404).json({ msg: 'Course not found' });
     }
 
-    // Update course with new data
     Object.assign(course, courseData);
 
-    // Save the updated course
     const updatedCourse = await course.save();
-
     res.status(200).json(updatedCourse);
   } catch (error) {
-    console.error('Error updating course:', error);
     res.status(400).send(error);
+  }
+};
+
+// Industry Talk Handlers
+exports.industryTalk = async (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).send({ error: err.message });
+    }
+
+    try {
+      const { name, title, specializationWith } = req.body;
+
+      if (!req.files || !req.files.photo || !req.files.video) {
+        return res.status(400).send({ error: 'Photo and video are required' });
+      }
+
+      const newMedia = new Industry({
+        photo: req.files.photo[0].path,
+        video: req.files.video[0].path,
+        name,
+        specializationWith,
+        title
+      });
+
+      await newMedia.save();
+      res.status(201).send(newMedia);
+    } catch (error) {
+      res.status(500).send({ error: 'Failed to create media' });
+    }
+  });
+};
+
+exports.deleteIndustryTalk = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const media = await Industry.findById(id);
+
+    if (!media) {
+      return res.status(404).send({ error: 'Document not found' });
+    }
+
+    const photoPath = path.join(__dirname, media.photo);
+    const videoPath = path.join(__dirname, media.video);
+
+    fs.unlink(photoPath, (err) => {
+      if (err) console.error('Error deleting photo:', err);
+    });
+
+    fs.unlink(videoPath, (err) => {
+      if (err) console.error('Error deleting video:', err);
+    });
+
+    await Industry.findByIdAndDelete(id);
+    res.status(200).send({ message: 'Files and document deleted successfully' });
+  } catch (error) {
+    res.status(500).send({ error: 'Failed to delete files' });
+  }
+};
+
+exports.getAllIndustryTalk = async (req, res) => {
+  try {
+    const media = await Industry.find();
+    res.status(200).send(media);
+  } catch (error) {
+    res.status(500).send({ error: 'Failed to fetch documents' });
+  }
+};
+
+// Upcoming Events Handlers
+exports.UpcomingEventController = async (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+
+    try {
+      const { hostName, eventName, date, time } = req.body;
+
+      if (!hostName || !eventName || !date || !time) {
+        return res.status(400).json({ error: 'All fields are required' });
+      }
+
+      const newEvent = new UpcomingEvent({
+        hostImage: req.files.hostImage ? req.files.hostImage[0].path : null,
+        hostName,
+        eventName,
+        date,
+        time
+      });
+
+      await newEvent.save();
+      res.status(201).json({ message: 'Event created successfully', event: newEvent });
+    } catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+};
+
+exports.DeleteEvents = async (req, res) => {
+  try {
+    const eventId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(eventId)) {
+      return res.status(400).json({ error: 'Invalid event ID' });
+    }
+
+    const deletedEvent = await UpcomingEvent.findByIdAndDelete(eventId);
+
+    if (!deletedEvent) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    res.status(200).json({ message: 'Event deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+exports.WantToJoinUpcomingEvents = async (req, res) => {
+  try {
+    const { adminId, students, eventId } = req.body;
+
+    if (!adminId || !students || !eventId) {
+      return res.status(400).json({ error: 'adminId, students, and eventId are required' });
+    }
+
+    let entry = await WantToJoinUpcomingEvent.findOne({ adminId, eventId });
+
+    if (!entry) {
+      return res.status(404).json({ error: 'Admin ID not found. No entry created.' });
+    }
+
+    for (let student of students) {
+      if (entry.students.some(existingStudent => existingStudent.studentId.equals(student.studentId))) {
+        return res.status(400).json({ error: `Student with ID ${student.studentId} is already enrolled.` });
+      }
+    }
+
+    entry.students = [...entry.students, ...students];
+
+    await entry.save();
+    res.status(200).json({ message: 'Entry updated successfully', entry });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+exports.RemoveStudentFromUpcomingEvent = async (req, res) => {
+  try {
+    const { adminId, studentId, eventId } = req.body;
+
+    if (!adminId || !studentId || !eventId) {
+      return res.status(400).json({ error: 'adminId, studentId, and eventId are required' });
+    }
+
+    let entry = await WantToJoinUpcomingEvent.findOne({ adminId, eventId });
+
+    if (!entry) {
+      return res.status(404).json({ error: 'Admin ID or Event ID not found. No entry exists.' });
+    }
+
+    const studentIndex = entry.students.findIndex(existingStudent => existingStudent.studentId.equals(studentId));
+    if (studentIndex === -1) {
+      return res.status(404).json({ error: 'Student ID not found in the event.' });
+    }
+
+    entry.students.splice(studentIndex, 1);
+
+    await entry.save();
+    res.status(200).json({ message: 'Student removed successfully', entry });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+exports.TopCoursesTraining = async (req, res) => {
+  try {
+    const topCourses = await Course.find()
+      .sort({ 'ratings.stars': -1 }) // Sort by stars rating in descending order
+      .limit(10) // Limit the results to top 10
+      .select('courseName price'); // Select only courseName and price fields
+
+    res.status(200).json({ topCourses });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
   }
 };

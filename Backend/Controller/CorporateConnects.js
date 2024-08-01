@@ -1,4 +1,4 @@
-const ActiveProcess = require('../Models/CorporateData');
+const ActiveProcess = require('../Models/Corporate');
 const student = require('../Models/studentdata');
 
 exports.ActiveProcessData = async (req, res) => {

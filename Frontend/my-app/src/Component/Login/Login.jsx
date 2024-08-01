@@ -1,67 +1,91 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './style.css'; // Import CSS
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate(); 
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleSubmitLogin = async (e) => {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation (optional)
-    if (!email || !password) {
-      setErrorMessage('Please enter email and password');
-      return;
-    }
+    const { email, password } = formData;
 
     try {
-      const response = await axios.post('http://localhost:3000/college/login', {
-        email,
-        password,
+      const response = await fetch('http://localhost:3000/college/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
       });
-      console.log('Login successful:', response.data);
- 
-      setErrorMessage(null); // Clear any previous error messages
 
-      if (response.data.token) {  
-        localStorage.setItem('token', response.data.token); 
-        navigate('/');  
+      if (response.ok) {
+        const data = await response.json();
+        login(data.token, data.user);
+        alert('Login successful!');
+        navigate('/');
       } else {
-        // Handle any other response conditions
-        setErrorMessage('Login failed');
+        const data = await response.json();
+        alert(data.message || 'Login failed!');
       }
     } catch (error) {
-      const message = error.response?.data?.msg || 'Login failed';
-      setErrorMessage(message);
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-wrapper">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmitLogin}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Login</button>
-        </form>
-        {errorMessage && <p className="error">{errorMessage}</p>}
+    <div className="flex items-center justify-center h-screen bg-gray-200 p-5">
+      <div className="flex flex-col md:flex-row max-w-4xl w-full bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="flex-1 p-8">
+          <h2 className="text-2xl font-bold mb-6">Welcome to Gethire</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="mb-4 w-full p-4 border border-gray-300 rounded-lg text-lg"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="mb-6 w-full p-4 border border-gray-300 rounded-lg text-lg"
+            />
+            <button
+              type="submit"
+              className="w-full py-3 bg-blue-500 text-white rounded-lg text-lg font-semibold transition duration-300 hover:bg-blue-600"
+            >
+              Log In
+            </button>
+            <div className="mt-6 text-center">
+              <p className="text-sm">
+                Don't have an account? <Link to="/signup" className="text-blue-500 hover:underline">Sign Up</Link>
+              </p>
+            </div>
+          </form>
+        </div>
+        <div className="hidden md:block flex-1 bg-cover bg-center" style={{ backgroundImage: 'url("https://www.insidehook.com/wp-content/uploads/2018/03/Graduation-caps-1.jpg?fit=1200%2C800")' }}></div>
       </div>
     </div>
   );

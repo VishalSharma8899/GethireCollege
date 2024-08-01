@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   email:{
       type:String,
   },
-  pass:{
+  password:{
       type:String
   },
   role:{
@@ -18,8 +18,6 @@ const UserSchema = new mongoose.Schema({
       default: 'user'
   }
 });
-
-
 
   
  
