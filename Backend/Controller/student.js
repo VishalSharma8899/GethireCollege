@@ -42,22 +42,18 @@ exports.uploadStudentData = async (req, res) => {
     for (const student of studentData) {
       student.isPlaced = Boolean(student.isPlaced && student.isPlaced.toString().toLowerCase() === 'true');
       student.PlacementRequired = Boolean(student.PlacementRequired && student.PlacementRequired.toString().toLowerCase() === 'true');
-      student.intershipRequired = Boolean(student.intershipRequired && student.intershipRequired.toString().toLowerCase() === 'true');
+      student.internshipRequired = Boolean(student.internshipRequired && student.internshipRequired.toString().toLowerCase() === 'true'); // Corrected spelling
+
       const contactInformation = {
         phone: student.phone,
         email: student.email
       };
-      const placedStDetails = { 
-        companyName: student.companyName,
-        jobTitle: student.jobTitle,
-        salary: student.salary
-      };
 
       const updatedStudent = {
-        userId: objId,
+        userId: objId, // Ensure this is the correct userId
         studentId: student.studentId,
         name: student.name,
-        dob: student.dob,
+        dob: new Date(student.dob), // Ensure the date is properly formatted
         gender: student.gender,
         contactInformation: contactInformation,
         address: student.address,
@@ -65,12 +61,18 @@ exports.uploadStudentData = async (req, res) => {
         yearOfStudy: student.yearOfStudy,
         cgpa: student.cgpa,
         isPlaced: student.isPlaced,
-        placedDetails: placedStDetails,
+        companyName: student.companyName || null,
+        jobTitle: student.jobTitle || null,
+        salary: student.salary || null,
         PlacementRequired: student.PlacementRequired,
-        internshipRequired: student.internshipRequired  // Correct spelling
+        internshipRequired: student.internshipRequired
       };
 
-      await Student.findOneAndUpdate({ studentId: student.studentId }, updatedStudent, { upsert: true });
+      await Student.findOneAndUpdate(
+        { studentId: student.studentId },
+        updatedStudent,
+        { upsert: true, new: true }
+      );
       console.log('Updating student record:', updatedStudent);
     }
 

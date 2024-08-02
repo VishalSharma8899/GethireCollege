@@ -19,19 +19,17 @@ const studentSchema = new mongoose.Schema({
   yearOfStudy: Number,
   cgpa: Number,
   isPlaced: Boolean,
-  placedDetails: {
-    companyName: {
-      type: String,
-      default: null,
-    },
-    jobTitle: {
-      type: String,
-      default: null,
-    },
-    salary: {
-      type: Number,
-      default: null,
-    },
+  companyName: {
+    type: String,
+    default: null,
+  },
+  jobTitle: {
+    type: String,
+    default: null,
+  },
+  salary: {
+    type: Number,
+    default: null,
   },
   PlacementRequired: Boolean,
   internshipRequired: Boolean
