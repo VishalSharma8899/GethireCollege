@@ -12,6 +12,7 @@ function Main1() {
   const [count, setCount] = useState(null);
   //no of placed student
   const [placedcount, setplacedCount] = useState(0);
+  const [placedData, setPlacedData] = useState([]);
   const authToken = localStorage.getItem('authToken');
   console.log(authToken);
   async function fetchStudentCount() {
@@ -59,6 +60,29 @@ async function fetchPlacedStudentCount() {
       console.error('Error fetching student count:', error);
   }
 }
+async function fetchPlacedStudentdata() {
+  if (!authToken) {
+      console.error('No authToken found');
+      return;
+  }
+
+  try {
+      const response = await fetch(' http://localhost:3000/college/topplaced', {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${authToken}`
+          }
+      });
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data);
+      return data;  
+  } catch (error) {
+      console.error('Error fetching student count:', error);
+  }
+}
 
   useEffect(() => {
     async function getCount() {
@@ -69,7 +93,16 @@ async function fetchPlacedStudentCount() {
       const placedcount= await  fetchPlacedStudentCount();
       setplacedCount(placedcount.count);
   }
+  async function getplaceddata() { //http://localhost:3000/students/topplaced
+    const responseData = await fetchPlacedStudentdata();
+    if (responseData && Array.isArray(responseData.students)) {
+      setPlacedData(responseData.students);
+    } else {
+      setPlacedData([]);
+    }
+  }
     getCount();
+    getplaceddata();
     getplacedCount(); 
 }, []);
   const handleMouseEnter = (icon) => {
@@ -80,37 +113,7 @@ async function fetchPlacedStudentCount() {
     setHoveredIcon(null);
   };
 
-  const placements = [
-    {
-      rank: "#1",
-      name: "John",
-      branch: "CSE",
-      company: "Google",
-      package: "56LPA",
-    },
-    {
-      rank: "#2",
-      name: "Mark",
-      branch: "CSE",
-      company: "Microsoft",
-      package: "45LPA",
-    },
-    {
-      rank: "#3",
-      name: "Bark",
-      branch: "ITB",
-      company: "Walmart",
-      package: "36LPA",
-    },
-    {
-      rank: "#4",
-      name: "Alexa",
-      branch: "ECE",
-      company: "Deloitte",
-      package: "30LPA",
-    },
-  ];
-
+  
   return (
     <div className="bg-white w-full min-h-screen mt-3 rounded-lg">
       <div className="bg-[rgba(246, 249, 254, 1)] w-full min-h-screen mt-3 rounded-lg">
@@ -159,79 +162,76 @@ async function fetchPlacedStudentCount() {
           </div>
 
           <div className="bg-white rounded-lg h-auto mt-3 p-4">
-            <div className="flex justify-between items-center">
-              <p className="font-bold text-sm md:text-lg">Top Placements</p>
-              <button className="inline-block rounded px-4 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out bg-violet-500 hover:bg-violet-600 focus:bg-violet-600 active:bg-violet-700">
-                See all
-              </button>
-            </div>
-            <div className="mt-4">
-              <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 text-center">
-                <p className="hidden sm:block w-1/6">Rank</p>
-                <p className="hidden sm:block w-1/6">Name</p>
-                <p className="hidden sm:block w-1/6">Branch</p>
-                <p className="hidden sm:block w-1/6">Company</p>
-                <p className="hidden sm:block w-1/6">Package</p>
-                <p className="hidden sm:block w-1/6">Action</p>
-              </div>
-              {placements.map((placement, index) => (
+      <div className="flex justify-between items-center">
+        <p className="font-bold text-sm md:text-lg">Top Placements</p>
+        <button className="inline-block rounded px-4 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out bg-violet-500 hover:bg-violet-600 focus:bg-violet-600 active:bg-violet-700">
+          See all
+        </button>
+      </div>
+      <div className="mt-4">
+        <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 text-center">
+          <p className="hidden sm:block w-1/6">Rank</p>
+          <p className="hidden sm:block w-1/6">Name</p>
+          <p className="hidden sm:block w-1/6">Branch</p>
+          <p className="hidden sm:block w-1/6">Company</p>
+          <p className="hidden sm:block w-1/6">Package</p>
+          <p className="hidden sm:block w-1/6">Contact</p>
+        </div>
+        {placedData.map((placeddata, index) => (
+          <div
+            key={index}
+            className="grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-2"
+          >
+            <p className="w-full sm:w-1/6">{index + 1}</p>
+            <p className="w-full sm:w-1/6">{placeddata.name}</p>
+            <p className="w-full sm:w-1/6">{placeddata.department}</p>
+            <p className="w-full sm:w-1/6">{placeddata.companyName}</p>
+            <p className="w-full sm:w-1/6">{placeddata.salary}</p>
+            <div className="w-full sm:w-1/6">
+              <div className="flex gap-1 justify-center">
                 <div
-                  key={index}
-                  className="grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-2"
+                  className="relative flex flex-col items-center"
+                  onMouseEnter={() => handleMouseEnter(`application-${index}`)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  <div className="sm:hidden font-bold text-left">Rank:</div>
-                  <p className="w-full sm:w-1/6">{placement.rank}</p>
-                  <div className="sm:hidden font-bold text-left">Name:</div>
-                  <p className="w-full sm:w-1/6">{placement.name}</p>
-                  <div className="sm:hidden font-bold text-left">Branch:</div>
-                  <p className="w-full sm:w-1/6">{placement.branch}</p>
-                  <div className="sm:hidden font-bold text-left">Company:</div>
-                  <p className="w-full sm:w-1/6">{placement.company}</p>
-                  <div className="sm:hidden font-bold text-left">Package:</div>
-                  <p className="w-full sm:w-1/6">{placement.package}</p>
-                  <div className="sm:hidden font-bold text-left">Action:</div>
-                  <div className="flex gap-1">
-                    <div
-                      className="relative flex flex-col items-center"
-                      onMouseEnter={() => handleMouseEnter(`application-${index}`)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <MdOutlineSettingsApplications className="text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" />
-                      {hoveredIcon === `application-${index}` && (
-                        <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded transition-opacity duration-300 p-1">
-                          Application
-                        </div>
-                      )}
+                  <MdOutlineSettingsApplications className="text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" />
+                  {hoveredIcon === `application-${index}` && (
+                    <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded transition-opacity duration-300 p-1">
+                      Application
                     </div>
-                    <div
-                      className="relative flex flex-col items-center"
-                      onMouseEnter={() => handleMouseEnter(`offer-${index}`)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <BiSolidOffer className="text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" />
-                      {hoveredIcon === `offer-${index}` && (
-                        <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded transition-opacity duration-300 p-1">
-                          Offers
-                        </div>
-                      )}
-                    </div>
-                    <div
-                      className="relative flex flex-col items-center"
-                      onMouseEnter={() => handleMouseEnter(`contact-${index}`)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <IoIosContact className="text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" />
-                      {hoveredIcon === `contact-${index}` && (
-                        <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded transition-opacity duration-300 p-1">
-                          Contact
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  )}
                 </div>
-              ))}
+                <div
+                  className="relative flex flex-col items-center"
+                  onMouseEnter={() => handleMouseEnter(`offer-${index}`)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <BiSolidOffer className="text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" />
+                  {hoveredIcon === `offer-${index}` && (
+                    <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded transition-opacity duration-300 p-1">
+                      Offers
+                    </div>
+                  )}
+                </div>
+                <div
+                  className="relative flex flex-col items-center"
+                  onMouseEnter={() => handleMouseEnter(`contact-${index}`)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <IoIosContact className="text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" />
+                  {hoveredIcon === `contact-${index}` && (
+                    <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded transition-opacity duration-300 p-1">
+                      {placeddata.contactInformation.email}<br />
+                      {placeddata.contactInformation.phone}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
+        ))}
+      </div>
+    </div>
         </div>
       </div>
     </div>

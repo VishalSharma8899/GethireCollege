@@ -147,8 +147,10 @@ exports.GetTopPlacedUser = async (req, res) => {
       console.log('UserId from token:', objId);
       // Retrieve all placed students
       const PlacedStudent = await student.find({ isPlaced: true })
-      .sort({ salary: -1 }) // Sort by salary in descending order
-      .lean();
+  .sort({ 'salary': -1 }) // Sort by salary in descending order
+  .limit(5) // Limit to top 5 students
+  .lean();
+
       // Calculate the count of placed students
       const count = PlacedStudent.length;
   
