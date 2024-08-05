@@ -16,11 +16,41 @@ import { FaWhatsapp } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import Events from "./Events";
 import Card from "./Card";
+
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
 function College() {
+   
+  // const [objectId, setObjectId] = useState(null);
+
+  // useEffect(() => {
+  //   const authToken = localStorage.getItem('authToken');
+
+  //   if (authToken) {
+  //     const objectId = getObjectIdFromToken(authToken);
+  //     setObjectId(objectId);
+  //   }
+  // }, []);
+
+  // const getObjectIdFromToken = (token) => {
+  //   try {
+  //     const payload = token.split('.')[1];
+  //     const decodedPayload = JSON.parse(atob(payload));
+  //     return decodedPayload.objId; 
+  //   } catch (error) {
+  //     console.error('Invalid token format', error);
+  //     return null;
+  //   }
+  // };
+  // console.log( "Object id is" , objectId);
+
+  
+
+ 
   const clgInfo = {
     img: clgImg,
     logo: clglogo,
@@ -127,7 +157,7 @@ function College() {
           <div className="flex gap-3 items-end justify-end mr-2">
           <IoAdd onClick={handleAdd} />
           <MdEdit />
-          <MdDelete />
+        
           </div>
           <div className="container mx-auto px-4 py-4">
             <div className="relative w-full h-48 md:h-64 lg:h-72">
@@ -241,7 +271,7 @@ function College() {
             <div className="container mx-auto p-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {clgInfo.events.map((event) => {
-                  console.log(event);
+                  // console.log(event);
                   return (
                     <div
                       key={event.id}

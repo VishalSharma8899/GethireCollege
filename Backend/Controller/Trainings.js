@@ -71,8 +71,33 @@ function checkFileType(file, cb) {
 
 
 // Course Handlers
+// exports.uploadCourse = async (req, res) => {
+//   const courseData = req.body;
+// console.log(courseData);
+//   if (req.files) {
+//     if (req.files.courseImage) {
+//       courseData.courseImage = req.files.courseImage[0].path;
+//     }
+//     if (req.files.demoVideo) {
+//       courseData.demoVideo = req.files.demoVideo[0].path;
+//     }
+//     if (req.files.Videos) {
+//       courseData.Videos = req.files.Videos[0].path;
+//     }
+//   }
+
+//   const course = new Course(courseData);
+
+//   try {
+//     const savedCourse = await course.save();
+//     res.status(201).json(savedCourse);
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// };
 exports.uploadCourse = async (req, res) => {
   const courseData = req.body;
+  console.log('Received course data:', courseData);
 
   if (req.files) {
     if (req.files.courseImage) {
@@ -86,15 +111,25 @@ exports.uploadCourse = async (req, res) => {
     }
   }
 
+  // No need to parse if the data is already in correct format
+  // if (courseData.content && Array.isArray(courseData.content.sections)) {
+  //   console.log('Sections data:', courseData.content.sections);
+  // } else {
+  //   console.error('Invalid sections format');
+  //   return res.status(400).send('Invalid sections format');
+  // }
+
   const course = new Course(courseData);
 
   try {
     const savedCourse = await course.save();
     res.status(201).json(savedCourse);
   } catch (error) {
+    console.error('Error saving course:', error);
     res.status(400).send(error);
   }
 };
+
 
 exports.getCourse = async (req, res) => {
   try {
@@ -125,14 +160,17 @@ exports.deleteCourse = async (req, res) => {
   }
 };
 
+ // Adjust the path to your Course model
+
 exports.updateCourse = async (req, res) => {
   const courseId = req.params.id;
   const courseData = req.body;
-
+console.log("data" ,courseData)
   if (!courseData.content) {
     courseData.content = {};
   }
 
+  // Handle file uploads
   if (req.files) {
     if (req.files.courseImage) {
       courseData.courseImage = req.files.courseImage[0].path;
@@ -149,24 +187,35 @@ exports.updateCourse = async (req, res) => {
   }
 
   try {
+    // Validate course ID
     if (!mongoose.Types.ObjectId.isValid(courseId)) {
       return res.status(400).json({ msg: `Invalid course ID ${courseId}` });
     }
 
+    // Find the course to update
     const course = await Course.findById(courseId);
 
     if (!course) {
       return res.status(404).json({ msg: 'Course not found' });
     }
 
-    Object.assign(course, courseData);
+    // Update course fields only if they are provided
+    Object.keys(courseData).forEach(key => {
+      if (courseData[key] !== undefined) {
+        course[key] = courseData[key];
+      }
+    });
 
+    // Save the updated course
     const updatedCourse = await course.save();
+    console.log(updatedCourse);
     res.status(200).json(updatedCourse);
   } catch (error) {
+    console.error('Error updating course:', error);
     res.status(400).send(error);
   }
 };
+
 
 // Industry Talk Handlers
 exports.industryTalk = async (req, res) => {

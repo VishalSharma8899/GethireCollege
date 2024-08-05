@@ -21,7 +21,8 @@ import ParticularCourse from './Component/Dashboard/Pages/Training/ParticularCou
 import AllIndustry from './Component/Dashboard/Pages/Training/AllIndustry.jsx';
 import ParticularIndustry from './Component/Dashboard/Pages/Training/ParticularIndustry.jsx';
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
-// import ActiveButton from './Component/Dashboard/ActiveButton.jsx'; // Add your ActiveButton import
+import ActiveButton from './Component/Dashboard/Pages/Jobs/ActiveButton.jsx';
+import InviteCompanies from './Component/Dashboard/Pages/Jobs/InviteCompanies.jsx';
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/feedback" element={<ProtectedRoute><Sidebar><Feedback /></Sidebar></ProtectedRoute>} />
         <Route path="/jobs/top-performers" element={<ProtectedRoute><Sidebar><TopPerformers /></Sidebar></ProtectedRoute>} />
         <Route path="/jobs/see-all-companies" element={<ProtectedRoute><Sidebar><SeeAllCompanies /></Sidebar></ProtectedRoute>} />
+        <Route path="/jobs/invite" element={<ProtectedRoute><Sidebar><InviteCompanies></InviteCompanies></Sidebar></ProtectedRoute>}/>
         <Route path="/jobs/student-details/:name" element={<ProtectedRoute><Sidebar><StudentDetails /></Sidebar></ProtectedRoute>} />
         <Route path="/training/all-courses" element={<ProtectedRoute><Sidebar><AllCourses /></Sidebar></ProtectedRoute>} />
         <Route path="/training/all-courses/course/:id" element={<ProtectedRoute><Sidebar><ParticularCourse /></Sidebar></ProtectedRoute>} />

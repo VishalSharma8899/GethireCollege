@@ -153,7 +153,7 @@ async function fetchPlacedStudentdata() {
               <div className="bg-[#f4e4e6] p-3 rounded-lg flex items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                 <div className="flex flex-col">
                   <p className="text-xs mb-2 font-bold">No of Hiring</p>
-                  <p className="text-gray-600 mb-2 font-bold">5 Years</p>
+                  <p className="text-gray-600 mb-2 font-bold">5 Yr.</p>
                   <p className="text-green-500 font-bold">+6.5%</p>
                 </div>
                 <img className="w-11 mt-1 ml-auto" src={graph} alt="Graph" />
@@ -169,25 +169,24 @@ async function fetchPlacedStudentdata() {
         </button>
       </div>
       <div className="mt-4">
-        <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 text-center">
+        <div className="bg-[rgba(237, 244, 251, 1)] grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 gap-24 text-center">
           <p className="hidden sm:block w-1/6">Rank</p>
           <p className="hidden sm:block w-1/6">Name</p>
           <p className="hidden sm:block w-1/6">Branch</p>
           <p className="hidden sm:block w-1/6">Company</p>
           <p className="hidden sm:block w-1/6">Package</p>
-          <p className="hidden sm:block w-1/6">Contact</p>
         </div>
         {placedData.map((placeddata, index) => (
           <div
             key={index}
-            className="grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-2"
+            className="grid grid-cols-1 sm:grid-cols-6 p-2 rounded-md mb-2 bg-gray-100 text-center gap-24"
           >
-            <p className="w-full sm:w-1/6">{index + 1}</p>
+            <p className="w-full sm:w-1/6">#{index + 1}</p>
             <p className="w-full sm:w-1/6">{placeddata.name}</p>
             <p className="w-full sm:w-1/6">{placeddata.department}</p>
             <p className="w-full sm:w-1/6">{placeddata.companyName}</p>
             <p className="w-full sm:w-1/6">{placeddata.salary}</p>
-            <div className="w-full sm:w-1/6">
+            {/* <div className="w-full sm:w-1/6">
               <div className="flex gap-1 justify-center">
                 <div
                   className="relative flex flex-col items-center"
@@ -227,7 +226,7 @@ async function fetchPlacedStudentdata() {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>

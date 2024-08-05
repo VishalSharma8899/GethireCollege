@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useIndustryData } from "./Context/IndustryTalkContext";
+import { useEffect } from "react";
 
 function AllIndustry() {
   const data = useIndustryData();
@@ -20,7 +21,20 @@ function AllIndustry() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+const {industry , setindustry} = useState(null);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/college/getCourse");
+        const data = await response.json();
+        setindustry(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
 
+    fetchCourses();
+  }, []);
   return (
     <div className="w-full">
       <div className="mt-3 container font-bold text-xl">All Sessions</div>

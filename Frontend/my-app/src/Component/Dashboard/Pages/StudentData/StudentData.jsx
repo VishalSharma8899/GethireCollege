@@ -44,24 +44,65 @@ function StudentData() {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [fileContent, setFileContent] = useState(null);
+  const [file, setFile] = useState(null);
+  const authToken = localStorage.getItem('authToken');
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!query) return;
+
+    try {
+      const response = await fetch('http://localhost:3000/students/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        },
+        body: JSON.stringify({ query })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      const searchData = data.map((item, index) => ({
+        key: index,
+        id: item.studentId,
+        date: moment(item.dob).format("DD/MM/YYYY"),
+        name: item.name,
+        dep: item.department,
+        placement: item.isPlaced ? "Placed" : "Unplaced",
+        action: (
+          <>
+            <MdDeleteOutline
+              onClick={() => handleDelete(item.studentId)}
+              style={{ cursor: "pointer", marginRight: "10px" }}
+            />
+            <FaRegEdit
+              onClick={() => handleEdit(item.studentId)}
+              style={{ cursor: "pointer" }}
+            />
+          </>
+        ),
+      }));
+      setFilteredData(searchData);
+    } catch (error) {
+      console.error('Error fetching student data:', error);
+    }
+  };
+
+  
   const [filters, setFilters] = useState({
     department: "",
     isPlaced: "",
-    internshipInterest: "",
-    placementInterest: "",
+    internshipRequired: "",
+    PlacementRequired: "",
     yearOfStudy: "",
   });
 
-  function getCookie(userId) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${userId}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  }
-  
-  const userId = getCookie('userId');
-  
   useEffect(() => {
     fetchStudentData();
   }, []);
@@ -73,7 +114,12 @@ function StudentData() {
   const fetchStudentData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/students/alluser"
+        "http://localhost:3000/students/alluser",
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
       );
       const data = response.data.map((item, index) => ({
         key: index,
@@ -106,8 +152,8 @@ function StudentData() {
     setFilters({
       department: "",
       isPlaced: "",
-      internshipInterest: "",
-      placementInterest: "",
+      internshipRequired: "",
+      PlacementRequired: "",
       yearOfStudy: "",
     });
     fetchStudentData();
@@ -117,7 +163,12 @@ function StudentData() {
     try {
       const response = await axios.post(
         "http://localhost:3000/students/filter",
-        filters
+        filters,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
       );
       const data = response.data.map((item, index) => ({
         key: index,
@@ -147,32 +198,24 @@ function StudentData() {
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-
-    if (file) {
-      reader.onload = (e) => {
-        setFileContent(e.target.result);
-      };
-
-      reader.readAsText(file);
-    }
+    setFile(file);
   };
 
   const handleOk = async () => {
-    const userId = getCookie('userId');
-    if (fileContent) {
+    if (file) {
       try {
         const formData = new FormData();
-        formData.append("file", new Blob([fileContent], { type: "text/csv" }));
-        formData.append("userId", userId); // Add userId to FormData
+        formData.append("file", file);
   
         await axios.post("http://localhost:3000/students/upload", formData, {
           headers: {
+            Authorization: `Bearer ${authToken}`,
             "Content-Type": "multipart/form-data",
-          }
+          },
         });
   
         alert("File uploaded successfully");
+        fetchStudentData();
       } catch (err) {
         console.error("There was an error uploading the file:", err);
         alert("There was an error uploading the file");
@@ -184,7 +227,11 @@ function StudentData() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/students/delete/${id}`);
+      await axios.delete(`http://localhost:3000/students/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
       const newData = dataSource.filter((item) => item.id !== id);
       setDataSource(newData);
       setFilteredData(newData);
@@ -264,10 +311,7 @@ function StudentData() {
 
       <Navbar className="bg-body-tertiary flex flex-col lg:flex-row lg:justify-between p-4">
         <Form inline className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-          <Button
-            className="w-full lg:w-auto"
-            onClick={handleFetchAllUsers}
-          >
+          <Button className="w-full lg:w-auto" onClick={handleFetchAllUsers}>
             All Users
           </Button>
           <Form.Select
@@ -293,7 +337,7 @@ function StudentData() {
           </Form.Select>
           <Form.Select
             aria-label="Internship Interest"
-            onChange={(e) => handleFilterChange("internshipInterest", e.target.value)}
+            onChange={(e) => handleFilterChange("internshipRequired", e.target.value)}
             className="w-full lg:w-auto"
           >
             <option value="">Internship Interest</option>
@@ -302,7 +346,7 @@ function StudentData() {
           </Form.Select>
           <Form.Select
             aria-label="Placement Interest"
-            onChange={(e) => handleFilterChange("placementInterest", e.target.value)}
+            onChange={(e) => handleFilterChange("PlacementRequired", e.target.value)}
             className="w-full lg:w-auto"
           >
             <option value="">Placement Interest</option>
@@ -355,3 +399,4 @@ function StudentData() {
 }
 
 export default StudentData;
+ 
