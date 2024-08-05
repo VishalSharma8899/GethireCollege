@@ -43,6 +43,7 @@ main{
     padding: 10px 15px;
     gap: 15px;
     transition: all 0.5s;
+    text-decoration: none;
 }
 .link:hover{
     /* background:lightskyblue; */
@@ -55,7 +56,7 @@ main{
     border-radius: 4px;
     margin-left: 3px;
     margin-right: 2px;
-    
+    position: static;
 }
 .icon, .link_text{
     font-size: 20px;

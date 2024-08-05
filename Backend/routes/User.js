@@ -25,7 +25,8 @@ const {    uploadCourse,
 //coprate
  const {Invitation,ActiveProcessData  ,GetActiveProcessData , gethireplacment ,GetTopPlacedUser} = require('../Controller/Corporate');
 //college
-const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('../Controller/CollegeDataCont')
+// const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('../Controller/CollegeDataCont')
+const { createCollege, getColleges, updateCollegeById, deleteCollegeById }  = require('../Controller/CollegeDataCont');
  const multer = require('multer');
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -43,7 +44,8 @@ const storage = multer.diskStorage({
   router.post('/uploadCourse', upload.fields([
     { name: 'courseImage', maxCount: 1 },
     { name: 'demoVideo', maxCount: 1 },
-    { name: 'Videos', maxCount: 10 } // Adjust as needed
+    { name: 'Videos', maxCount: 10 }  
+   
   ]), uploadCourse);
   
 
@@ -51,12 +53,12 @@ const storage = multer.diskStorage({
 router.post("/login", handleUserLogin);
 router.post("/register", handleUserRegistration);
 
-// All college data apis / routes --------
-router.post('/college_data_upload', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]) ,CollegeData);
-router.get('/college_data_get', CollegeDataGet);
-router.post('/college_data_update', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]),CollegeDataUpdate);
-router.post('/college_top_placements_add', CollegeDataPlacementAdd);
-router.post('/college_cultural_events_add',CollegeDataEventAdd);
+// // All college data apis / routes --------
+// router.post('/college_data_upload', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]) ,CollegeData);
+// router.get('/college_data_get', CollegeDataGet);
+// router.post('/college_data_update', upload.fields([{ name: 'college_img', maxCount: 1 }, { name: 'college_logo', maxCount: 1 }]),CollegeDataUpdate);
+// router.post('/college_top_placements_add', CollegeDataPlacementAdd);
+// router.post('/college_cultural_events_add',CollegeDataEventAdd);
  
 
  //coprative
@@ -94,6 +96,22 @@ router.get('/TopCoursesTraining', TopCoursesTraining);
 
 
  //college profile
+
+ router.post('/collegesdata', upload.fields([
+  { name: 'college_img', maxCount: 1 },
+  { name: 'college_logo', maxCount: 1 }
+]), createCollege);
+
+// Get all colleges
+router.get('/colleges/:id', getColleges);
+
+// Update college
+router.put('/collegesdata/:userId', upload.fields([
+  { name: 'college_img', maxCount: 1 },
+  { name: 'college_logo', maxCount: 1 }
+]), updateCollegeById);
+
+// Delete college
  
 
   

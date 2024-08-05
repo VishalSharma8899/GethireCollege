@@ -11,7 +11,7 @@ function Report() {
   };
 
   return (
-    <div className="h-full rounded-md bg-[rgba(246,249,254,1)] p-4">
+    <div className="h-full w-full rounded-md bg-[rgba(246,249,254,1)] p-4">
       <Search />
       <span>
         <p className="text-lg md:text-xl mt-2 font-semibold ml-3 md:ml-5">Reports for All Jobs</p>

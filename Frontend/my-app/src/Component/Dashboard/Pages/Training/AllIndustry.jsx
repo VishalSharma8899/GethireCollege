@@ -1,6 +1,10 @@
 import  { useState, useEffect } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+ 
+import { useIndustryData } from "./Context/IndustryTalkContext";
+ 
+
 
 function AllIndustry() {
   const [isModalOpen, setIsModalOpen] = useState(false);

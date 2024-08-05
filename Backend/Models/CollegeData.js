@@ -56,52 +56,6 @@ const CollegeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  college_cultural_events: {
-    type: [
-      {
-        eventName: {
-          type: String,
-          required: true,
-        },
-        eventDate: {
-          type: Date,
-          required: true,
-        },
-        description: {
-          type: String,
-          required: true,
-        },
-        image: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    required: true,
-  },
-  college_top_placements: {
-    type: [
-      {
-        placementCompany: {
-          type: String,
-          required: true,
-        },
-        studentName: {
-          type: String,
-          required: true,
-        },
-        ctc: {
-          type: String,
-          required: true,
-        },
-        location: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    required: true,
-  },
   college_location: {
     type: String,
     required: true,
@@ -110,9 +64,6 @@ const CollegeSchema = new mongoose.Schema({
 
 const CollegeData = mongoose.model('CollegeData', CollegeSchema);
 
- 
-
 module.exports = {
   CollegeData
- 
 };
