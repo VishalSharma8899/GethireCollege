@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -36,7 +37,7 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         login(data.token, data.user);
-        alert('Login successful!');
+     toast('Login Succesful')
         navigate('/');
       } else {
         const data = await response.json();

@@ -69,7 +69,7 @@ function Tranding() {
       <div className="scroll-container">
         <div className="scroll-content animate-scroll">
           {trendingData.concat(trendingData).map((item, index) => (
-            <div key={index} className="bg-blue-100 p-2 md:p-4 lg:p-6  rounded-md flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <div key={index} className="bg-[rgba(89, 86, 233, 1)] p-2 md:p-4 lg:p-6  rounded-md flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
               <div className="w-full sm:w-1/4 flex justify-center ">
                 <img src={Google} alt="Company" className="w-20 h-14 sm:w-24 sm:h-16 object-contain" />
               </div>

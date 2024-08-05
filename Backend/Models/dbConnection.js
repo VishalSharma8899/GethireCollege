@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/Skillgenic", {
-     // Optional with Mongoose 6+
+    await mongoose.connect("mongodb://127.0.0.1:27017/Skillgenic", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
     console.log('MongoDB connected...');
   } catch (err) {

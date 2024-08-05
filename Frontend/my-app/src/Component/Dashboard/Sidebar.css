@@ -21,6 +21,7 @@ main{
     transition: all 0.5s;
     box-shadow: 0px 10px 5px rgba(154, 151, 151, 0.3); 
     border-radius: 2px;
+    
 }
 .top_section{
     display: flex;
@@ -54,7 +55,8 @@ main{
     border-radius: 4px;
     margin-left: 3px;
     margin-right: 2px;
+    
 }
 .icon, .link_text{
     font-size: 20px;
-}
+} 
