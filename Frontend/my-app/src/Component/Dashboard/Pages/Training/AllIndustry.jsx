@@ -20,7 +20,20 @@ function AllIndustry() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+const {industry , setindustry} = useState(null);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/college/getCourse");
+        const data = await response.json();
+        setindustry(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
 
+    fetchCourses();
+  }, []);
   return (
     <div className="w-full">
       <div className="mt-3 container font-bold text-xl">All Sessions</div>

@@ -177,7 +177,7 @@ exports.filter = async (req, res) => {
 
 exports.GetByName = async (req, res) => {
   const { name } = req.body;
-
+console.log(name);
   try {
     const token = req.headers.authorization.split(' ')[1];
 

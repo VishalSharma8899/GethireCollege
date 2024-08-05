@@ -1,22 +1,18 @@
 const mongoose = require('mongoose');
 
-// Lecture Schema
 const lectureSchema = new mongoose.Schema({
   title: { type: String },
-  duration: { type: String },
-  preview: { type: Boolean },
+  duration: {type : String},
 });
 
-// Section Schema
 const sectionSchema = new mongoose.Schema({
-  title: { type: String },
+  sectionTitle: { type: String },
   lectures: [lectureSchema],
 });
 
-// Course Schema
 const courseSchema = new mongoose.Schema({
-  title: { type: String },
-  courseImage: { type: String },
+  title: { type: String }, //
+  courseImage: { type: String },//
   demoVideo: { type: String },
   Videos: { type: String },
   instructor: { type: String },
@@ -42,14 +38,15 @@ const courseSchema = new mongoose.Schema({
   },
   whatYouWillLearn: { type: [String] },
   content: {
-    ContentTilte: { type: String },
-    Section: [sectionSchema],
+    ContentTitle: { type: String },
+    sections: [sectionSchema],
   },
   payment: {
     type: Boolean,
     default: false,
   },
 });
+
 
 const Course = mongoose.model('Course', courseSchema);
 
