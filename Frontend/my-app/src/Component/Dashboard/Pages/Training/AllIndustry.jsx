@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import  { useState, useEffect } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useIndustryData } from "./Context/IndustryTalkContext";
 
 function AllIndustry() {
-  const data = useIndustryData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
+  const [industry, setIndustry] = useState([]);
 
   const showModal = (data) => {
     setSelectedData(data);
@@ -20,25 +19,28 @@ function AllIndustry() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-const {industry , setindustry} = useState(null);
+
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchtalk = async () => {
       try {
-        const response = await fetch("http://localhost:3000/college/getCourse");
+        const response = await fetch("http://localhost:3000/college/getAllIndustryTalk");
         const data = await response.json();
-        setindustry(data);
+        setIndustry(data);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
     };
 
-    fetchCourses();
+    fetchtalk();
   }, []);
+
+  console.log("industry", industry);
+  const baseUrl = 'http://localhost:3000';
   return (
     <div className="w-full">
       <div className="mt-3 container font-bold text-xl">All Sessions</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {data.map((item) => (
+        {industry.map((item) => (
           <div
             key={item.id}
             className="cursor-pointer flex flex-col"
@@ -48,7 +50,7 @@ const {industry , setindustry} = useState(null);
               <div className="relative w-full h-48">
                 <Card.Img
                   variant="top"
-                  src={item.img}
+                  src={`${baseUrl}/${item.photo}`}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
@@ -62,7 +64,7 @@ const {industry , setindustry} = useState(null);
                 </Card.Text>
                 <Card.Text className="text-xs flex-grow">
                   {item.title}
-                </Card.Text> 
+                </Card.Text>
               </Card.Body>
             </Card>
           </div>
@@ -76,7 +78,7 @@ const {industry , setindustry} = useState(null);
         <Modal.Body>
           {selectedData?.video && (
             <video controls autoPlay muted className="w-full h-48 mt-4">
-              <source src={selectedData.video} type="video/mp4" />
+              <source src={`${baseUrl}/${selectedData.video}`} type="video/mp4" />
             </video>
           )}
           <p>{selectedData?.title}</p>

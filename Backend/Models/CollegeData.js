@@ -110,36 +110,9 @@ const CollegeSchema = new mongoose.Schema({
 
 const CollegeData = mongoose.model('CollegeData', CollegeSchema);
 
-// Industry Schema
-const industrySchema = new mongoose.Schema({
-  photo: {
-    type: String,
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  video: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  specializationWith: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-});
-
-const Industry = mongoose.model('Media', industrySchema);
+ 
 
 module.exports = {
-  CollegeData,
-  Industry,
+  CollegeData
+ 
 };

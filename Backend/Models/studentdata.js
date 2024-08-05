@@ -28,7 +28,7 @@ const studentSchema = new mongoose.Schema({
     default: null,
   },
   salary: {
-    type: Number,
+    type: String,
     default: null,
   },
   PlacementRequired: Boolean,

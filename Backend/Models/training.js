@@ -56,7 +56,10 @@ const upcomingEventSchema = new mongoose.Schema({
   hostName: { type: String, required: true, trim: true },
   eventName: { type: String, required: true, trim: true },
   date: { type: String, required: true },
-  time: { type: String, required: true }, // Storing time as a string (e.g., '14:00')
+  time: { type: String, required: true },  
+  details:{
+    type: String, required: true, trim: true
+  }
 });
 
 const UpcomingEvent = mongoose.model('UpcomingEvent', upcomingEventSchema);
@@ -89,11 +92,38 @@ const WantToJoinUpcomingEventSchema = new mongoose.Schema({
     ref: 'UpcomingEvent', // Reference to the UpcomingEvent model
   },
 });
-
+// Industry Schema
+const industrySchema = new mongoose.Schema({
+  photo: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  video: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  specializationWith: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+});
+const Industry = mongoose.model('Media', industrySchema);
 const WantToJoinUpcomingEvent = mongoose.model('WantToJoinUpcomingEvent', WantToJoinUpcomingEventSchema);
 
 module.exports = {
   Course,
   UpcomingEvent,
   WantToJoinUpcomingEvent,
+  Industry
 };
