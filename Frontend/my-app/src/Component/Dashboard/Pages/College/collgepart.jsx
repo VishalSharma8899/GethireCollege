@@ -1,8 +1,6 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
 import img from "../../../Images/userimg.png";
 import clgImg from "../../../Images/clgimg.jpg";
 import ClgCult from "../../../Images/ClgDance.jfif";
@@ -18,7 +16,10 @@ import { FaWhatsapp } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import Events from "./Events";
 import Card from "./Card";
-
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { IoAdd } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 function College() {
   const clgInfo = {
     img: clgImg,
@@ -65,12 +66,16 @@ function College() {
       },
     ],
   };
+  const navigate = useNavigate();
+  function handleAdd() {
+    navigate(`/college/collegeinfo`);
+  };
 
   return (
     <div>
       <div className="w-full h-screen">
         {/* Search */}
-        <div className="container mx-auto px-4 py-2">
+        {/* <div className="container mx-auto px-4 py-2">
           <Navbar className="bg-body-tertiary flex flex-row justify-between items-center">
             <Form className="flex items-center">
               <IoSearch className="text-lg mr-2" />
@@ -94,11 +99,36 @@ function College() {
               </div>
             </div>
           </Navbar>
+        </div> */}
+          <div className="container mx-auto px-4 py-2 bg-white rounded-lg shadow-md">
+      <Navbar className="bg-body-tertiary p-0">
+        <div className="flex justify-end items-center w-full">
+          <div className="flex items-center gap-3">
+            <IoNotificationsOutline className="text-lg text-gray-700" />
+            <div className="bg-black rounded-full w-8 h-8 overflow-hidden">
+              <img
+                src={img}
+                alt="profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="text-black text-sm font-medium">
+              John
+            </div>
+          </div>
         </div>
+      </Navbar>
+    </div>
 
         {/* Main-Container */}
+         
         <div className="container w-full bg-grey-50 mt-3 h-screen">
           {/* ImageClg */}
+          <div className="flex gap-3 items-end justify-end mr-2">
+          <IoAdd onClick={handleAdd} />
+          <MdEdit />
+          <MdDelete />
+          </div>
           <div className="container mx-auto px-4 py-4">
             <div className="relative w-full h-48 md:h-64 lg:h-72">
               <img

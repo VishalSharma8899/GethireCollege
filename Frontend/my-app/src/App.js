@@ -11,10 +11,6 @@ import Training from './Component/Dashboard/Pages/Training/Training.jsx';
 import Feedback from './Component/Dashboard/Pages/Feedback/Feedback.jsx';
 import Report from './Component/Dashboard/Pages/Report/Report.jsx';
 import Form from './Component/Profile/Form.jsx';
-import CollegePage from './Component/Profile/CollegePage.jsx';
-import UpdateForm from './Component/Profile/UpdateFrom.jsx';
-import PlacementForm from './Component/Profile/PlacementForm.jsx';
-import EventsAddForm from './Component/Profile/EventsAddForm.jsx';
 import Login from './Component/Login/Login.jsx';
 import Signup from './Component/Login/Signup.jsx';
 import TopPerformers from './Component/Dashboard/Pages/Jobs/TopPerformers.jsx';
@@ -25,6 +21,7 @@ import ParticularCourse from './Component/Dashboard/Pages/Training/ParticularCou
 import AllIndustry from './Component/Dashboard/Pages/Training/AllIndustry.jsx';
 import ParticularIndustry from './Component/Dashboard/Pages/Training/ParticularIndustry.jsx';
 import ProtectedRoute from './Component/Login/ProtectedRoute.jsx';
+// import ActiveButton from './Component/Dashboard/ActiveButton.jsx'; // Add your ActiveButton import
 
 const App = () => {
   return (
@@ -32,15 +29,16 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/demo" element={<Form />} />
-        <Route path="/collegePage" element={<CollegePage />} />
-        <Route path="/updateForm" element={<UpdateForm />} />
-        <Route path="/placementForm" element={<PlacementForm />} />
-        <Route path="/eventAddForm" element={<EventsAddForm />} />
+        {/* <Route path="/invite" element={<ActiveButton />} /> Add route for ActiveButton */}
+        {/* <Route path="/college_info" element={<Form />} /> */}
+        {/* <Route path="/updateForm" element={<UpdateForm />} /> */}
+        {/* <Route path="/placementForm" element={<PlacementForm />} /> */}
+        {/* <Route path="/eventAddForm" element={<EventsAddForm />} /> */}
 
         <Route path="/" element={<ProtectedRoute><Sidebar><Dashboard /></Sidebar></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Sidebar><Dashboard /></Sidebar></ProtectedRoute>} />
         <Route path="/college" element={<ProtectedRoute><Sidebar><Collgepart /></Sidebar></ProtectedRoute>} />
+        <Route path="/college/collegeinfo" element={<ProtectedRoute><Form/></ProtectedRoute>} />
         <Route path="/jobs" element={<ProtectedRoute><Sidebar><Jobs /></Sidebar></ProtectedRoute>} />
         <Route path="/student" element={<ProtectedRoute><Sidebar><StudentData /></Sidebar></ProtectedRoute>} />
         <Route path="/placement" element={<ProtectedRoute><Sidebar><Placement /></Sidebar></ProtectedRoute>} />
@@ -60,4 +58,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;

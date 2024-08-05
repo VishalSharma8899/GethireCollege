@@ -115,8 +115,8 @@ async function fetchPlacedStudentdata() {
 
   
   return (
-    <div className="bg-white w-full min-h-screen mt-3 rounded-lg">
-      <div className="bg-[rgba(246, 249, 254, 1)] w-full min-h-screen mt-3 rounded-lg">
+    <div className="bg-white w-full min-h-screen mt-2 rounded-lg">
+      <div className="bg-[rgba(246, 249, 254, 1)] w-full min-h-screen mt-1 rounded-lg">
         <div className="container mx-auto p-4">
           <div className="flex flex-wrap justify-center md:justify-between">
             <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
