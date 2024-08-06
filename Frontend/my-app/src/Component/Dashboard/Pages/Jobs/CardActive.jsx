@@ -8,6 +8,7 @@ import walmart from '../../../Images/walmart.png';
 import meesho from '../../../Images/meesho.png';
 import Helios from '../../../Images/Helios.png'
 import Card from './Card';
+import { useNavigate } from "react-router";
 
 function CardActive() {
   const cardData = [
@@ -17,6 +18,10 @@ function CardActive() {
     { image: meesho, company: 'Meesho', position: 'Frontend', progress: 80, percentage: 80 },
     {image: Helios , company: "Helios", position: 'Software Developer', progress: 90, percentage: 90}
   ];
+  const navigate = useNavigate();
+   const handleNavigate = ()=>{
+    navigate('/jobs/${company}')
+   }
 
   const settings = {
     infinite: true,
@@ -52,9 +57,9 @@ function CardActive() {
   };
 
   return (
-    <Slider {...settings}>
+    <Slider {...settings}  >
       {cardData.map((card, index) => (
-        <Card key={index} {...card} />
+        <Card onclick={handleNavigate}  key={index} {...card} />
       ))}
     </Slider>
   );

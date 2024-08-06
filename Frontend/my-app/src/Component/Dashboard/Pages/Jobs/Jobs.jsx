@@ -6,7 +6,7 @@ import Tranding from './Tranding';
 
 function Jobs() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100 overflow-x-hidden ">
       {/* Main Content */}
       <main className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
         {/* Post Section */}

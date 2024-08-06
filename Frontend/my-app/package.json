@@ -48,6 +48,7 @@
     "recharts": "^2.12.7",
     "redux": "^5.0.1",
     "slick-carousel": "^1.8.1",
+    "use-history": "^1.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -3,7 +3,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 
 function Card({ image, company, position, progress, percentage }) {
   return (
-    <div className="bg-white w-56 md:w-56 h-auto rounded-xl mx-auto md:ml-4 flex flex-col gap-1 p-4 hover:shadow-lg transform transition-transform duration-300 hover:scale-105">
+    <div onClick={onclick} className="bg-white w-56 md:w-56 h-auto rounded-xl mx-auto md:ml-4 flex flex-col gap-1 p-4 hover:shadow-lg transform transition-transform duration-300 hover:scale-105">
       {/* Image Section */}
       <div className="flex-shrink-0">
         <img

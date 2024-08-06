@@ -19,8 +19,8 @@ function TopPerformers() {
         <div>
           <Jobtable className="w-12 h-12" />
         </div>
-        <div style={{ background: "rgba(247, 249, 254, 1)" }} className="bg-gradient-to-r from-violet-300 to-violet-100 w-full rounded-md h-40 m-3">
-        </div>
+        {/* <div style={{ background: "rgba(247, 249, 254, 1)" }} className="bg-gradient-to-r from-violet-300 to-violet-100 w-full rounded-md h-40 m-3">
+        </div> */}
       </div>
     </div>
   );

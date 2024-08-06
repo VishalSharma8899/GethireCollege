@@ -8,10 +8,7 @@ import Main4 from './Main4';
 function Placement() {
   return (
     <div className="w-full min-h-screen p-4">
-      {/* Search */}
-      <div className="mb-4">
-        <Search />
-      </div>
+    
 
       {/* First-Container */}
       <div className="container mx-auto bg-blue-50 rounded p-4">

@@ -5,18 +5,20 @@ import Search from "./Search";
 
 function Main() {
   return (
-    <div>
-      <Search />
-      <div  className=' w-full h-screen rounded-lg bg-[rgba(246, 249, 254, 1)]'>
-        <div className='w-full p-3 ml-2 text-xl'>
-          <p className='font-bold text-sm md:text-lg ml-8'>Overview</p>
+    <div className="bg-blue-50 overflow-hidden min-h-screen">
+      <div className="p-4">
+        <Search />
+      </div>
+      <div className="w-full min-h-screen rounded-lg bg-[rgba(246, 249, 254, 1)]">
+        <div className="w-full p-4 md:p-6">
+          <p className="font-bold text-base md:text-lg">Overview</p>
         </div>
-        <div className='container bg-[rgba(246, 249, 254, 1)] -mt-9'>
-          <div className='flex flex-wrap '>
-            <div className='w-full md:w-1/2 p-2'>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1 p-2">
               <Main1 />
             </div>
-            <div className='w-full md:w-1/2 p-2'>
+            <div className="flex-1 p-2">
               <Main2 />
             </div>
           </div>

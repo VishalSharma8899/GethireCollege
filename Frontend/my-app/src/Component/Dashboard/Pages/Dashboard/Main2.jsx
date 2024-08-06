@@ -38,7 +38,7 @@ function Main2() {
   return (
     <div
       style={{ background: "rgba(246, 249, 254, 1)" }}
-      className="w-full h-screen xs={12} md={8} mt-3 rounded-lg gap-3"
+      className="w-full h-screen xs={12} md={8} -mt-7 rounded-lg gap-3 "
     >
       {/* <Container className="bg-white rounded-lg">
         <Col xs={2} md={4} lg={6}>

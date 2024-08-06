@@ -8,7 +8,6 @@ function ActiveButton() {
   const handleClick = () => {
     navigate('/jobs/invite'); // Replace '/target-page' with the actual path you want to navigate to
   };
-
   return (
     <button
       onClick={handleClick}
