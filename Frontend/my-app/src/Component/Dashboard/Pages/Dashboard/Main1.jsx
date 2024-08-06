@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 function Main1() {
   const [hoveredIcon, setHoveredIcon] = useState(null);
   // no of student
-  const [count, setCount] = useState(null);
+  const [count, setCount] = useState(0);
   //no of placed student
   const [placedcount, setplacedCount] = useState(0);
   const [placedData, setPlacedData] = useState([]);
