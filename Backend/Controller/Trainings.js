@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { Course, UpcomingEvent, WantToJoinUpcomingEvent } = require('../Models/training');
-const Industry = require('../Models/CollegeData');
+ 
+const { Course, UpcomingEvent, WantToJoinUpcomingEvent,  Industry } = require('../Models/training');
+ 
 
 // // Configure multer for file uploads
 // const storage = multer.diskStorage({
@@ -292,9 +293,9 @@ exports.UpcomingEventController = async (req, res) => {
     }
 
     try {
-      const { hostName, eventName, date, time } = req.body;
+      const { hostName, eventName, date, time ,details } = req.body;
 
-      if (!hostName || !eventName || !date || !time) {
+      if (!hostName || !eventName || !date || !time ||!details) {
         return res.status(400).json({ error: 'All fields are required' });
       }
 
@@ -303,7 +304,8 @@ exports.UpcomingEventController = async (req, res) => {
         hostName,
         eventName,
         date,
-        time
+        time,
+        details
       });
 
       await newEvent.save();
@@ -396,7 +398,7 @@ exports.TopCoursesTraining = async (req, res) => {
     const topCourses = await Course.find()
       .sort({ 'ratings.stars': -1 }) // Sort by stars rating in descending order
       .limit(10) // Limit the results to top 10
-      .select('courseName price'); // Select only courseName and price fields
+        
 
     res.status(200).json({ topCourses });
   } catch (error) {

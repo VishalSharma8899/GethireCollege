@@ -56,52 +56,6 @@ const CollegeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  college_cultural_events: {
-    type: [
-      {
-        eventName: {
-          type: String,
-          required: true,
-        },
-        eventDate: {
-          type: Date,
-          required: true,
-        },
-        description: {
-          type: String,
-          required: true,
-        },
-        image: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    required: true,
-  },
-  college_top_placements: {
-    type: [
-      {
-        placementCompany: {
-          type: String,
-          required: true,
-        },
-        studentName: {
-          type: String,
-          required: true,
-        },
-        ctc: {
-          type: String,
-          required: true,
-        },
-        location: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    required: true,
-  },
   college_location: {
     type: String,
     required: true,
@@ -110,36 +64,32 @@ const CollegeSchema = new mongoose.Schema({
 
 const CollegeData = mongoose.model('CollegeData', CollegeSchema);
 
-// Industry Schema
-const industrySchema = new mongoose.Schema({
-  photo: {
+ 
+const imageSchema = new mongoose.Schema({
+  url: {
     type: String,
     required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  video: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  specializationWith: {
-    type: String,
-    required: true,
-    trim: true,
   },
 });
+const CollegeEventSchema = new mongoose.Schema({
+  eventName: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  eventDate: {
+    type: Date,
+    required: true,
+  },
+  images: [imageSchema],
+});
+const CollegeEvent = mongoose.model('CollegeEvent', CollegeEventSchema);
 
-const Industry = mongoose.model('Media', industrySchema);
 
 module.exports = {
   CollegeData,
-  Industry,
+  CollegeEvent
 };

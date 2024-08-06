@@ -22,18 +22,16 @@ function Placement() {
         </div>
       </div>
       <div className="container mx-auto bg-blue-50 mt-2 rounded p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="col-span-1">
-            <Main3 />
-          </div>
-          <div className="col-span-1 flex items-center justify-center">
-            <Main4 />
-          </div>
-          <div className="col-span-1 flex items-center justify-center">
-            <Main3 />
-          </div>
-        </div>
-      </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div className="flex justify-center items-center h-full w-full bg-white rounded shadow-md p-6">
+      <Main3 />
+    </div>
+    <div className="flex justify-center items-center h-full w-full bg-white rounded shadow-md p-6">
+      <Main4 />
+    </div>
+  </div>
+</div>
+
     </div>
   );
 }
