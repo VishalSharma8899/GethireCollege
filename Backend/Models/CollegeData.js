@@ -64,6 +64,32 @@ const CollegeSchema = new mongoose.Schema({
 
 const CollegeData = mongoose.model('CollegeData', CollegeSchema);
 
+ 
+const imageSchema = new mongoose.Schema({
+  url: {
+    type: String,
+    required: true,
+  },
+});
+const CollegeEventSchema = new mongoose.Schema({
+  eventName: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  eventDate: {
+    type: Date,
+    required: true,
+  },
+  images: [imageSchema],
+});
+const CollegeEvent = mongoose.model('CollegeEvent', CollegeEventSchema);
+
+
 module.exports = {
-  CollegeData
+  CollegeData,
+  CollegeEvent
 };

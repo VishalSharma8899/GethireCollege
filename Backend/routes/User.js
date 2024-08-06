@@ -26,20 +26,20 @@ const {    uploadCourse,
  const {Invitation,ActiveProcessData  ,GetActiveProcessData , gethireplacment ,GetTopPlacedUser} = require('../Controller/Corporate');
 //college
 // const {CollegeData ,CollegeDataGet, CollegeDataUpdate,CollegeDataPlacementAdd,CollegeDataEventAdd} = require('../Controller/CollegeDataCont')
-const { createCollege, getColleges, updateCollegeById, deleteCollegeById }  = require('../Controller/CollegeDataCont');
+const { createCollege, getColleges, updateCollegeById, deleteCollegeById , eventUpload,getEventById }  = require('../Controller/CollegeDataCont');
  const multer = require('multer');
 const router = express.Router();
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads/'); // Directory where files will be uploaded
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-  });
-  
-  const upload = multer({ storage: storage });
-  const path = require('path');
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Directory where files will be uploaded
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  } 
+});
+
+const upload = multer({ storage: storage });
+const path = require('path');
   // Define the route with multer handling
   router.post('/uploadCourse', upload.fields([
     { name: 'courseImage', maxCount: 1 },
@@ -114,6 +114,10 @@ router.put('/collegesdata/:userId', upload.fields([
 // Delete college
  
 
+// upload events
+router.post('/collegeEvent/:id', upload.array('images', 10),eventUpload)
+router.get('/getCollegeEvent/:id' , getEventById)
+
   
   
-module.exports = router;
+module.exports = router;  

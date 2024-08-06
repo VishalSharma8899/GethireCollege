@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/Skillgenic", {
+    await mongoose.connect("mongodb+srv://vverma7271:lPV3bER3u4OO0oKB@cluster0.yn2dkxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
       // useNewUrlParser: true,
       // useUnifiedTopology: true
     });
